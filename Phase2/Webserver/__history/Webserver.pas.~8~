@@ -1,0 +1,17 @@
+unit Webserver;
+
+interface
+
+uses System.SysUtils, System.Classes, util_statemachine;
+
+type
+  TWebServer = class(Tobject)
+    myHealth : THealth;
+    iPort : integer;
+    bEnabled: boolean;
+    dtStartup : TDateTime;
+
+  end;
+implementation
+
+end.

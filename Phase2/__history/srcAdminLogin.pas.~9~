@@ -21,8 +21,8 @@ type
     Label4: TLabel;
     Label5: TLabel;
     redStatus: TRichEdit;
-    btnExit: TBitBtn;
-    procedure btnExitClick(Sender: TObject);
+    BitBtn1: TBitBtn;
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,7 +38,7 @@ implementation
 
 uses EMSmain;
 
-procedure TfrmAdminLogin.btnExitClick(Sender: TObject);
+procedure TfrmAdminLogin.BitBtn1Click(Sender: TObject);
 begin
   frmAdminLogin.Hide;
   frmEMSMain.Show;

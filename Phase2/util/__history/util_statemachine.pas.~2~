@@ -1,0 +1,12 @@
+unit util_statemachine;
+
+interface
+
+uses System.Classes;
+
+type
+  THealth = (healthy, degraded, critical);
+
+implementation
+
+end.

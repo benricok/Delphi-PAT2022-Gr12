@@ -9,19 +9,13 @@ type
     protected
       Var
         iPort : integer;
-        bRunning: boolean;
+        bEnabled: boolean;
         dtStartup, dtLastStatusReport : TDateTime;
       function GetHealth : THealth;
     public
       property Health : THealth read GetHealth;
       property Port : integer read iPort;
-      property Running : boolean read bRunning;
-      property Started : TDateTime read dtStartup;
-      property LastStatusReport : TDateTime read dtLastStatusReport;
-      procedure requestStatusReport;
 
-      constructor Create(Port: integer);
-      function launch : THealth;
   end;
 implementation
 

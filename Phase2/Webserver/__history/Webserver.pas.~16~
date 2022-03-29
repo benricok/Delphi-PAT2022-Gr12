@@ -21,7 +21,6 @@ type
       procedure requestStatusReport;
 
       constructor Create(Port: integer);
-      function launch : THealth;
   end;
 implementation
 

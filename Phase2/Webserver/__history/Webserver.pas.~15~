@@ -20,8 +20,7 @@ type
       property LastStatusReport : TDateTime read dtLastStatusReport;
       procedure requestStatusReport;
 
-      constructor Create(Port: integer);
-      function launch : THealth;
+      constructor Create(Port);
   end;
 implementation
 
