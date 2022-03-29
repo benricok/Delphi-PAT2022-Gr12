@@ -3,8 +3,7 @@ program WebServer;
 uses
   Vcl.Forms,
   Login in 'Login.pas' {frmLogin},
-  Webserver in 'Webserver\Webserver.pas',
-  wsUtil in 'Webserver\wsUtil.pas';
+  Unit1 in 'Unit1.pas' {frmEmsMain};
 
 {$R *.res}
 
@@ -12,5 +11,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmEmsMain, frmEmsMain);
   Application.Run;
 end.

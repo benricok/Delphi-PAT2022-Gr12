@@ -3,7 +3,7 @@ unit Webserver;
 interface
 
 uses
-  ServerSocket;
+  //ServerSocket;
 
 implementation
 
