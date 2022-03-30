@@ -5,7 +5,7 @@ interface
 uses System.Classes;
 
 type
-  THealth = (healthy, degraded, critical);
+  THealth = (starting, healthy, degraded, critical);
   TEventType = (error, info, warning);
 
 implementation
