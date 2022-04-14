@@ -70,6 +70,7 @@ object frmEmsMain: TfrmEmsMain
       Height = 53
       Caption = 'Student'
       TabOrder = 2
+      OnClick = btnStudentClick
     end
   end
 end
