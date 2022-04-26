@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2022/04/25 20:13:16.156,=C:\Users\windows\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/04/25 20:14:19.600,C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Launch.dfm=C:\Users\windows\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2022/04/25 20:14:19.600,C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Launch.pas=C:\Users\windows\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/04/25 20:15:25.190,C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\StudentAdmissionsManager.dproj=C:\Users\windows\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
