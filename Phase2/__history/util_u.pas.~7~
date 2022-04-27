@@ -1,0 +1,44 @@
+// -----------------------------------------------------------------------------
+//
+//  Copyright (C) 2021  Benrico Krog
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Affero General Public License as published
+//  by the Free Software Foundation version 3 of the License.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Affero General Public License for more details.
+//
+//  You should have received a copy of the GNU Affero General Public License
+//  along with this program.  If not, see <https://www.gnu.org/licenses/>
+//
+// -----------------------------------------------------------------------------
+
+unit util_u;
+
+interface
+
+uses SysUtils, Classes, Vcl.Forms, Vcl.Dialogs, System.Variants;
+
+type
+  Tsc = set of char;
+  TUser = record
+    username : string[20];
+    fullname : string[25];
+    surname : string[25];
+    gender : char;
+    email : string[30];
+    privilege : string[5];
+    enabled : boolean;
+    cellPhone : string[11];
+  end;
+  TEventType = (error, info, warning);
+  Var
+    scInvalidNames : Tsc = [#33..#44, #46..#64, #91..#96, #123..#126];
+                           {!  to , ;  . to @ ;  [ to ' ;  {  to  " }
+
+implementation
+
+end.

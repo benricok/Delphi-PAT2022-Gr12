@@ -1,0 +1,27 @@
+unit util_u;
+
+interface
+
+uses SysUtils, Classes, Vcl.Forms, Vcl.Dialogs, System.Variants;
+
+type
+  Tsc = set of char;
+  TUser = record
+    username : string[20];
+    fullname : string[25];
+    surname : string[25];
+    gender : char;
+    email : string[30];
+    privilege : string[5];
+    enabled : boolean;
+    cellPhone : string[11];
+  end;
+  TEventType = (error, info, warning);
+
+end;
+
+
+
+implementation
+
+end.

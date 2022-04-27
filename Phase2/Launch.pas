@@ -9,10 +9,13 @@ uses
 type
   TfrmLaunch = class(TForm)
     btnStudents: TBitBtn;
-    btnAdminstrators: TBitBtn;
+    btnStaff: TBitBtn;
     Panel1: TPanel;
     BitBtn3: TBitBtn;
-    procedure btnAdminstratorsClick(Sender: TObject);
+    Panel2: TPanel;
+    lblWeclome: TLabel;
+    procedure btnStaffClick(Sender: TObject);
+    procedure btnStudentsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,15 +29,20 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmLaunch.btnAdminstratorsClick(Sender: TObject);
+uses login;
+
+procedure TfrmLaunch.btnStaffClick(Sender: TObject);
 begin
+  frmLaunch.Hide;
+  frmLogin.frmConfigure(staff);
+  frmLogin.Show;
+end;
 
-Try
-
-Finally
-
-End;
-
+procedure TfrmLaunch.btnStudentsClick(Sender: TObject);
+begin
+  frmLaunch.Hide;
+  frmLogin.frmConfigure(students);
+  frmLogin.Show;
 end;
 
 end.

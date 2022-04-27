@@ -15,23 +15,6 @@ object frmLaunch: TfrmLaunch
   Position = poMainFormCenter
   PixelsPerInch = 96
   TextHeight = 13
-  object btnStudents: TBitBtn
-    Left = 16
-    Top = 88
-    Width = 145
-    Height = 57
-    Caption = 'Student'
-    TabOrder = 0
-  end
-  object btnAdminstrators: TBitBtn
-    Left = 184
-    Top = 88
-    Width = 145
-    Height = 57
-    Caption = 'Administrators'
-    TabOrder = 1
-    OnClick = btnAdminstratorsClick
-  end
   object Panel1: TPanel
     Left = 0
     Top = 155
@@ -39,7 +22,7 @@ object frmLaunch: TfrmLaunch
     Height = 37
     Align = alBottom
     BevelOuter = bvNone
-    TabOrder = 2
+    TabOrder = 0
     ExplicitTop = 259
     ExplicitWidth = 349
     object BitBtn3: TBitBtn
@@ -50,6 +33,44 @@ object frmLaunch: TfrmLaunch
       Kind = bkClose
       NumGlyphs = 2
       TabOrder = 0
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 346
+    Height = 157
+    TabOrder = 1
+    object lblWeclome: TLabel
+      Left = 104
+      Top = 32
+      Width = 129
+      Height = 32
+      Caption = 'Welcome!'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -27
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object btnStaff: TBitBtn
+      Left = 184
+      Top = 88
+      Width = 145
+      Height = 57
+      Caption = 'Staff'
+      TabOrder = 0
+      OnClick = btnStaffClick
+    end
+    object btnStudents: TBitBtn
+      Left = 16
+      Top = 88
+      Width = 145
+      Height = 57
+      Caption = 'Students'
+      TabOrder = 1
+      OnClick = btnStudentsClick
     end
   end
 end
