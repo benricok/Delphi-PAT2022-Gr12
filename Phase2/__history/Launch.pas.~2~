@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons;
 
 type
-  TfrmLaunch = class(TForm)
+  TForm1 = class(TForm)
     btnStudents: TBitBtn;
     btnAdminstrators: TBitBtn;
     Panel1: TPanel;
@@ -20,13 +20,13 @@ type
   end;
 
 var
-  frmLaunch: TfrmLaunch;
+  Form1: TForm1;
 
 implementation
 
 {$R *.dfm}
 
-procedure TfrmLaunch.btnAdminstratorsClick(Sender: TObject);
+procedure TForm1.btnAdminstratorsClick(Sender: TObject);
 begin
 
 Try

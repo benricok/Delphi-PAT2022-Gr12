@@ -99,7 +99,15 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="Launch.pas">
-            <Form>Form1</Form>
+            <Form>frmLaunch</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Students.pas">
+            <Form>frmStudents</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Staff.pas">
+            <Form>frmStaff</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

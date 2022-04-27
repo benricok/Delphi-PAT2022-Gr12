@@ -1,9 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2022/04/25 20:13:16.156,=C:\Users\windows\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2022/04/25 20:14:19.600,C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Launch.dfm=C:\Users\windows\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2022/04/25 20:14:19.600,C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Launch.pas=C:\Users\windows\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2022/04/25 20:15:25.190,C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\StudentAdmissionsManager.dproj=C:\Users\windows\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+	<Transactions>
+    <Transaction>2022/04/25 20:13:16.000.156,=C:\Users\windows\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/04/25 20:14:19.000.600,C:\Users\windows\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Launch.pas</Transaction>
+    <Transaction>2022/04/25 20:14:19.000.600,C:\Users\windows\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Launch.dfm</Transaction>
+    <Transaction>2022/04/25 20:15:25.000.190,C:\Users\windows\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\StudentAdmissionsManager.dproj</Transaction>
+    <Transaction>2022/04/27 12:14:54.623,=C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Unit1.pas</Transaction>
+    <Transaction>2022/04/27 12:15:05.394,C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Students.dfm=C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Unit1.dfm</Transaction>
+    <Transaction>2022/04/27 12:15:05.394,C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Students.pas=C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Unit1.pas</Transaction>
+    <Transaction>2022/04/27 12:15:18.229,=C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Unit2.pas</Transaction>
+    <Transaction>2022/04/27 12:15:33.125,C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Staff.dfm=C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Unit2.dfm</Transaction>
+    <Transaction>2022/04/27 12:15:33.125,C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Staff.pas=C:\Users\windows\Documents\GitHub\Delphi-PAT2022-Gr12\Phase2\Unit2.pas</Transaction>
   </Transactions>
 </BorlandProject>
