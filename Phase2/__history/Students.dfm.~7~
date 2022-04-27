@@ -15,15 +15,15 @@ object frmStudents: TfrmStudents
   TextHeight = 13
   object pnlQuickAcess: TPanel
     Left = 0
-    Top = 520
+    Top = 96
     Width = 884
-    Height = 41
+    Height = 465
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
     object BitBtn1: TBitBtn
       Left = 795
-      Top = 6
+      Top = 382
       Width = 75
       Height = 25
       Kind = bkClose
@@ -32,7 +32,7 @@ object frmStudents: TfrmStudents
     end
     object btnLogout: TButton
       Left = 706
-      Top = 6
+      Top = 382
       Width = 75
       Height = 25
       Caption = 'Logout'
@@ -43,7 +43,7 @@ object frmStudents: TfrmStudents
     Left = 0
     Top = 0
     Width = 884
-    Height = 520
+    Height = 96
     Align = alClient
     TabOrder = 1
     Tabs.Strings = (
