@@ -26,7 +26,6 @@ object frmStaff: TfrmStaff
       'Tab 1'
       'Tab 2')
     TabIndex = 0
-    ExplicitHeight = 810
   end
   object pnlQuickAcess: TPanel
     Left = 0
@@ -36,7 +35,6 @@ object frmStaff: TfrmStaff
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 769
     object BitBtn1: TBitBtn
       Left = 1323
       Top = 6
@@ -45,6 +43,7 @@ object frmStaff: TfrmStaff
       Kind = bkClose
       NumGlyphs = 2
       TabOrder = 0
+      OnExit = BitBtn1Exit
     end
     object btnLogout: TButton
       Left = 1242

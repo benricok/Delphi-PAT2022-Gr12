@@ -29,20 +29,22 @@ implementation
 
 {$R *.dfm}
 
-uses login;
+uses login, staff, students;
 
 procedure TfrmLaunch.btnStaffClick(Sender: TObject);
 begin
   frmLaunch.Hide;
-  frmLogin.frmConfigure(staff);
-  frmLogin.Show;
+  //frmLogin.frmConfigure(staff);
+  //frmLogin.Show;
+  frmStaff.Show;
 end;
 
 procedure TfrmLaunch.btnStudentsClick(Sender: TObject);
 begin
   frmLaunch.Hide;
-  frmLogin.frmConfigure(students);
-  frmLogin.Show;
+  //frmLogin.frmConfigure(students);
+  //frmLogin.Show;
+  frmStudents.Show;
 end;
 
 end.

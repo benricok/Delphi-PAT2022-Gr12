@@ -13,6 +13,7 @@ type
     pnlQuickAcess: TPanel;
     BitBtn1: TBitBtn;
     btnLogout: TButton;
+    procedure BitBtn1Exit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,5 +26,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmStaff.BitBtn1Exit(Sender: TObject);
+begin
+  Application.Terminate;
+end;
 
 end.

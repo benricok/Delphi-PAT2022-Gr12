@@ -29,6 +29,7 @@ object frmStudents: TfrmStudents
       Kind = bkClose
       NumGlyphs = 2
       TabOrder = 0
+      OnExit = BitBtn1Exit
     end
     object btnLogout: TButton
       Left = 706
@@ -52,6 +53,5 @@ object frmStudents: TfrmStudents
       'New Application'
       'Notifications')
     TabIndex = 0
-    ExplicitHeight = 401
   end
 end

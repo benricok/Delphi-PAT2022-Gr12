@@ -28,7 +28,7 @@ begin
   conDB := TADOConnection.Create(Self);
 
   conDB.ConnectionString :=
-    'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=.\Users.MDB;' +
+    'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..\..\Web application.mdb;' +
     'Mode=ReadWrite;Persist Security Info=False';
 
   conDB.LoginPrompt := false;
@@ -38,18 +38,18 @@ begin
   tblUsers := TADOtable.Create(Self);
   tblUsers.Connection := conDB;
 
-  tblUsers.TableName := 'Users';
+  tblUsers.TableName := 'Staff';
   tblUsers.Active := true;
 
   //tblUsersinfo
-  tblUserInfo := TADOtable.Create(Self);
-  tblUserInfo.Connection := conDB;
+  //tblUserInfo := TADOtable.Create(Self);
+  //tblUserInfo.Connection := conDB;
 
-  tblUserInfo.TableName := 'UserInfo';
-  tblUserInfo.Active := true;
+  //tblUserInfo.TableName := 'UserInfo';
+  //tblUserInfo.Active := true;
 
   // Create datasource object
-  dsrTbl := TDataSource.Create(Self);
-  dsrTbl.DataSet := tblUserInfo;
+  //dsrTbl := TDataSource.Create(Self);
+  //dsrTbl.DataSet := tblUserInfo;
 end;
 end.
