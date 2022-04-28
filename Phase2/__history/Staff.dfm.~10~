@@ -47,7 +47,7 @@ object frmStaff: TfrmStaff
     Top = 0
     Width = 894
     Height = 534
-    ActivePage = tabCources
+    ActivePage = tabHome
     TabOrder = 1
     object tabHome: TTabSheet
       Caption = 'Home'

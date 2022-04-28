@@ -1,10 +1,9 @@
-object frmStaff: TfrmStaff
+object frmStudents: TfrmStudents
   Left = 0
   Top = 0
-  BorderStyle = bsDialog
-  Caption = 'Staff'
-  ClientHeight = 571
-  ClientWidth = 894
+  Caption = 'Students'
+  ClientHeight = 561
+  ClientWidth = 884
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,19 +11,18 @@ object frmStaff: TfrmStaff
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poMainFormCenter
   PixelsPerInch = 96
   TextHeight = 13
   object pnlQuickAcess: TPanel
     Left = 0
-    Top = 534
-    Width = 894
+    Top = 524
+    Width = 884
     Height = 37
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
     object BitBtn1: TBitBtn
-      Left = 803
+      Left = 787
       Top = 6
       Width = 75
       Height = 25
@@ -34,7 +32,7 @@ object frmStaff: TfrmStaff
       OnClick = BitBtn1Click
     end
     object btnLogout: TButton
-      Left = 714
+      Left = 698
       Top = 6
       Width = 75
       Height = 25
@@ -42,31 +40,27 @@ object frmStaff: TfrmStaff
       TabOrder = 1
     end
   end
-  object tbcStaff: TPageControl
+  object tbcStudents: TPageControl
     Left = 0
-    Top = 0
+    Top = -2
     Width = 894
-    Height = 534
-    ActivePage = tabCources
+    Height = 526
+    ActivePage = tabNotificationsStudents
     TabOrder = 1
-    object tabHome: TTabSheet
+    object tabHomeStudents: TTabSheet
       Caption = 'Home'
     end
-    object tabCources: TTabSheet
-      Caption = 'Cources'
+    object tabYourSubmissions: TTabSheet
+      Caption = 'Your Submissions'
       ImageIndex = 1
     end
-    object tabSubmissions: TTabSheet
-      Caption = 'Submissions'
+    object tabNewApplication: TTabSheet
+      Caption = 'New Application'
       ImageIndex = 2
     end
-    object tabUserAdmin: TTabSheet
-      Caption = 'User Administration'
+    object tabNotificationsStudents: TTabSheet
+      Caption = 'Notifications'
       ImageIndex = 3
-    end
-    object tabEventLog: TTabSheet
-      Caption = 'Event Log'
-      ImageIndex = 4
     end
   end
 end
