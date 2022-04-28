@@ -9,11 +9,16 @@ uses
 
 type
   TfrmStaff = class(TForm)
-    tabCtrl: TTabControl;
     pnlQuickAcess: TPanel;
     BitBtn1: TBitBtn;
     btnLogout: TButton;
-    procedure BitBtn1Exit(Sender: TObject);
+    tbcStaff: TPageControl;
+    tabHome: TTabSheet;
+    tabCources: TTabSheet;
+    tabSubmissions: TTabSheet;
+    tabUserAdmin: TTabSheet;
+    tabEventLog: TTabSheet;
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,7 +32,8 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmStaff.BitBtn1Exit(Sender: TObject);
+
+procedure TfrmStaff.BitBtn1Click(Sender: TObject);
 begin
   Application.Terminate;
 end;

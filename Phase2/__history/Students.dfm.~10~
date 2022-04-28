@@ -1,0 +1,60 @@
+object frmStudents: TfrmStudents
+  Left = 0
+  Top = 0
+  Caption = 'Students'
+  ClientHeight = 561
+  ClientWidth = 884
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object tabCtrl: TTabControl
+    Left = 0
+    Top = 0
+    Width = 884
+    Height = 524
+    Align = alClient
+    TabOrder = 0
+    Tabs.Strings = (
+      'Home'
+      'Submissions'
+      'New Application'
+      'Notifications')
+    TabIndex = 0
+    ExplicitLeft = 8
+    ExplicitHeight = 528
+  end
+  object pnlQuickAcess: TPanel
+    Left = 0
+    Top = 524
+    Width = 884
+    Height = 37
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 1
+    ExplicitLeft = -10
+    ExplicitWidth = 894
+    object BitBtn1: TBitBtn
+      Left = 787
+      Top = 6
+      Width = 75
+      Height = 25
+      Kind = bkClose
+      NumGlyphs = 2
+      TabOrder = 0
+    end
+    object btnLogout: TButton
+      Left = 698
+      Top = 6
+      Width = 75
+      Height = 25
+      Caption = 'Logout'
+      TabOrder = 1
+    end
+  end
+end

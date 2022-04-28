@@ -15,24 +15,24 @@ object frmStudents: TfrmStudents
   TextHeight = 13
   object pnlQuickAcess: TPanel
     Left = 0
-    Top = 520
+    Top = 524
     Width = 884
-    Height = 41
+    Height = 37
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
     object BitBtn1: TBitBtn
-      Left = 795
+      Left = 787
       Top = 6
       Width = 75
       Height = 25
       Kind = bkClose
       NumGlyphs = 2
       TabOrder = 0
-      OnExit = BitBtn1Exit
+      OnClick = BitBtn1Click
     end
     object btnLogout: TButton
-      Left = 706
+      Left = 698
       Top = 6
       Width = 75
       Height = 25
@@ -40,18 +40,27 @@ object frmStudents: TfrmStudents
       TabOrder = 1
     end
   end
-  object tabCtrl: TTabControl
+  object tbcStudents: TPageControl
     Left = 0
-    Top = 0
-    Width = 884
-    Height = 520
-    Align = alClient
+    Top = -2
+    Width = 894
+    Height = 526
+    ActivePage = tabNotificationsStudents
     TabOrder = 1
-    Tabs.Strings = (
-      'Home'
-      'Submissions'
-      'New Application'
-      'Notifications')
-    TabIndex = 0
+    object tabHomeStudents: TTabSheet
+      Caption = 'Home'
+    end
+    object tabYourSubmissions: TTabSheet
+      Caption = 'Your Submissions'
+      ImageIndex = 1
+    end
+    object tabNewApplication: TTabSheet
+      Caption = 'New Application'
+      ImageIndex = 2
+    end
+    object tabNotificationsStudents: TTabSheet
+      Caption = 'Notifications'
+      ImageIndex = 3
+    end
   end
 end

@@ -12,8 +12,12 @@ type
     pnlQuickAcess: TPanel;
     BitBtn1: TBitBtn;
     btnLogout: TButton;
-    tabCtrl: TTabControl;
-    procedure BitBtn1Exit(Sender: TObject);
+    tbcStudents: TPageControl;
+    tabHomeStudents: TTabSheet;
+    tabYourSubmissions: TTabSheet;
+    tabNewApplication: TTabSheet;
+    tabNotificationsStudents: TTabSheet;
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,9 +31,10 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmStudents.BitBtn1Exit(Sender: TObject);
+procedure TfrmStudents.BitBtn1Click(Sender: TObject);
 begin
   Application.Terminate;
 end;
+
 
 end.
