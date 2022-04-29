@@ -45,8 +45,6 @@ type
     dateUpdated : TDatetime;
     preCalculatedScore : real;
   end;
-
-
   TUtil = class(TComponent)
     Function noSpace(sString : string) : string;
     procedure error(sError: string; log : boolean);
@@ -54,7 +52,7 @@ type
     Procedure logevent(sEvent : string; EventType: TEventType);
     Procedure deleteFile(const sFileName : string);
     Procedure warn(sWarn : string; log : boolean);
-    Function calculateScore(course_ID : string; marks : TMarks) : real;
+    Function calculateScore(course_ID : string[50]; marks : TMarks) : real;
     Var
       const
         scInvalidNames : Tsc = [#33..#44, #46..#64, #91..#96, #123..#126];
@@ -88,7 +86,7 @@ begin
   CloseFile(tFile);
 end;
 
-function TUtil.calculateScore(course_ID : string, marks : TMarks) : real;
+function TUtil.calculateScore(course_ID : string[50], marks : TMarks) : real;
 begin
 //
 end;
