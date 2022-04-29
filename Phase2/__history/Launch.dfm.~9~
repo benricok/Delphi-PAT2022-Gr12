@@ -15,12 +15,30 @@ object frmLaunch: TfrmLaunch
   Position = poMainFormCenter
   PixelsPerInch = 96
   TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 155
+    Width = 346
+    Height = 37
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 0
+    object BitBtn3: TBitBtn
+      Left = 254
+      Top = 8
+      Width = 75
+      Height = 25
+      Kind = bkClose
+      NumGlyphs = 2
+      TabOrder = 0
+    end
+  end
   object Panel2: TPanel
     Left = 0
     Top = 0
     Width = 346
     Height = 157
-    TabOrder = 0
+    TabOrder = 1
     object lblWeclome: TLabel
       Left = 104
       Top = 32
@@ -51,34 +69,6 @@ object frmLaunch: TfrmLaunch
       Caption = 'Students'
       TabOrder = 1
       OnClick = btnStudentsClick
-    end
-  end
-  object Panel1: TPanel
-    Left = 0
-    Top = 155
-    Width = 346
-    Height = 37
-    Align = alBottom
-    BevelOuter = bvNone
-    TabOrder = 1
-    ExplicitTop = 151
-    object BitBtn3: TBitBtn
-      Left = 254
-      Top = 8
-      Width = 75
-      Height = 25
-      Kind = bkClose
-      NumGlyphs = 2
-      TabOrder = 0
-    end
-    object BitBtn1: TBitBtn
-      Left = 16
-      Top = 8
-      Width = 75
-      Height = 25
-      Kind = bkHelp
-      NumGlyphs = 2
-      TabOrder = 1
     end
   end
 end

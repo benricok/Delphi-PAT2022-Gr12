@@ -14,7 +14,6 @@ type
     BitBtn3: TBitBtn;
     Panel2: TPanel;
     lblWeclome: TLabel;
-    BitBtn1: TBitBtn;
     procedure btnStaffClick(Sender: TObject);
     procedure btnStudentsClick(Sender: TObject);
   private
