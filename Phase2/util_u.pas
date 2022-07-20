@@ -20,7 +20,7 @@ unit util_u;
 
 interface
 
-uses SysUtils, Classes, Vcl.Forms, Vcl.Dialogs, System.Variants, time;
+uses SysUtils, Classes, Vcl.Forms, Vcl.Dialogs, System.Variants;
 
 type
   Tsc = set of char;
@@ -88,7 +88,7 @@ begin
   CloseFile(tFile);
 end;
 
-function TUtil.calculateScore(course_ID : string, marks : TMarks) : real;
+function TUtil.calculateScore(course_ID : string; marks : TMarks) : real;
 begin
 //
 end;
