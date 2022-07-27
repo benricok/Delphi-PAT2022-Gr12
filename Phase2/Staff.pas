@@ -14,11 +14,20 @@ type
     btnLogout: TButton;
     tbcStaff: TPageControl;
     tabHome: TTabSheet;
-    tabCources: TTabSheet;
+    tabCourses: TTabSheet;
     tabSubmissions: TTabSheet;
     tabUserAdmin: TTabSheet;
     tabEventLog: TTabSheet;
+    ComboBox1: TComboBox;
+    Label2: TLabel;
+    Label1: TLabel;
+    BitBtn2: TBitBtn;
+    btnNewCourse: TBitBtn;
+    BitBtn3: TBitBtn;
     procedure BitBtn1Click(Sender: TObject);
+    procedure btnNewCourseClick(Sender: TObject);
+    procedure clearFrmFields;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -34,6 +43,21 @@ implementation
 
 
 procedure TfrmStaff.BitBtn1Click(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmStaff.btnNewCourseClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmStaff.clearFrmFields;
+begin
+//
+end;
+
+procedure TfrmStaff.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Application.Terminate;
 end;

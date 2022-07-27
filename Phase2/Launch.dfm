@@ -61,7 +61,6 @@ object frmLaunch: TfrmLaunch
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 151
     object BitBtn3: TBitBtn
       Left = 254
       Top = 8

@@ -8,13 +8,16 @@ uses
   Login in 'Login.pas' {frmLogin},
   DBUsers_u in 'DBUsers_u.pas',
   util_u in 'util_u.pas',
-  auth_u in 'auth_u.pas';
+  auth_u in 'auth_u.pas',
+  Vcl.Themes,
+  Vcl.Styles;
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Amakrits');
   Application.CreateForm(TfrmLaunch, frmLaunch);
   Application.CreateForm(TfrmStudents, frmStudents);
   Application.CreateForm(TfrmStaff, frmStaff);
