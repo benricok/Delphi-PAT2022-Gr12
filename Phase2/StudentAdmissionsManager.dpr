@@ -17,7 +17,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  TStyleManager.TrySetStyle('Amakrits');
+  TStyleManager.TrySetStyle('Light');
   Application.CreateForm(TfrmLaunch, frmLaunch);
   Application.CreateForm(TfrmStudents, frmStudents);
   Application.CreateForm(TfrmStaff, frmStaff);
