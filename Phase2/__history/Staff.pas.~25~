@@ -58,8 +58,6 @@ type
     Label14: TLabel;
     cbxSub8: TComboBox;
     spnSub8: TSpinEdit;
-    Label15: TLabel;
-    btnEdtSubjects: TBitBtn;
     procedure BitBtn1Click(Sender: TObject);
     procedure btnNewCourseClick(Sender: TObject);
     procedure clearFrmFields;
