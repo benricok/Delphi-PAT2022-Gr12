@@ -185,31 +185,23 @@ object frmStudents: TfrmStudents
         ParentFont = False
         TabOrder = 1
       end
-      object btnAppSave: TBitBtn
+      object btnSubmitnew: TBitBtn
         Left = 16
         Top = 448
         Width = 145
         Height = 25
-        Caption = '&Save Your New Application'
-        TabOrder = 2
-      end
-      object btnSubmitnew: TBitBtn
-        Left = 184
-        Top = 448
-        Width = 145
-        Height = 25
         Caption = 'Submit New Application'
-        TabOrder = 3
+        TabOrder = 2
       end
       object BitBtn3: TBitBtn
         Left = 343
         Top = 448
         Width = 75
         Height = 25
-        Caption = '&Restart'
+        Caption = '&Reset'
         Kind = bkRetry
         NumGlyphs = 2
-        TabOrder = 4
+        TabOrder = 3
       end
       object edtStudentNotiEmail: TEdit
         Left = 16
@@ -217,7 +209,7 @@ object frmStudents: TfrmStudents
         Width = 402
         Height = 21
         Hint = 'notification email'
-        TabOrder = 5
+        TabOrder = 4
         TextHint = 'Enter the email(s) you want to use to recieve notifications'
       end
       object rgpCurriculum: TRadioGroup
@@ -234,7 +226,7 @@ object frmStudents: TfrmStudents
           'Cambridge International A- Levels'
           'International Baccalaureate Diploma'
           'American High School Diploma')
-        TabOrder = 6
+        TabOrder = 5
       end
       object Edit1: TEdit
         Left = 16
@@ -242,7 +234,7 @@ object frmStudents: TfrmStudents
         Width = 402
         Height = 21
         Hint = 'Enter the name of your education institution'
-        TabOrder = 7
+        TabOrder = 6
         TextHint = 'Enter the name of your education institution'
       end
       object ComboBox2: TComboBox
@@ -251,7 +243,7 @@ object frmStudents: TfrmStudents
         Width = 402
         Height = 21
         ItemIndex = 0
-        TabOrder = 8
+        TabOrder = 7
         Text = 'Western Cape Education Department'
         Items.Strings = (
           'Western Cape Education Department')

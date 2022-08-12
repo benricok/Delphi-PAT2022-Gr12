@@ -57,14 +57,31 @@ object frmStudents: TfrmStudents
     Height = 526
     ActivePage = tabNewApplication
     TabOrder = 1
-    object tabMyInfo: TTabSheet
-      Caption = 'My Info'
+    object tabHomeStudents: TTabSheet
+      Caption = 'Home'
       object Label3: TLabel
         Left = 32
         Top = 24
         Width = 62
         Height = 29
         Caption = 'Home'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+    end
+    object tabYourSubmissions: TTabSheet
+      Caption = 'Your Submissions'
+      ImageIndex = 1
+      object lblYourSub: TLabel
+        Left = 16
+        Top = 24
+        Width = 136
+        Height = 29
+        Caption = 'Submissions:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -24
@@ -255,6 +272,23 @@ object frmStudents: TfrmStudents
         Text = 'Western Cape Education Department'
         Items.Strings = (
           'Western Cape Education Department')
+      end
+    end
+    object tabNotificationsStudents: TTabSheet
+      Caption = 'Notifications'
+      ImageIndex = 3
+      object Label1: TLabel
+        Left = 24
+        Top = 24
+        Width = 136
+        Height = 29
+        Caption = 'Submissions:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
     end
   end
