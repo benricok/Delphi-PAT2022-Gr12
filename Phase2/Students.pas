@@ -20,7 +20,6 @@ type
     ComboBox1: TComboBox;
     Label4: TLabel;
     Memo1: TMemo;
-    btnAppSave: TBitBtn;
     btnSubmitnew: TBitBtn;
     BitBtn2: TBitBtn;
     BitBtn3: TBitBtn;
