@@ -24,7 +24,6 @@ object frmStaff: TfrmStaff
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 894
     object BitBtn1: TBitBtn
       Left = 795
       Top = 6
