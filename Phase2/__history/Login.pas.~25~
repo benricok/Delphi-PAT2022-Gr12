@@ -7,7 +7,6 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, DB, ADODB, util_u;
 
 type
-  eFrmType = (Students, Staff);
   TfrmLogin = class(TForm)
     pnlLogin: TPanel;
     btnLogin: TBitBtn;
@@ -18,12 +17,13 @@ type
     btnShowPass: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
-  private
     procedure btnLoginClick(Sender: TObject);
     procedure btnShowPassMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnShowPassMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+  private
+    
     var
       activeUser : util_u.TUser;
       bAuth : boolean;
@@ -33,8 +33,8 @@ type
       dsrTbl: TDataSource;
       dsrSQL: TDataSource;
       SQL: String;
+      eMyType : eFrmType;
   published
-
     Procedure frmConfigure(eType : eFrmType);
     Procedure logout;
     Function getUser : TUser;
@@ -49,7 +49,7 @@ implementation
 
 { TfrmLogin }
 
-uses DBUsers_u, auth_u;
+uses DBUsers_u, auth_u, Staff;
 
 // -----------------------------------------------------------------------------
 //
@@ -81,7 +81,6 @@ begin
         if tblUsers['HashedPASS'] = auth.hash(edtPass.Text) then begin
           auth.readUser(activeUser);
           util.logevent('User ' + activeUser.username + ' logged in.', TEventType.info);
-          frmMain.Show;
           frmLogin.Hide;
         end else
           util.warn('Invalid password by user ' + edtUser.Text, true)
@@ -125,7 +124,7 @@ end;
 procedure TfrmLogin.logout;
 begin
   frmLogin.Show;
-  frmMain.Hide;
+  //frmMain.Hide;
   edtUser.SetFocus;
   edtPass.Clear;
 end;

@@ -55,6 +55,7 @@ type
     Procedure deleteFile(const sFileName : string);
     Procedure warn(sWarn : string; log : boolean);
     Function calculateScore(course_ID : string; marks : TMarks) : real;
+    Procedure notify(sMessage : string);
     Var
       const
         scInvalidNames : Tsc = [#33..#44, #46..#64, #91..#96, #123..#126];
@@ -126,5 +127,10 @@ begin
   if log then
     logevent(sWarn, TEventType.warning); // Log event in event logger
 end;
+
+ Procedure TUtil.notify(sMessage : string);
+ begin
+   MessageDlg(sMessage, mtInformation, [mbOK], 0);
+ end;
 
 end.

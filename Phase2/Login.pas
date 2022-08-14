@@ -7,7 +7,6 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, DB, ADODB, util_u;
 
 type
-  eFrmType = (Students, Staff);
   TfrmLogin = class(TForm)
     pnlLogin: TPanel;
     btnLogin: TBitBtn;
@@ -34,9 +33,7 @@ type
       dsrTbl: TDataSource;
       dsrSQL: TDataSource;
       SQL: String;
-      eMyType : eFrmType;
   published
-    Procedure frmConfigure(eType : eFrmType);
     Procedure logout;
     Function getUser : TUser;
   end;
@@ -50,7 +47,7 @@ implementation
 
 { TfrmLogin }
 
-uses DBUsers_u, auth_u, Students, Staff;
+uses DBUsers_u, auth_u, Staff;
 
 // -----------------------------------------------------------------------------
 //
@@ -82,10 +79,6 @@ begin
         if tblUsers['HashedPASS'] = auth.hash(edtPass.Text) then begin
           auth.readUser(activeUser);
           util.logevent('User ' + activeUser.username + ' logged in.', TEventType.info);
-          case eMyType of
-            eFrmType.Students: frmStudents.Show;
-            eFrmType.Staff: frmStaff.Show;
-          end;
           frmLogin.Hide;
         end else
           util.warn('Invalid password by user ' + edtUser.Text, true)
@@ -117,11 +110,6 @@ end;
 procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
   DBUsers.connectDB;
-end;
-
-procedure TfrmLogin.frmConfigure(eType: eFrmType);
-begin
-  eMyType := eType;
 end;
 
 // Getter for active user record

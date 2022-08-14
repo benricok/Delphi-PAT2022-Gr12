@@ -18,12 +18,13 @@ type
     btnShowPass: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
-  private
     procedure btnLoginClick(Sender: TObject);
     procedure btnShowPassMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnShowPassMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+  private
+    
     var
       activeUser : util_u.TUser;
       bAuth : boolean;
@@ -49,7 +50,7 @@ implementation
 
 { TfrmLogin }
 
-uses DBUsers_u, auth_u;
+uses DBUsers_u, auth_u, Students, Staff;
 
 // -----------------------------------------------------------------------------
 //
@@ -81,7 +82,10 @@ begin
         if tblUsers['HashedPASS'] = auth.hash(edtPass.Text) then begin
           auth.readUser(activeUser);
           util.logevent('User ' + activeUser.username + ' logged in.', TEventType.info);
-          frmMain.Show;
+          case eMyType of
+            eFrmType.Students: frmStudents.Show;
+            eFrmType.Staff: frmStaff.Show;
+          end;
           frmLogin.Hide;
         end else
           util.warn('Invalid password by user ' + edtUser.Text, true)
@@ -115,6 +119,11 @@ begin
   DBUsers.connectDB;
 end;
 
+procedure TfrmLogin.frmConfigure(eType: eFrmType);
+begin
+  eMyType := eType;
+end;
+
 // Getter for active user record
 function TfrmLogin.getUser: util_u.TUser;
 begin
@@ -125,7 +134,7 @@ end;
 procedure TfrmLogin.logout;
 begin
   frmLogin.Show;
-  frmMain.Hide;
+  //frmMain.Hide;
   edtUser.SetFocus;
   edtPass.Clear;
 end;

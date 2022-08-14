@@ -1,28 +1,35 @@
-unit Staff;
+unit Students;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
-  Vcl.ComCtrls, Vcl.Menus;
+  Vcl.ComCtrls;
 
 type
-  TfrmStaff = class(TForm)
+  TfrmStudents = class(TForm)
     pnlQuickAcess: TPanel;
     BitBtn1: TBitBtn;
     btnLogout: TButton;
-    tbcStaff: TPageControl;
-    tabHome: TTabSheet;
-    tabCourses: TTabSheet;
-    tabSubmissions: TTabSheet;
-    tabUserAdmin: TTabSheet;
-    tabEventLog: TTabSheet;
-    ComboBox1: TComboBox;
+    tbcStudents: TPageControl;
+    tabMyInfo: TTabSheet;
+    tabNewApplication: TTabSheet;
     Label2: TLabel;
-    Label1: TLabel;
+    Label3: TLabel;
+    ComboBox1: TComboBox;
+    Label4: TLabel;
+    Memo1: TMemo;
+    btnSubmitnew: TBitBtn;
     BitBtn2: TBitBtn;
     BitBtn3: TBitBtn;
+    Label5: TLabel;
+    edtStudentNotiEmail: TEdit;
+    rgpCurriculum: TRadioGroup;
+    Label6: TLabel;
+    Edit1: TEdit;
+    Label7: TLabel;
+    ComboBox2: TComboBox;
     procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
@@ -31,16 +38,16 @@ type
   end;
 
 var
-  frmStaff: TfrmStaff;
+  frmStudents: TfrmStudents;
 
 implementation
 
 {$R *.dfm}
 
-
-procedure TfrmStaff.BitBtn1Click(Sender: TObject);
+procedure TfrmStudents.BitBtn1Click(Sender: TObject);
 begin
   Application.Terminate;
 end;
+
 
 end.

@@ -55,7 +55,7 @@ end;
 
 procedure TfrmStudents.FormActivate(Sender: TObject);
 begin
-  util.notify('Please note progress cannot be saved, thus fill in application and submit immediately');
+  util.notify('Please note progress cannot be saved, thus fill in application and submit immediately')
 end;
 
 end.

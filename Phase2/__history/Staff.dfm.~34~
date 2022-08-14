@@ -4,7 +4,7 @@ object frmStaff: TfrmStaff
   BorderStyle = bsDialog
   Caption = 'Staff'
   ClientHeight = 571
-  ClientWidth = 884
+  ClientWidth = 894
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,14 +19,13 @@ object frmStaff: TfrmStaff
   object pnlQuickAcess: TPanel
     Left = 0
     Top = 528
-    Width = 884
+    Width = 894
     Height = 43
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 894
     object BitBtn1: TBitBtn
-      Left = 795
+      Left = 803
       Top = 6
       Width = 75
       Height = 25
@@ -53,19 +52,18 @@ object frmStaff: TfrmStaff
       TabOrder = 2
     end
     object btnEdtSubjects: TBitBtn
-      Left = 97
+      Left = 109
       Top = 6
       Width = 75
       Height = 25
       Caption = 'Edit Subjects'
       TabOrder = 3
-      OnClick = btnEdtSubjectsClick
     end
   end
   object tbcStaff: TPageControl
-    Left = 0
+    Left = 8
     Top = 0
-    Width = 886
+    Width = 878
     Height = 522
     ActivePage = tabCourses
     TabOrder = 1
