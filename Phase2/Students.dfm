@@ -55,7 +55,7 @@ object frmStudents: TfrmStudents
     Top = -2
     Width = 894
     Height = 526
-    ActivePage = tabNewApplication
+    ActivePage = tabMyInfo
     TabOrder = 1
     object tabMyInfo: TTabSheet
       Caption = 'My Info'
