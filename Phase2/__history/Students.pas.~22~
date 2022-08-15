@@ -35,12 +35,6 @@ type
     edtPrefName: TEdit;
     edtSurname: TEdit;
     edtInitials: TEdit;
-    Label8: TLabel;
-    Edit1: TEdit;
-    Label9: TLabel;
-    Edit2: TEdit;
-    Edit3: TEdit;
-    Edit4: TEdit;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure edtFullNamesChange(Sender: TObject);
@@ -67,14 +61,11 @@ end;
 
 procedure TfrmStudents.edtFullNamesChange(Sender: TObject);
 Var
-  sTemp, sBuild : string;
+  sFullname : string;
   iPos : integer;
 begin
-  sTemp := edtFullNames.Text;
-  iPos := Pos(' ', sTemp);
-  sBuild := Uppercase(sTemp[1] + sTemp[iPos+1]);
-
-
+  sFullname := edtFullNames.Text;
+  iPos := Pos(' ', sFullname);
 end;
 
 procedure TfrmStudents.FormActivate(Sender: TObject);

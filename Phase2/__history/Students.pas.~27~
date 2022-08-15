@@ -27,11 +27,17 @@ type
     edtStudentNotiEmail: TEdit;
     rgpCurriculum: TRadioGroup;
     Label6: TLabel;
-    Edit1: TEdit;
+    edtEduInstitution: TEdit;
     Label7: TLabel;
     ComboBox2: TComboBox;
+    edtFullNames: TEdit;
+    Label1: TLabel;
+    edtPrefName: TEdit;
+    edtSurname: TEdit;
+    edtInitials: TEdit;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure edtFullNamesChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -53,9 +59,21 @@ begin
 end;
 
 
+procedure TfrmStudents.edtFullNamesChange(Sender: TObject);
+Var
+  sTemp, sBuild : string;
+  iPos : integer;
+begin
+  sTemp := edtFullNames.Text;
+  iPos := Pos(' ', sTemp);
+  sBuild := Uppercase(sTemp[1] + sTemp[iPos+1]);
+
+
+end;
+
 procedure TfrmStudents.FormActivate(Sender: TObject);
 begin
-  util.notify('Please note progress cannot be saved, thus fill in application and submit immediately')
+  util.notify('Please note progress cannot be saved, thus fill in application and submit immediately');
 end;
 
 end.

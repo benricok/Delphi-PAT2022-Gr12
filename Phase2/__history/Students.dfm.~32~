@@ -143,7 +143,7 @@ object frmStudents: TfrmStudents
         Top = 281
         Width = 88
         Height = 16
-        Caption = 'Home Address:'
+        Caption = 'Phone number:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -242,7 +242,7 @@ object frmStudents: TfrmStudents
         Height = 21
         Hint = 'notification email'
         TabOrder = 8
-        TextHint = 'Enter your personal phone number'
+        TextHint = 'Enter the email(s) you want to use to recieve notifications'
       end
       object Edit2: TEdit
         Left = 32
@@ -251,25 +251,7 @@ object frmStudents: TfrmStudents
         Height = 21
         Hint = 'notification email'
         TabOrder = 9
-        TextHint = 'Address line 1'
-      end
-      object Edit3: TEdit
-        Left = 32
-        Top = 330
-        Width = 402
-        Height = 21
-        Hint = 'notification email'
-        TabOrder = 10
-        TextHint = 'Address line 2'
-      end
-      object Edit4: TEdit
-        Left = 32
-        Top = 357
-        Width = 402
-        Height = 21
-        Hint = 'notification email'
-        TabOrder = 11
-        TextHint = 'Address line 3'
+        TextHint = 'Enter the email(s) you want to use to recieve notifications'
       end
     end
     object tabNewApplication: TTabSheet

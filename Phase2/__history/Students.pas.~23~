@@ -20,7 +20,6 @@ type
     ComboBox1: TComboBox;
     Label4: TLabel;
     Memo1: TMemo;
-    btnAppSave: TBitBtn;
     btnSubmitnew: TBitBtn;
     BitBtn2: TBitBtn;
     BitBtn3: TBitBtn;
@@ -28,10 +27,17 @@ type
     edtStudentNotiEmail: TEdit;
     rgpCurriculum: TRadioGroup;
     Label6: TLabel;
-    Edit1: TEdit;
+    edtEduInstitution: TEdit;
     Label7: TLabel;
     ComboBox2: TComboBox;
+    edtFullNames: TEdit;
+    Label1: TLabel;
+    edtPrefName: TEdit;
+    edtSurname: TEdit;
+    edtInitials: TEdit;
     procedure BitBtn1Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure edtFullNamesChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,6 +49,8 @@ var
 
 implementation
 
+uses util_u;
+
 {$R *.dfm}
 
 procedure TfrmStudents.BitBtn1Click(Sender: TObject);
@@ -50,5 +58,20 @@ begin
   Application.Terminate;
 end;
 
+
+procedure TfrmStudents.edtFullNamesChange(Sender: TObject);
+Var
+  sFullname, sTemp : string;
+  iPos : integer;
+begin
+  sFullname := edtFullNames.Text;
+  iPos := Pos(' ', sFullname);
+
+end;
+
+procedure TfrmStudents.FormActivate(Sender: TObject);
+begin
+  util.notify('Please note progress cannot be saved, thus fill in application and submit immediately');
+end;
 
 end.

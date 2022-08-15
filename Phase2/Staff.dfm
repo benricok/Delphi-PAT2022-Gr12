@@ -65,7 +65,7 @@ object frmStaff: TfrmStaff
     Top = 0
     Width = 886
     Height = 522
-    ActivePage = tabCourses
+    ActivePage = tabHome
     TabOrder = 1
     object tabHome: TTabSheet
       Caption = 'Home'
@@ -543,6 +543,10 @@ object frmStaff: TfrmStaff
     object tabEventLog: TTabSheet
       Caption = 'Event Log'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
 end
