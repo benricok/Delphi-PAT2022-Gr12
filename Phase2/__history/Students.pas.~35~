@@ -29,15 +29,24 @@ type
     Label6: TLabel;
     edtEduInstitution: TEdit;
     Label7: TLabel;
-    ComboBox2: TComboBox;
     edtFullNames: TEdit;
     Label1: TLabel;
     edtPrefName: TEdit;
     edtSurname: TEdit;
     edtInitials: TEdit;
+    ComboBox2: TComboBox;
+    Label8: TLabel;
+    Edit1: TEdit;
+    Label9: TLabel;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    btnNext: TBitBtn;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure edtFullNamesChange(Sender: TObject);
+    procedure btnNextClick(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -59,13 +68,25 @@ begin
 end;
 
 
+procedure TfrmStudents.btnNextClick(Sender: TObject);
+begin
+  tbcStudents.ActivePageIndex := 1;
+end;
+
+procedure TfrmStudents.ComboBox1Change(Sender: TObject);
+begin
+  //
+end;
+
 procedure TfrmStudents.edtFullNamesChange(Sender: TObject);
 Var
-  sTemp : string;
+  sTemp, sBuild : string;
   iPos : integer;
 begin
   sTemp := edtFullNames.Text;
   iPos := Pos(' ', sTemp);
+  sBuild := Uppercase(sTemp[1] + sTemp[iPos+1]);
+
 
 end;
 

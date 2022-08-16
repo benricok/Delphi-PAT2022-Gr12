@@ -58,7 +58,6 @@ object frmStaff: TfrmStaff
       Height = 25
       Caption = 'Edit Subjects'
       TabOrder = 3
-      OnClick = btnEdtSubjectsClick
     end
   end
   object tbcStaff: TPageControl

@@ -55,6 +55,9 @@ type
     Label13: TLabel;
     cbxSub7: TComboBox;
     spnSub7: TSpinEdit;
+    Label14: TLabel;
+    cbxSub8: TComboBox;
+    spnSub8: TSpinEdit;
     Label15: TLabel;
     btnEdtSubjects: TBitBtn;
     procedure BitBtn1Click(Sender: TObject);

@@ -67,7 +67,6 @@ type
     procedure btnUpdateCourseClick(Sender: TObject);
     procedure saveCourse(new : boolean);
     procedure clearInputsCourse;
-    procedure btnEdtSubjectsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -85,11 +84,6 @@ implementation
 procedure TfrmStaff.BitBtn1Click(Sender: TObject);
 begin
   Application.Terminate;
-end;
-
-procedure TfrmStaff.btnEdtSubjectsClick(Sender: TObject);
-begin
-
 end;
 
 procedure TfrmStaff.btnNewCourseClick(Sender: TObject);

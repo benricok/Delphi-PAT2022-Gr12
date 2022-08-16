@@ -65,7 +65,7 @@ object frmStaff: TfrmStaff
     Top = 0
     Width = 886
     Height = 522
-    ActivePage = tabHome
+    ActivePage = tabCourses
     TabOrder = 1
     object tabHome: TTabSheet
       Caption = 'Home'
@@ -321,19 +321,6 @@ object frmStaff: TfrmStaff
           Font.Style = []
           ParentFont = False
         end
-        object Label14: TLabel
-          Left = 407
-          Top = 345
-          Width = 59
-          Height = 16
-          Caption = 'Subject 8:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
         object Label15: TLabel
           Left = 767
           Top = 41
@@ -513,23 +500,6 @@ object frmStaff: TfrmStaff
           TabOrder = 16
           Value = 0
         end
-        object cbxSub8: TComboBox
-          Left = 488
-          Top = 343
-          Width = 265
-          Height = 21
-          TabOrder = 17
-        end
-        object spnSub8: TSpinEdit
-          Left = 767
-          Top = 343
-          Width = 58
-          Height = 22
-          MaxValue = 0
-          MinValue = 0
-          TabOrder = 18
-          Value = 0
-        end
       end
     end
     object tabSubmissions: TTabSheet
@@ -543,10 +513,6 @@ object frmStaff: TfrmStaff
     object tabEventLog: TTabSheet
       Caption = 'Event Log'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
   end
 end

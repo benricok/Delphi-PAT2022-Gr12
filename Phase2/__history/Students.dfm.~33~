@@ -75,10 +75,10 @@ object frmStudents: TfrmStudents
       end
       object Label5: TLabel
         Left = 32
-        Top = 384
-        Width = 98
+        Top = 168
+        Width = 85
         Height = 16
-        Caption = 'Email addresses:'
+        Caption = 'Email address:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -88,7 +88,7 @@ object frmStudents: TfrmStudents
       end
       object Label7: TLabel
         Left = 456
-        Top = 264
+        Top = 281
         Width = 198
         Height = 16
         Caption = 'Select the province of your school:'
@@ -101,7 +101,7 @@ object frmStudents: TfrmStudents
       end
       object Label6: TLabel
         Left = 456
-        Top = 208
+        Top = 225
         Width = 95
         Height = 16
         Caption = 'Name of School:'
@@ -127,10 +127,23 @@ object frmStudents: TfrmStudents
       end
       object Label8: TLabel
         Left = 32
-        Top = 138
-        Width = 57
+        Top = 225
+        Width = 88
         Height = 16
-        Caption = 'Fullname:'
+        Caption = 'Phone number:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label9: TLabel
+        Left = 32
+        Top = 281
+        Width = 88
+        Height = 16
+        Caption = 'Home Address:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -140,16 +153,16 @@ object frmStudents: TfrmStudents
       end
       object edtStudentNotiEmail: TEdit
         Left = 32
-        Top = 406
+        Top = 190
         Width = 402
         Height = 21
         Hint = 'notification email'
         TabOrder = 0
-        TextHint = 'Enter the email(s) you want to use to recieve notifications'
+        TextHint = 'Enter the email address you want to use to recieve notifications'
       end
       object ComboBox2: TComboBox
         Left = 456
-        Top = 286
+        Top = 303
         Width = 402
         Height = 21
         TabOrder = 1
@@ -167,7 +180,7 @@ object frmStudents: TfrmStudents
       end
       object edtEduInstitution: TEdit
         Left = 456
-        Top = 230
+        Top = 247
         Width = 402
         Height = 21
         Hint = 'Enter the name of your education institution'
@@ -176,7 +189,7 @@ object frmStudents: TfrmStudents
       end
       object rgpCurriculum: TRadioGroup
         Left = 456
-        Top = 72
+        Top = 89
         Width = 402
         Height = 122
         Caption = 'Curriculum'
@@ -196,13 +209,67 @@ object frmStudents: TfrmStudents
         Width = 402
         Height = 21
         TabOrder = 4
+        OnChange = edtFullNamesChange
+      end
+      object edtPrefName: TEdit
+        Left = 79
+        Top = 123
+        Width = 187
+        Height = 21
+        TabOrder = 5
+        TextHint = 'Prefered name'
+      end
+      object edtSurname: TEdit
+        Left = 272
+        Top = 123
+        Width = 162
+        Height = 21
+        TabOrder = 6
+        TextHint = 'Surname'
+      end
+      object edtInitials: TEdit
+        Left = 32
+        Top = 123
+        Width = 41
+        Height = 21
+        TabOrder = 7
+        TextHint = 'Initials'
       end
       object Edit1: TEdit
         Left = 32
-        Top = 160
+        Top = 247
         Width = 402
         Height = 21
-        TabOrder = 5
+        Hint = 'notification email'
+        TabOrder = 8
+        TextHint = 'Enter your personal phone number'
+      end
+      object Edit2: TEdit
+        Left = 32
+        Top = 303
+        Width = 402
+        Height = 21
+        Hint = 'notification email'
+        TabOrder = 9
+        TextHint = 'Address line 1'
+      end
+      object Edit3: TEdit
+        Left = 32
+        Top = 330
+        Width = 402
+        Height = 21
+        Hint = 'notification email'
+        TabOrder = 10
+        TextHint = 'Address line 2'
+      end
+      object Edit4: TEdit
+        Left = 32
+        Top = 357
+        Width = 402
+        Height = 21
+        Hint = 'notification email'
+        TabOrder = 11
+        TextHint = 'Address line 3'
       end
     end
     object tabNewApplication: TTabSheet
