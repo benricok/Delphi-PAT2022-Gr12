@@ -15,13 +15,13 @@ type
     lblUser: TLabel;
     lblPass: TLabel;
     btnShowPass: TBitBtn;
-    procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure btnLoginClick(Sender: TObject);
     procedure btnShowPassMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnShowPassMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     
     var
@@ -47,7 +47,7 @@ implementation
 
 { TfrmLogin }
 
-uses DBUsers_u, auth_u, Staff;
+uses DBConnection_u, auth_u, Staff, Launch;
 
 // -----------------------------------------------------------------------------
 //
@@ -72,11 +72,11 @@ Var
   sGender : string;
 begin
   if NOT((edtPass.Text = '') OR (edtUser.Text = '')) then begin
-    tblUsers.open;
-    tblUsers.First;
-    if tblUsers.Locate('Username', edtUser.Text, [loCaseInsensitive]) then begin
-      if tblUsers['Enabled'] = true then begin
-        if tblUsers['HashedPASS'] = auth.hash(edtPass.Text) then begin
+    tblStaff.open;
+    tblStaff.First;
+    if tblStaff.Locate('Username', edtUser.Text, [loCaseInsensitive]) then begin
+      if tblStaff['Enabled'] = true then begin
+        if tblStaff['HashedPASS'] = auth.hash(edtPass.Text) then begin
           auth.readUser(activeUser);
           util.logevent('User ' + activeUser.username + ' logged in.', TEventType.info);
           frmLogin.Hide;
@@ -107,9 +107,9 @@ begin
   edtUser.SetFocus;
 end;
 
-procedure TfrmLogin.FormCreate(Sender: TObject);
+procedure TfrmLogin.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  DBUsers.connectDB;
+  frmLaunch.Show;
 end;
 
 // Getter for active user record

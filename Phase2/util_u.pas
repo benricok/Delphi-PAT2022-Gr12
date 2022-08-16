@@ -67,6 +67,8 @@ Var
 
 implementation
 
+uses DBConnection_u;
+
 procedure TUtil.initFile(const sFileName: string; var tFile : Textfile);
 begin
   AssignFile(tFile, sFileName);

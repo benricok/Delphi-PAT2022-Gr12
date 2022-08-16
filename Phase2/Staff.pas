@@ -77,6 +77,8 @@ implementation
 
 {$R *.dfm}
 
+uses DBConnection_u, util_u;
+
 
 procedure TfrmStaff.BitBtn1Click(Sender: TObject);
 begin

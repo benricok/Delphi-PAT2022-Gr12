@@ -17,6 +17,7 @@ type
     BitBtn1: TBitBtn;
     procedure btnStaffClick(Sender: TObject);
     procedure btnStudentsClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,7 +31,7 @@ implementation
 
 {$R *.dfm}
 
-uses login, staff, students;
+uses login, staff, students, DBConnection_u;
 
 procedure TfrmLaunch.btnStaffClick(Sender: TObject);
 begin
@@ -46,6 +47,11 @@ begin
   //frmLogin.frmConfigure(students);
   //frmLogin.Show;
   frmStudents.Show;
+end;
+
+procedure TfrmLaunch.FormCreate(Sender: TObject);
+begin
+  cDB.connectDB;
 end;
 
 end.

@@ -117,11 +117,9 @@
             <Form>frmLogin</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="DBUsers_u.pas"/>
+        <DCCReference Include="DBConnection_u.pas"/>
         <DCCReference Include="util_u.pas"/>
-        <DCCReference Include="auth_u.pas">
-            <ModuleName>auth_u</ModuleName>
-        </DCCReference>
+        <DCCReference Include="auth_u.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

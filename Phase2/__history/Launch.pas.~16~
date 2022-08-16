@@ -1,0 +1,57 @@
+unit Launch;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TfrmLaunch = class(TForm)
+    btnStudents: TBitBtn;
+    btnStaff: TBitBtn;
+    Panel1: TPanel;
+    BitBtn3: TBitBtn;
+    Panel2: TPanel;
+    lblWeclome: TLabel;
+    BitBtn1: TBitBtn;
+    procedure btnStaffClick(Sender: TObject);
+    procedure btnStudentsClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLaunch: TfrmLaunch;
+
+implementation
+
+{$R *.dfm}
+
+uses login, staff, students, DBConnection_u;
+
+procedure TfrmLaunch.btnStaffClick(Sender: TObject);
+begin
+  frmLaunch.Hide;
+  //frmLogin.frmConfigure(staff);
+  //frmLogin.Show;
+  frmStaff.Show;
+end;
+
+procedure TfrmLaunch.btnStudentsClick(Sender: TObject);
+begin
+  frmLaunch.Hide;
+  //frmLogin.frmConfigure(students);
+  //frmLogin.Show;
+  frmStudents.Show;
+end;
+
+procedure TfrmLaunch.FormCreate(Sender: TObject);
+begin
+  DB.connectDB;
+end;
+
+end.

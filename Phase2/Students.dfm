@@ -56,7 +56,7 @@ object frmStudents: TfrmStudents
     Top = -2
     Width = 894
     Height = 526
-    ActivePage = tabNewApplication
+    ActivePage = tabMyInfo
     TabOrder = 1
     object tabMyInfo: TTabSheet
       Caption = 'My Info'
@@ -312,67 +312,122 @@ object frmStudents: TfrmStudents
       end
       object lblSub1: TLabel
         Left = 16
-        Top = 136
-        Width = 49
-        Height = 13
+        Top = 162
+        Width = 59
+        Height = 16
         Caption = 'Subject 1:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
       object lblSub2: TLabel
         Left = 16
-        Top = 162
-        Width = 49
-        Height = 13
+        Top = 192
+        Width = 59
+        Height = 16
         Caption = 'Subject 2:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
       object lblSub3: TLabel
         Left = 16
-        Top = 189
-        Width = 49
-        Height = 13
+        Top = 222
+        Width = 59
+        Height = 16
         Caption = 'Subject 3:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
       object lblSub4: TLabel
         Left = 16
-        Top = 216
-        Width = 49
-        Height = 13
+        Top = 252
+        Width = 59
+        Height = 16
         Caption = 'Subject 4:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
       object lblSub5: TLabel
         Left = 16
-        Top = 245
-        Width = 49
-        Height = 13
+        Top = 282
+        Width = 59
+        Height = 16
         Caption = 'Subject 5:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
       object lblSub6: TLabel
         Left = 16
-        Top = 272
-        Width = 49
-        Height = 13
+        Top = 312
+        Width = 59
+        Height = 16
         Caption = 'Subject 6:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
       object lblSub7: TLabel
         Left = 16
-        Top = 304
-        Width = 49
-        Height = 13
+        Top = 342
+        Width = 59
+        Height = 16
         Caption = 'Subject 7:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
-      object ComboBox1: TComboBox
+      object lblCourseID: TLabel
+        Left = 16
+        Top = 132
+        Width = 65
+        Height = 16
+        Caption = 'Course ID: '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object cmbCourses: TComboBox
         Left = 16
         Top = 89
         Width = 402
         Height = 21
         TabOrder = 0
         Text = 'Select an avalible course'
-        OnChange = ComboBox1Change
+        OnChange = cmbCoursesChange
       end
       object Memo1: TMemo
-        Left = 499
-        Top = 38
+        Left = 448
+        Top = 43
         Width = 410
-        Height = 435
+        Height = 430
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -411,6 +466,7 @@ object frmStudents: TfrmStudents
         Height = 25
         Caption = 'Submit New Application'
         TabOrder = 2
+        OnClick = btnSubmitnewClick
       end
       object BitBtn3: TBitBtn
         Left = 343
@@ -421,6 +477,76 @@ object frmStudents: TfrmStudents
         Kind = bkRetry
         NumGlyphs = 2
         TabOrder = 3
+      end
+      object spnM1: TSpinEdit
+        Left = 343
+        Top = 158
+        Width = 75
+        Height = 22
+        MaxValue = 100
+        MinValue = 0
+        TabOrder = 4
+        Value = 0
+      end
+      object spnM2: TSpinEdit
+        Left = 343
+        Top = 188
+        Width = 75
+        Height = 22
+        MaxValue = 100
+        MinValue = 0
+        TabOrder = 5
+        Value = 0
+      end
+      object spnM3: TSpinEdit
+        Left = 343
+        Top = 218
+        Width = 75
+        Height = 22
+        MaxValue = 100
+        MinValue = 0
+        TabOrder = 6
+        Value = 0
+      end
+      object spnM4: TSpinEdit
+        Left = 343
+        Top = 248
+        Width = 75
+        Height = 22
+        MaxValue = 100
+        MinValue = 0
+        TabOrder = 7
+        Value = 0
+      end
+      object spnM5: TSpinEdit
+        Left = 343
+        Top = 278
+        Width = 75
+        Height = 22
+        MaxValue = 100
+        MinValue = 0
+        TabOrder = 8
+        Value = 0
+      end
+      object spnM6: TSpinEdit
+        Left = 343
+        Top = 308
+        Width = 75
+        Height = 22
+        MaxValue = 100
+        MinValue = 0
+        TabOrder = 9
+        Value = 0
+      end
+      object spnM7: TSpinEdit
+        Left = 343
+        Top = 338
+        Width = 75
+        Height = 22
+        MaxValue = 100
+        MinValue = 0
+        TabOrder = 10
+        Value = 0
       end
     end
   end

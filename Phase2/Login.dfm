@@ -17,7 +17,7 @@ object frmLogin: TfrmLogin
   FormStyle = fsStayOnTop
   OldCreateOrder = False
   OnActivate = FormActivate
-  OnCreate = FormCreate
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object pnlLogin: TPanel
@@ -52,7 +52,6 @@ object frmLogin: TfrmLogin
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
-      OnClick = FormCreate
     end
     object edtUser: TEdit
       Left = 16

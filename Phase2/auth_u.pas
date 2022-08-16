@@ -20,7 +20,7 @@ unit auth_u;
 
 interface
 
-uses SysUtils, Classes, Vcl.Forms, Vcl.Dialogs, System.Variants, util_u, DBUsers_u, System.Hash;
+uses SysUtils, Classes, Vcl.Forms, Vcl.Dialogs, System.Variants, util_u, DBConnection_u, System.Hash;
 
 type
   Tauth = class(TComponent)
@@ -56,10 +56,10 @@ Var
   sGender : string;
 begin
   with user do begin
-    tblUserInfo.recNo := tblUsers.RecNo;
-    username := tblUsers['Username'];
-    privilege := tblUsers['Privilege'];
-    enabled := tblUsers['Enabled'];
+    tblUserInfo.recNo := tblStaff.RecNo;
+    username := tblStaff['Username'];
+    privilege := tblStaff['Privilege'];
+    enabled := tblStaff['Enabled'];
     if NOT(tblUserInfo['Fullname'] = '') then
       fullname := tblUserInfo['Fullname']
     else
@@ -87,9 +87,9 @@ end;
 Procedure Tauth.writeUser(const user : Tuser);
 begin
   with user do begin
-    tblUsers['Username'] := username;
+    tblStaff['Username'] := username;
     tblUserInfo['Username'] := username;
-    tblUsers['Privilege'] := privilege;
+    tblStaff['Privilege'] := privilege;
     if NOT(fullname = 'N/A') then
       tblUserInfo['Fullname'] := fullname
     else
@@ -110,7 +110,7 @@ begin
       tblUserInfo['Email'] := email
     else
       tblUserInfo['Email'] := Null;
-    tblUsers['Enabled'] := enabled;
+    tblStaff['Enabled'] := enabled;
   end;
 end;
 
@@ -120,14 +120,14 @@ Var
   tempUser : Tuser;
 begin
   // import users
-  tblUsers.Open;
+  tblStaff.Open;
   tblUserInfo.Open;
-  tblUsers.First;
+  tblStaff.First;
   tblUserInfo.First;
-    for i := 1 to tblUsers.RecordCount do begin
+    for i := 1 to tblStaff.RecordCount do begin
       readUser(tempUser);
       arrUsers[i-1] := tempUser;
-      tblUsers.Next;
+      tblStaff.Next;
       tblUserInfo.Next;
     end;
 end;

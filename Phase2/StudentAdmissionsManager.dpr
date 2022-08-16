@@ -6,7 +6,7 @@ uses
   Students in 'Students.pas' {frmStudents},
   Staff in 'Staff.pas' {frmStaff},
   Login in 'Login.pas' {frmLogin},
-  DBUsers_u in 'DBUsers_u.pas',
+  DBConnection_u in 'DBConnection_u.pas',
   util_u in 'util_u.pas',
   auth_u in 'auth_u.pas',
   Vcl.Themes,
