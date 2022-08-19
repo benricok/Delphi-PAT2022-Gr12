@@ -135,12 +135,4 @@ object frmLogin: TfrmLogin
       OnMouseUp = btnShowPassMouseUp
     end
   end
-  object btnNewStudent: TButton
-    Left = 48
-    Top = 151
-    Width = 75
-    Height = 25
-    Caption = 'New'
-    TabOrder = 1
-  end
 end

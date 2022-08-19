@@ -15,6 +15,7 @@ type
     lblUser: TLabel;
     lblPass: TLabel;
     btnShowPass: TBitBtn;
+    btnNewStudent: TButton;
     procedure FormActivate(Sender: TObject);
     procedure btnLoginClick(Sender: TObject);
     procedure btnShowPassMouseDown(Sender: TObject; Button: TMouseButton;
