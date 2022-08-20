@@ -5,8 +5,8 @@ object frmLogin: TfrmLogin
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Login'
-  ClientHeight = 265
-  ClientWidth = 333
+  ClientHeight = 252
+  ClientWidth = 328
   Color = clBtnFace
   DefaultMonitor = dmPrimary
   Font.Charset = DEFAULT_CHARSET
@@ -18,6 +18,7 @@ object frmLogin: TfrmLogin
   OldCreateOrder = False
   OnActivate = FormActivate
   OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlLogin: TPanel
@@ -27,21 +28,21 @@ object frmLogin: TfrmLogin
     Height = 257
     TabOrder = 0
     object lblUser: TLabel
-      Left = 80
+      Left = 75
       Top = 73
-      Width = 26
+      Width = 52
       Height = 13
-      Caption = 'User:'
+      Caption = 'Username:'
     end
     object lblPass: TLabel
-      Left = 80
+      Left = 75
       Top = 119
       Width = 50
       Height = 13
       Caption = 'Password:'
     end
     object lblWeclome: TLabel
-      Left = 0
+      Left = 20
       Top = 35
       Width = 290
       Height = 32
@@ -54,8 +55,8 @@ object frmLogin: TfrmLogin
       ParentFont = False
     end
     object btnLogin: TBitBtn
-      Left = 128
-      Top = 176
+      Left = 127
+      Top = 207
       Width = 75
       Height = 25
       Hint = 'Login'
@@ -67,9 +68,9 @@ object frmLogin: TfrmLogin
       TabOrder = 2
     end
     object edtUser: TEdit
-      Left = 80
+      Left = 75
       Top = 92
-      Width = 177
+      Width = 180
       Height = 21
       Cursor = crIBeam
       Hint = 'Enter your username'
@@ -80,9 +81,9 @@ object frmLogin: TfrmLogin
       TextHint = 'Enter your username'
     end
     object edtPass: TEdit
-      Left = 80
+      Left = 75
       Top = 138
-      Width = 177
+      Width = 180
       Height = 21
       Cursor = crIBeam
       Hint = 'Enter your password'
@@ -91,13 +92,12 @@ object frmLogin: TfrmLogin
       PasswordChar = '*'
       ShowHint = True
       TabOrder = 1
-      Text = 'admin'
       TextHint = 'Enter your password'
     end
     object btnShowPass: TBitBtn
-      Left = 209
-      Top = 176
-      Width = 32
+      Left = 208
+      Top = 207
+      Width = 33
       Height = 25
       Hint = 'Show password'
       Glyph.Data = {
@@ -147,13 +147,28 @@ object frmLogin: TfrmLogin
       OnMouseDown = btnShowPassMouseDown
       OnMouseUp = btnShowPassMouseUp
     end
+    object Edit1: TEdit
+      Left = 75
+      Top = 165
+      Width = 180
+      Height = 21
+      Cursor = crIBeam
+      Hint = 'Enter your password'
+      HelpType = htKeyword
+      ParentShowHint = False
+      PasswordChar = '*'
+      ShowHint = True
+      TabOrder = 4
+      TextHint = 'Confirm Password'
+    end
   end
   object btnNewStudent: TButton
-    Left = 103
+    Left = 88
     Top = 207
-    Width = 75
+    Width = 33
     Height = 25
     Caption = 'New'
     TabOrder = 1
+    OnClick = btnNewStudentClick
   end
 end

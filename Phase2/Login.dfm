@@ -17,7 +17,6 @@ object frmLogin: TfrmLogin
   FormStyle = fsStayOnTop
   OldCreateOrder = False
   OnActivate = FormActivate
-  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -56,7 +55,7 @@ object frmLogin: TfrmLogin
     end
     object btnLogin: TBitBtn
       Left = 127
-      Top = 207
+      Top = 211
       Width = 75
       Height = 25
       Hint = 'Login'
@@ -66,6 +65,7 @@ object frmLogin: TfrmLogin
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
+      OnClick = btnLoginClick
     end
     object edtUser: TEdit
       Left = 75
@@ -96,7 +96,7 @@ object frmLogin: TfrmLogin
     end
     object btnShowPass: TBitBtn
       Left = 208
-      Top = 207
+      Top = 211
       Width = 33
       Height = 25
       Hint = 'Show password'
@@ -147,24 +147,10 @@ object frmLogin: TfrmLogin
       OnMouseDown = btnShowPassMouseDown
       OnMouseUp = btnShowPassMouseUp
     end
-    object Edit1: TEdit
-      Left = 75
-      Top = 165
-      Width = 180
-      Height = 21
-      Cursor = crIBeam
-      Hint = 'Enter your password'
-      HelpType = htKeyword
-      ParentShowHint = False
-      PasswordChar = '*'
-      ShowHint = True
-      TabOrder = 4
-      TextHint = 'Confirm Password'
-    end
   end
   object btnNewStudent: TButton
     Left = 88
-    Top = 207
+    Top = 211
     Width = 33
     Height = 25
     Caption = 'New'
