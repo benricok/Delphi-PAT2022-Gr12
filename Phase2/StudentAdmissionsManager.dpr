@@ -2,7 +2,6 @@ program StudentAdmissionsManager;
 
 uses
   Vcl.Forms,
-  Launch in 'Launch.pas' {frmLaunch},
   Students in 'Students.pas' {frmStudents},
   Staff in 'Staff.pas' {frmStaff},
   Login in 'Login.pas' {frmLogin},
@@ -18,9 +17,8 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Light');
-  Application.CreateForm(TfrmLaunch, frmLaunch);
+  Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmStudents, frmStudents);
   Application.CreateForm(TfrmStaff, frmStaff);
-  Application.CreateForm(TfrmLogin, frmLogin);
   Application.Run;
 end.

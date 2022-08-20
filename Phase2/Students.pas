@@ -57,6 +57,9 @@ type
     spnM6: TSpinEdit;
     spnM7: TSpinEdit;
     lblCourseID: TLabel;
+    btnCalculate: TBitBtn;
+    lblScoretext: TLabel;
+    lblScore: TLabel;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure edtFullNamesChange(Sender: TObject);

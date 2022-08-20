@@ -56,7 +56,13 @@ object frmStudents: TfrmStudents
     Top = -2
     Width = 894
     Height = 526
-    ActivePage = tabMyInfo
+    ActivePage = tabNewApplication
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 1
     object tabMyInfo: TTabSheet
       Caption = 'My Info'
@@ -155,7 +161,7 @@ object frmStudents: TfrmStudents
         Left = 32
         Top = 190
         Width = 402
-        Height = 21
+        Height = 24
         Hint = 'notification email'
         TabOrder = 0
         TextHint = 'Enter the email address you want to use to recieve notifications'
@@ -164,7 +170,7 @@ object frmStudents: TfrmStudents
         Left = 456
         Top = 303
         Width = 402
-        Height = 21
+        Height = 24
         TabOrder = 1
         TextHint = 'Select province'
         Items.Strings = (
@@ -182,7 +188,7 @@ object frmStudents: TfrmStudents
         Left = 456
         Top = 247
         Width = 402
-        Height = 21
+        Height = 24
         Hint = 'Enter the name of your education institution'
         TabOrder = 2
         TextHint = 'Enter the name of your education institution'
@@ -207,7 +213,7 @@ object frmStudents: TfrmStudents
         Left = 32
         Top = 96
         Width = 402
-        Height = 21
+        Height = 24
         TabOrder = 4
         OnChange = edtFullNamesChange
       end
@@ -215,7 +221,7 @@ object frmStudents: TfrmStudents
         Left = 79
         Top = 123
         Width = 187
-        Height = 21
+        Height = 24
         TabOrder = 5
         TextHint = 'Prefered name'
       end
@@ -223,7 +229,7 @@ object frmStudents: TfrmStudents
         Left = 272
         Top = 123
         Width = 162
-        Height = 21
+        Height = 24
         TabOrder = 6
         TextHint = 'Surname'
       end
@@ -231,7 +237,7 @@ object frmStudents: TfrmStudents
         Left = 32
         Top = 123
         Width = 41
-        Height = 21
+        Height = 24
         TabOrder = 7
         TextHint = 'Initials'
       end
@@ -239,7 +245,7 @@ object frmStudents: TfrmStudents
         Left = 32
         Top = 247
         Width = 402
-        Height = 21
+        Height = 24
         Hint = 'notification email'
         TabOrder = 8
         TextHint = 'Enter your personal phone number'
@@ -248,7 +254,7 @@ object frmStudents: TfrmStudents
         Left = 32
         Top = 303
         Width = 402
-        Height = 21
+        Height = 24
         Hint = 'notification email'
         TabOrder = 9
         TextHint = 'Address line 1'
@@ -257,7 +263,7 @@ object frmStudents: TfrmStudents
         Left = 32
         Top = 330
         Width = 402
-        Height = 21
+        Height = 24
         Hint = 'notification email'
         TabOrder = 10
         TextHint = 'Address line 2'
@@ -266,7 +272,7 @@ object frmStudents: TfrmStudents
         Left = 32
         Top = 357
         Width = 402
-        Height = 21
+        Height = 24
         Hint = 'notification email'
         TabOrder = 11
         TextHint = 'Address line 3'
@@ -414,11 +420,37 @@ object frmStudents: TfrmStudents
         Font.Style = []
         ParentFont = False
       end
+      object lblScoretext: TLabel
+        Left = 16
+        Top = 376
+        Width = 38
+        Height = 16
+        Caption = 'Score:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblScore: TLabel
+        Left = 80
+        Top = 378
+        Width = 80
+        Height = 16
+        Caption = 'Not calculated'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
       object cmbCourses: TComboBox
         Left = 16
         Top = 89
         Width = 402
-        Height = 21
+        Height = 24
         TabOrder = 0
         Text = 'Select an avalible course'
         OnChange = cmbCoursesChange
@@ -469,9 +501,9 @@ object frmStudents: TfrmStudents
         OnClick = btnSubmitnewClick
       end
       object BitBtn3: TBitBtn
-        Left = 343
+        Left = 327
         Top = 448
-        Width = 75
+        Width = 89
         Height = 25
         Caption = '&Reset'
         Kind = bkRetry
@@ -482,7 +514,7 @@ object frmStudents: TfrmStudents
         Left = 343
         Top = 158
         Width = 75
-        Height = 22
+        Height = 26
         MaxValue = 100
         MinValue = 0
         TabOrder = 4
@@ -492,7 +524,7 @@ object frmStudents: TfrmStudents
         Left = 343
         Top = 188
         Width = 75
-        Height = 22
+        Height = 26
         MaxValue = 100
         MinValue = 0
         TabOrder = 5
@@ -502,7 +534,7 @@ object frmStudents: TfrmStudents
         Left = 343
         Top = 218
         Width = 75
-        Height = 22
+        Height = 26
         MaxValue = 100
         MinValue = 0
         TabOrder = 6
@@ -512,7 +544,7 @@ object frmStudents: TfrmStudents
         Left = 343
         Top = 248
         Width = 75
-        Height = 22
+        Height = 26
         MaxValue = 100
         MinValue = 0
         TabOrder = 7
@@ -522,7 +554,7 @@ object frmStudents: TfrmStudents
         Left = 343
         Top = 278
         Width = 75
-        Height = 22
+        Height = 26
         MaxValue = 100
         MinValue = 0
         TabOrder = 8
@@ -532,7 +564,7 @@ object frmStudents: TfrmStudents
         Left = 343
         Top = 308
         Width = 75
-        Height = 22
+        Height = 26
         MaxValue = 100
         MinValue = 0
         TabOrder = 9
@@ -542,11 +574,19 @@ object frmStudents: TfrmStudents
         Left = 343
         Top = 338
         Width = 75
-        Height = 22
+        Height = 26
         MaxValue = 100
         MinValue = 0
         TabOrder = 10
         Value = 0
+      end
+      object btnCalculate: TBitBtn
+        Left = 232
+        Top = 448
+        Width = 89
+        Height = 25
+        Caption = 'Calculate score'
+        TabOrder = 11
       end
     end
   end

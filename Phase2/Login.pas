@@ -16,6 +16,8 @@ type
     lblPass: TLabel;
     btnShowPass: TBitBtn;
     btnNewStudent: TButton;
+    lblWeclome: TLabel;
+    Edit1: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure btnLoginClick(Sender: TObject);
     procedure btnShowPassMouseDown(Sender: TObject; Button: TMouseButton;
@@ -23,9 +25,12 @@ type
     procedure btnShowPassMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure btnNewStudentClick(Sender: TObject);
   private
     
     var
+      edtConfirmPassword : TEdit;
       activeUser : util_u.TUser;
       bAuth : boolean;
       conDB: TADOConnection;
@@ -91,6 +96,13 @@ begin
     util.error('Please enter your credentials before submitting', false);
 end;
 
+procedure TfrmLogin.btnNewStudentClick(Sender: TObject);
+begin
+  edtConfirmPassword := TEdit.Create(pnlLogin);
+  edtConfirmPassword.Parent := pnlLogin;
+  edtConfirmPassword.Visible := True;
+end;
+
 procedure TfrmLogin.btnShowPassMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
@@ -111,6 +123,11 @@ end;
 procedure TfrmLogin.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   frmLaunch.Show;
+end;
+
+procedure TfrmLogin.FormCreate(Sender: TObject);
+begin
+  cDB.connectDB;
 end;
 
 // Getter for active user record

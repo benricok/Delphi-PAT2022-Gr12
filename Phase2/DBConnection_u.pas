@@ -30,7 +30,7 @@ begin
   dbConnection := TADOConnection.Create(Self);
 
   dbConnection.ConnectionString :=
-    'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..\..\Web application.mdb;' +
+    'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=./Data/eduPortal.mdb;' +
     'Mode=ReadWrite;Persist Security Info=False';
 
   dbConnection.LoginPrompt := false;
