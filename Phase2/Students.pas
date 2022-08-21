@@ -67,6 +67,7 @@ type
     procedure cmbCoursesChange(Sender: TObject);
     procedure ClearMarks;
     procedure btnSubmitnewClick(Sender: TObject);
+    procedure btnCalculateClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -87,6 +88,11 @@ begin
   Application.Terminate;
 end;
 
+
+procedure TfrmStudents.btnCalculateClick(Sender: TObject);
+begin
+  // Precalculate score SQL
+end;
 
 procedure TfrmStudents.btnNextClick(Sender: TObject);
 begin

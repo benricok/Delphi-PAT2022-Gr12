@@ -17,7 +17,7 @@ object frmLogin: TfrmLogin
   FormStyle = fsStayOnTop
   OldCreateOrder = False
   OnActivate = FormActivate
-  OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlLogin: TPanel
@@ -55,7 +55,7 @@ object frmLogin: TfrmLogin
     end
     object btnLogin: TBitBtn
       Left = 127
-      Top = 207
+      Top = 211
       Width = 75
       Height = 25
       Hint = 'Login'
@@ -65,6 +65,7 @@ object frmLogin: TfrmLogin
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
+      OnClick = btnLoginClick
     end
     object edtUser: TEdit
       Left = 75
@@ -76,7 +77,7 @@ object frmLogin: TfrmLogin
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      Text = 'admin'
+      Text = 'STAFF/1'
       TextHint = 'Enter your username'
     end
     object edtPass: TEdit
@@ -91,12 +92,11 @@ object frmLogin: TfrmLogin
       PasswordChar = '*'
       ShowHint = True
       TabOrder = 1
-      Text = 'admin'
       TextHint = 'Enter your password'
     end
     object btnShowPass: TBitBtn
       Left = 208
-      Top = 207
+      Top = 211
       Width = 33
       Height = 25
       Hint = 'Show password'
@@ -150,10 +150,11 @@ object frmLogin: TfrmLogin
   end
   object btnNewStudent: TButton
     Left = 88
-    Top = 207
+    Top = 211
     Width = 33
     Height = 25
     Caption = 'New'
     TabOrder = 1
+    OnClick = btnNewStudentClick
   end
 end

@@ -40,6 +40,7 @@ type
       dsrSQL: TDataSource;
       SQL: String;
 
+      sNewUser, sNewHash : string;
   published
     Procedure logout;
     Function getUser : TUser;
@@ -101,6 +102,8 @@ begin
 end;
 
 procedure TfrmLogin.btnNewStudentClick(Sender: TObject);
+Var
+  sLastAcc : string;
 begin
   edtUser.Clear;
   edtPass.Clear;
@@ -109,6 +112,7 @@ begin
     edtConfirmPassword.Free;
     lblNewAcc.Free;
     bStateNew := false;
+    edtUser.ReadOnly := false;
   end else begin
     edtConfirmPassword := TEdit.Create(pnlLogin);
     lblNewAcc := TLabel.Create(pnlLogin);
@@ -129,6 +133,14 @@ begin
     lblNewAcc.Left := 111;
     lblNewAcc.Caption := 'New applicant account';
     bStateNew := true;
+
+    //Auto assign new account username
+    tblApplicants.Open;
+    tblApplicants.Last;
+    sLastAcc := tblApplicants['Username'];
+    sNewUser := 'APP\' + IntToStr(StrToInt(Copy(sLastAcc, Pos('\', sLastAcc)+1))+1);
+    edtUser.Text := sNewUser;
+    edtUser.ReadOnly := true;
   end;
 end;
 

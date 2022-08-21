@@ -101,6 +101,8 @@ begin
 end;
 
 procedure TfrmLogin.btnNewStudentClick(Sender: TObject);
+Var
+  sLastAcc : string;
 begin
   edtUser.Clear;
   edtPass.Clear;
@@ -129,6 +131,13 @@ begin
     lblNewAcc.Left := 111;
     lblNewAcc.Caption := 'New applicant account';
     bStateNew := true;
+
+    //Auto assign new account username
+    tblApplicants.Open;
+    tblApplicants.Last;
+    sLastAcc := tblApplicants['Username'];
+    edtUser.Text := 'APP\' + IntToStr(Inc(StrToInt(Copy(sLastAcc, Pos('\', sLastAcc)))));
+
   end;
 end;
 

@@ -40,6 +40,7 @@ type
       dsrSQL: TDataSource;
       SQL: String;
 
+      sNewUser, sNewHash : string;
   published
     Procedure logout;
     Function getUser : TUser;
@@ -78,26 +79,31 @@ procedure TfrmLogin.btnLoginClick(Sender: TObject);
 Var
   sGender : string;
 begin
-  if NOT((edtPass.Text = '') OR (edtUser.Text = '')) then begin
-    tblStaff.open;
-    tblStaff.First;
-    if tblStaff.Locate('Username', edtUser.Text, [loCaseInsensitive]) then begin
-      if tblStaff['Enabled'] = true then begin
-        if tblStaff['HashedPASS'] = auth.hash(edtPass.Text) then begin
-          auth.readUser(activeUser);
-          util.logevent('User ' + activeUser.username + ' logged in.', TEventType.info);
-          frmLogin.Hide;
+  if bStateNew then begin
+
+
+  end else if NOT((edtPass.Text = '') OR (edtUser.Text = '')) then begin
+      tblStaff.open;
+      tblStaff.First;
+      if tblStaff.Locate('Username', edtUser.Text, [loCaseInsensitive]) then begin
+        if tblStaff['Enabled'] = true then begin
+          if tblStaff['HashedPASS'] = auth.hash(edtPass.Text) then begin
+            auth.readUser(activeUser);
+            util.logevent('User ' + activeUser.username + ' logged in.', TEventType.info);
+            frmLogin.Hide;
+          end else
+            util.warn('Invalid password by user ' + edtUser.Text, true)
         end else
-          util.warn('Invalid password by user ' + edtUser.Text, true)
+          util.warn('User ' + edtUser.Text + ' is disabled', true);
       end else
-        util.warn('User ' + edtUser.Text + ' is disabled', true);
+        util.warn(edtUser.Text + ' does not exist', true);
     end else
-      util.warn(edtUser.Text + ' does not exist', true);
-  end else
-    util.error('Please enter your credentials before submitting', false);
+      util.error('Please enter your credentials before submitting', false);
 end;
 
 procedure TfrmLogin.btnNewStudentClick(Sender: TObject);
+Var
+  sLastAcc : string;
 begin
   edtUser.Clear;
   edtPass.Clear;
@@ -106,6 +112,7 @@ begin
     edtConfirmPassword.Free;
     lblNewAcc.Free;
     bStateNew := false;
+    edtUser.ReadOnly := false;
   end else begin
     edtConfirmPassword := TEdit.Create(pnlLogin);
     lblNewAcc := TLabel.Create(pnlLogin);
@@ -126,6 +133,14 @@ begin
     lblNewAcc.Left := 111;
     lblNewAcc.Caption := 'New applicant account';
     bStateNew := true;
+
+    //Auto assign new account username
+    tblApplicants.Open;
+    tblApplicants.Last;
+    sLastAcc := tblApplicants['Username'];
+    sNewUser := 'APP\' + IntToStr(StrToInt(Copy(sLastAcc, Pos('\', sLastAcc)))+1);
+    edtUser.Text := sNewUser;
+    edtUser.ReadOnly := true;
   end;
 end;
 
@@ -167,9 +182,11 @@ procedure TfrmLogin.logout;
 begin
   frmLogin.Show;
   frmStudents.Hide;
+  frmStaff.Hide;
   edtUser.SetFocus;
   edtPass.Clear;
   edtUser.Clear;
+
   if bStateNew then begin
     edtConfirmPassword.Free;
     lblNewAcc.Free;

@@ -77,7 +77,7 @@ object frmLogin: TfrmLogin
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      Text = 'admin'
+      Text = 'STAFF/1'
       TextHint = 'Enter your username'
     end
     object edtPass: TEdit

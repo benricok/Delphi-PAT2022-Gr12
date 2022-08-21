@@ -56,12 +56,18 @@ type
     spnM5: TSpinEdit;
     spnM6: TSpinEdit;
     spnM7: TSpinEdit;
+    lblCourseID: TLabel;
+    btnCalculate: TBitBtn;
+    lblScoretext: TLabel;
+    lblScore: TLabel;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure edtFullNamesChange(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure cmbCoursesChange(Sender: TObject);
     procedure ClearMarks;
+    procedure btnSubmitnewClick(Sender: TObject);
+    procedure btnCalculateClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -83,9 +89,24 @@ begin
 end;
 
 
+procedure TfrmStudents.btnCalculateClick(Sender: TObject);
+begin
+  // Precalculate score SQL;
+end;
+
 procedure TfrmStudents.btnNextClick(Sender: TObject);
 begin
   tbcStudents.ActivePageIndex := 1;
+end;
+
+procedure TfrmStudents.btnSubmitnewClick(Sender: TObject);
+begin
+  cDB.runSQL('');
+
+  util.notify('Sucsessfully submitted your application');
+  cmbCourses.Text := '';
+  cmbCourses.ItemIndex := -1;
+  ClearMarks;
 end;
 
 procedure TfrmStudents.ClearMarks;
@@ -132,6 +153,8 @@ begin
     iW5 := tblCourses['Weight5'];
     iW6 := tblCourses['Weight6'];
     iW7 := tblCourses['Weight7'];
+
+    lblCourseID.Caption := tblCourses['CourseID'];
   end;
 end;
 

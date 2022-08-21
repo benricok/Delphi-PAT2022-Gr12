@@ -17,7 +17,7 @@ type
 var
   cDB : TcDB;
   dbConnection: TADOConnection;
-  tblApplications, tblCourses, tblStaff, tblApplicants: TADOtable;
+  tblApplications, tblCourses, tblStaff: TADOtable;
   tblUserInfo : TADOtable;
   dsrTbl: TDataSource;
   qryMain : TADOQuery;
@@ -59,14 +59,6 @@ begin
 
   tblStaff.TableName := 'Staff';
   tblStaff.Active := true;
-
-  //Create tblCourses object and assign it to the Users tabel in the DB
-  tblApplicants := TADOTable.Create(Self);
-  tblApplicants.Connection := dbConnection;
-
-  tblApplicants.TableName := 'Applicants';
-  tblApplicants.Active := true;
-
 
   //tblUsersinfo
   //tblUserInfo := TADOtable.Create(Self);

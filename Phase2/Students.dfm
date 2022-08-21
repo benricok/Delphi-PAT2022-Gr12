@@ -56,7 +56,7 @@ object frmStudents: TfrmStudents
     Top = -2
     Width = 894
     Height = 526
-    ActivePage = tabNewApplication
+    ActivePage = tabMyInfo
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -587,6 +587,7 @@ object frmStudents: TfrmStudents
         Height = 25
         Caption = 'Calculate score'
         TabOrder = 11
+        OnClick = btnCalculateClick
       end
     end
   end
