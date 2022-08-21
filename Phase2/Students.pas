@@ -1,3 +1,21 @@
+// -----------------------------------------------------------------------------
+//
+//  Copyright (C) 2022  Benrico Krog
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Affero General Public License as published
+//  by the Free Software Foundation version 3 of the License.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warrany of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Affero General Public License for more details.
+//
+//  You should have received a copy of the GNU Affero General Public License
+//  along with this program.  If not, see <https://www.gnu.org/licenses/>
+//
+// -----------------------------------------------------------------------------
+
 unit Students;
 
 interface
@@ -10,7 +28,6 @@ uses
 type
   TfrmStudents = class(TForm)
     pnlQuickAcess: TPanel;
-    BitBtn1: TBitBtn;
     btnLogout: TButton;
     tbcStudents: TPageControl;
     tabMyInfo: TTabSheet;
@@ -29,11 +46,9 @@ type
     Label6: TLabel;
     edtEduInstitution: TEdit;
     Label7: TLabel;
-    edtFullNames: TEdit;
+    edtFirstName: TEdit;
     Label1: TLabel;
-    edtPrefName: TEdit;
     edtSurname: TEdit;
-    edtInitials: TEdit;
     ComboBox2: TComboBox;
     Label8: TLabel;
     Edit1: TEdit;
@@ -60,18 +75,40 @@ type
     btnCalculate: TBitBtn;
     lblScoretext: TLabel;
     lblScore: TLabel;
+    btnInitSave: TBitBtn;
+    rgpGender: TRadioGroup;
+    lblActiveAcc: TLabel;
+    lblWarning: TLabel;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
-    procedure edtFullNamesChange(Sender: TObject);
+    procedure edtFirstNameChange(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure cmbCoursesChange(Sender: TObject);
     procedure ClearMarks;
     procedure btnSubmitnewClick(Sender: TObject);
     procedure btnCalculateClick(Sender: TObject);
+    procedure btnLogoutClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnInitSaveClick(Sender: TObject);
+    procedure edtSurnameChange(Sender: TObject);
+    procedure edtStudentNotiEmailChange(Sender: TObject);
+    procedure Edit1Change(Sender: TObject);
+    procedure Edit2Change(Sender: TObject);
+    procedure Edit3Change(Sender: TObject);
+    procedure Edit4Change(Sender: TObject);
+    procedure edtEduInstitutionChange(Sender: TObject);
+    procedure ComboBox2Change(Sender: TObject);
+    procedure rgpCurriculumClick(Sender: TObject);
+    procedure rgpGenderClick(Sender: TObject);
+  protected
+    procedure CreateParams(var Params: TCreateParams); override;
   private
-    { Private declarations }
-  public
-    { Public declarations }
+    Var
+      sCurUsername, sNewHash : String;
+      bUserSetup : boolean;
+  published
+    procedure setUser(fUsername, fNewHash : string; fNew : boolean);
+    procedure saveWarn;
   end;
 
 var
@@ -79,7 +116,7 @@ var
 
 implementation
 
-uses util_u, DBConnection_u;
+uses util_u, DBConnection_u, Login;
 
 {$R *.dfm}
 
@@ -92,6 +129,24 @@ end;
 procedure TfrmStudents.btnCalculateClick(Sender: TObject);
 begin
   // Precalculate score SQL
+end;
+
+procedure TfrmStudents.btnInitSaveClick(Sender: TObject);
+begin
+
+  lblWarning.Caption := 'Changes saved';
+  lblWarning.font.Color := clBtnText;
+end;
+
+procedure TfrmStudents.btnLogoutClick(Sender: TObject);
+begin
+  if bUserSetup then
+    if MessageDlg('Your new account will not be saved, are you sure?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then begin
+      sNewHash := '';
+      sCurUsername := '';
+      bUserSetup := false;
+      frmLogin.logout;
+    end;
 end;
 
 procedure TfrmStudents.btnNextClick(Sender: TObject);
@@ -118,17 +173,6 @@ begin
   spnM5.Clear;
   spnM6.Clear;
   spnM7.Clear;
-end;
-
-procedure TfrmStudents.edtFullNamesChange(Sender: TObject);
-Var
-  sTemp, sBuild : string;
-  iPos : integer;
-begin
-  sTemp := edtFullNames.Text;
-  iPos := Pos(' ', sTemp);
-  sBuild := Uppercase(sTemp[1] + sTemp[iPos+1]);
-
 end;
 
 procedure TfrmStudents.cmbCoursesChange(Sender: TObject);
@@ -158,9 +202,14 @@ begin
   end;
 end;
 
+procedure TfrmStudents.CreateParams(var Params: TCreateParams);
+begin
+  inherited;
+  Params.ExStyle := Params.ExStyle or WS_EX_APPWINDOW;
+end;
+
 procedure TfrmStudents.FormActivate(Sender: TObject);
 begin
-  util.notify('Please note progress cannot be saved, thus fill in application and submit immediately');
 
   // Load avalible courses
   cmbCourses.Items.Clear;
@@ -175,6 +224,81 @@ begin
     tblCourses.Next;
   end;
 
+end;
+
+procedure TfrmStudents.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmStudents.saveWarn;
+begin
+  lblWarning.Caption := 'Changes not saved';
+  lblWarning.font.Color := clOlive;
+end;
+
+procedure TfrmStudents.setUser(fUsername, fNewHash: string; fNew : boolean);
+begin
+  sCurUsername := fUsername;
+  lblActiveAcc.Caption := fUsername;
+  sNewHash := fNewHash;
+
+  bUserSetup := fNew;
+end;
+
+procedure TfrmStudents.ComboBox2Change(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.Edit1Change(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.Edit2Change(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.Edit3Change(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.Edit4Change(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.rgpCurriculumClick(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.rgpGenderClick(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.edtEduInstitutionChange(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.edtFirstNameChange(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.edtStudentNotiEmailChange(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.edtSurnameChange(Sender: TObject);
+begin
+  saveWarn;
 end;
 
 end.

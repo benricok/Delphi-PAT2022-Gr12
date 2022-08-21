@@ -7,7 +7,6 @@ uses
   Login in 'Login.pas' {frmLogin},
   DBConnection_u in 'DBConnection_u.pas',
   util_u in 'util_u.pas',
-  auth_u in 'auth_u.pas',
   Vcl.Themes,
   Vcl.Styles;
 

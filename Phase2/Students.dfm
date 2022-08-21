@@ -13,6 +13,7 @@ object frmStudents: TfrmStudents
   Font.Style = []
   OldCreateOrder = False
   OnActivate = FormActivate
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object pnlQuickAcess: TPanel
@@ -23,23 +24,14 @@ object frmStudents: TfrmStudents
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
-    object BitBtn1: TBitBtn
-      Left = 787
-      Top = 6
-      Width = 75
-      Height = 25
-      Kind = bkClose
-      NumGlyphs = 2
-      TabOrder = 0
-      OnClick = BitBtn1Click
-    end
     object btnLogout: TButton
-      Left = 698
+      Left = 780
       Top = 6
-      Width = 75
+      Width = 82
       Height = 25
       Caption = 'Logout'
-      TabOrder = 1
+      TabOrder = 0
+      OnClick = btnLogoutClick
     end
     object BitBtn2: TBitBtn
       Left = 20
@@ -48,7 +40,7 @@ object frmStudents: TfrmStudents
       Height = 25
       Kind = bkHelp
       NumGlyphs = 2
-      TabOrder = 2
+      TabOrder = 1
     end
   end
   object tbcStudents: TPageControl
@@ -69,9 +61,9 @@ object frmStudents: TfrmStudents
       object Label3: TLabel
         Left = 32
         Top = 24
-        Width = 62
+        Width = 180
         Height = 29
-        Caption = 'Home'
+        Caption = 'My Personal Info'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -24
@@ -94,7 +86,7 @@ object frmStudents: TfrmStudents
       end
       object Label7: TLabel
         Left = 456
-        Top = 281
+        Top = 273
         Width = 198
         Height = 16
         Caption = 'Select the province of your school:'
@@ -107,7 +99,7 @@ object frmStudents: TfrmStudents
       end
       object Label6: TLabel
         Left = 456
-        Top = 225
+        Top = 217
         Width = 95
         Height = 16
         Caption = 'Name of School:'
@@ -157,22 +149,54 @@ object frmStudents: TfrmStudents
         Font.Style = []
         ParentFont = False
       end
+      object lblActiveAcc: TLabel
+        Left = 803
+        Top = 32
+        Width = 35
+        Height = 19
+        Caption = 'APP\'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblWarning: TLabel
+        Left = 32
+        Top = 464
+        Width = 108
+        Height = 16
+        Caption = 'Changes not saved'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clOlive
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
       object edtStudentNotiEmail: TEdit
         Left = 32
         Top = 190
         Width = 402
         Height = 24
         Hint = 'notification email'
+        MaxLength = 50
         TabOrder = 0
         TextHint = 'Enter the email address you want to use to recieve notifications'
+        OnChange = edtStudentNotiEmailChange
       end
       object ComboBox2: TComboBox
         Left = 456
-        Top = 303
+        Top = 295
         Width = 402
         Height = 24
+        AutoDropDown = True
         TabOrder = 1
         TextHint = 'Select province'
+        OnChange = ComboBox2Change
         Items.Strings = (
           'Western Cape'
           'Eastern Cape'
@@ -186,12 +210,14 @@ object frmStudents: TfrmStudents
       end
       object edtEduInstitution: TEdit
         Left = 456
-        Top = 247
+        Top = 239
         Width = 402
         Height = 24
         Hint = 'Enter the name of your education institution'
+        MaxLength = 100
         TabOrder = 2
         TextHint = 'Enter the name of your education institution'
+        OnChange = edtEduInstitutionChange
       end
       object rgpCurriculum: TRadioGroup
         Left = 456
@@ -208,38 +234,27 @@ object frmStudents: TfrmStudents
           'International Baccalaureate Diploma'
           'American High School Diploma')
         TabOrder = 3
+        OnClick = rgpCurriculumClick
       end
-      object edtFullNames: TEdit
+      object edtFirstName: TEdit
         Left = 32
         Top = 96
         Width = 402
         Height = 24
+        MaxLength = 50
         TabOrder = 4
-        OnChange = edtFullNamesChange
-      end
-      object edtPrefName: TEdit
-        Left = 79
-        Top = 123
-        Width = 187
-        Height = 24
-        TabOrder = 5
-        TextHint = 'Prefered name'
+        TextHint = 'First name'
+        OnChange = edtFirstNameChange
       end
       object edtSurname: TEdit
-        Left = 272
-        Top = 123
-        Width = 162
-        Height = 24
-        TabOrder = 6
-        TextHint = 'Surname'
-      end
-      object edtInitials: TEdit
         Left = 32
-        Top = 123
-        Width = 41
+        Top = 126
+        Width = 402
         Height = 24
-        TabOrder = 7
-        TextHint = 'Initials'
+        MaxLength = 50
+        TabOrder = 5
+        TextHint = 'Surname'
+        OnChange = edtSurnameChange
       end
       object Edit1: TEdit
         Left = 32
@@ -247,8 +262,10 @@ object frmStudents: TfrmStudents
         Width = 402
         Height = 24
         Hint = 'notification email'
-        TabOrder = 8
+        MaxLength = 15
+        TabOrder = 6
         TextHint = 'Enter your personal phone number'
+        OnChange = Edit1Change
       end
       object Edit2: TEdit
         Left = 32
@@ -256,8 +273,10 @@ object frmStudents: TfrmStudents
         Width = 402
         Height = 24
         Hint = 'notification email'
-        TabOrder = 9
+        MaxLength = 50
+        TabOrder = 7
         TextHint = 'Address line 1'
+        OnChange = Edit2Change
       end
       object Edit3: TEdit
         Left = 32
@@ -265,8 +284,10 @@ object frmStudents: TfrmStudents
         Width = 402
         Height = 24
         Hint = 'notification email'
-        TabOrder = 10
+        MaxLength = 50
+        TabOrder = 8
         TextHint = 'Address line 2'
+        OnChange = Edit3Change
       end
       object Edit4: TEdit
         Left = 32
@@ -274,8 +295,10 @@ object frmStudents: TfrmStudents
         Width = 402
         Height = 24
         Hint = 'notification email'
-        TabOrder = 11
+        MaxLength = 50
+        TabOrder = 9
         TextHint = 'Address line 3'
+        OnChange = Edit4Change
       end
       object btnNext: TBitBtn
         Left = 776
@@ -283,8 +306,29 @@ object frmStudents: TfrmStudents
         Width = 82
         Height = 25
         Caption = '&Next'
-        TabOrder = 12
+        TabOrder = 10
         OnClick = btnNextClick
+      end
+      object btnInitSave: TBitBtn
+        Left = 688
+        Top = 464
+        Width = 82
+        Height = 25
+        Caption = 'Acc update'
+        TabOrder = 11
+        OnClick = btnInitSaveClick
+      end
+      object rgpGender: TRadioGroup
+        Left = 456
+        Top = 325
+        Width = 402
+        Height = 60
+        Caption = 'Gender'
+        Items.Strings = (
+          'M'
+          'F')
+        TabOrder = 12
+        OnClick = rgpGenderClick
       end
     end
     object tabNewApplication: TTabSheet

@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, DB, ADODB, util_u;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, DB, ADODB, util_u, System.Hash;
 
 type
   TfrmLogin = class(TForm)
@@ -40,10 +40,11 @@ type
       dsrSQL: TDataSource;
       SQL: String;
 
-      sNewUser, sNewHash : string;
+      sNewUser : string;
   published
     Procedure logout;
     Function getUser : TUser;
+    Function hash(sIn : string) : String;
   end;
 
 var
@@ -55,7 +56,7 @@ implementation
 
 { TfrmLogin }
 
-uses DBConnection_u, auth_u, Staff, Students;
+uses DBConnection_u, Staff, Students;
 
 // -----------------------------------------------------------------------------
 //
@@ -80,15 +81,22 @@ Var
   sGender : string;
 begin
   if bStateNew then begin
-
+    if NOT((edtPass.Text = '') OR (edtConfirmPassword.Text = '')) then
+      if (edtPass.Text = edtConfirmPassword.Text) then begin
+        frmStudents.setUser(sNewUser, hash(edtPass.Text), true);
+        frmLogin.Hide;
+        frmStudents.Show;
+      end else
+        util.error('Please make sure both passwords match', false)
+    else
+      util.error('Please fill in both password fields', false);
 
   end else if NOT((edtPass.Text = '') OR (edtUser.Text = '')) then begin
       tblStaff.open;
       tblStaff.First;
       if tblStaff.Locate('Username', edtUser.Text, [loCaseInsensitive]) then begin
         if tblStaff['Enabled'] = true then begin
-          if tblStaff['HashedPASS'] = auth.hash(edtPass.Text) then begin
-            auth.readUser(activeUser);
+          if tblStaff['HashedPASS'] = hash(edtPass.Text) then begin
             util.logevent('User ' + activeUser.username + ' logged in.', TEventType.info);
             frmLogin.Hide;
           end else
@@ -175,6 +183,11 @@ end;
 function TfrmLogin.getUser: util_u.TUser;
 begin
   result := activeUser;
+end;
+
+function TfrmLogin.hash(sIn: string): String;
+begin
+  result := THashMD5.GetHashString(sIn);
 end;
 
 // Log out user and reset Application
