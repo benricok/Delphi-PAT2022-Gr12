@@ -51,11 +51,11 @@ type
     edtSurname: TEdit;
     ComboBox2: TComboBox;
     Label8: TLabel;
-    Edit1: TEdit;
+    edtPhoneNumber: TEdit;
     Label9: TLabel;
-    Edit2: TEdit;
-    Edit3: TEdit;
-    Edit4: TEdit;
+    edtAddr1: TEdit;
+    edtAddr2: TEdit;
+    edtAddr3: TEdit;
     btnNext: TBitBtn;
     lblSub1: TLabel;
     lblSub2: TLabel;
@@ -79,6 +79,7 @@ type
     rgpGender: TRadioGroup;
     lblActiveAcc: TLabel;
     lblWarning: TLabel;
+    cmbCountryCodes: TComboBox;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure edtFirstNameChange(Sender: TObject);
@@ -92,20 +93,21 @@ type
     procedure btnInitSaveClick(Sender: TObject);
     procedure edtSurnameChange(Sender: TObject);
     procedure edtStudentNotiEmailChange(Sender: TObject);
-    procedure Edit1Change(Sender: TObject);
-    procedure Edit2Change(Sender: TObject);
-    procedure Edit3Change(Sender: TObject);
-    procedure Edit4Change(Sender: TObject);
+    procedure edtPhoneNumberChange(Sender: TObject);
+    procedure edtAddr1Change(Sender: TObject);
+    procedure edtAddr2Change(Sender: TObject);
+    procedure edtAddr3Change(Sender: TObject);
     procedure edtEduInstitutionChange(Sender: TObject);
     procedure ComboBox2Change(Sender: TObject);
     procedure rgpCurriculumClick(Sender: TObject);
     procedure rgpGenderClick(Sender: TObject);
+    procedure cmbCountryCodesChange(Sender: TObject);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
     Var
       sCurUsername, sNewHash : String;
-      bUserSetup : boolean;
+      bUserSetup, bChanges : boolean;
   published
     procedure setUser(fUsername, fNewHash : string; fNew : boolean);
     procedure saveWarn;
@@ -125,17 +127,56 @@ begin
   Application.Terminate;
 end;
 
-
 procedure TfrmStudents.btnCalculateClick(Sender: TObject);
 begin
   // Precalculate score SQL
 end;
 
 procedure TfrmStudents.btnInitSaveClick(Sender: TObject);
+Var
+  sPhoneVal, sPhone, sCode : string;
+  i, iTemp, iCode: Integer;
 begin
+  // Input validation
+  if (edtFirstName.Text = '') OR
+      (edtSurname.Text = '') OR
+      (edtEduInstitution.Text = '') OR
+      (edtPhoneNumber.Text = '') OR
+      (edtStudentNotiEmail.Text = '') OR
+      (edtAddr2.Text = '') OR
+      (rgpCurriculum.ItemIndex = -1) OR
+      (rgpGender.ItemIndex = -1) then begin
+        util.warn('Please complete all required fields', false);
+        exit;
+      end;
+  // Phone number format validation
+  sPhoneVal := edtPhoneNumber.Text;
+  if (sPhoneVal.Length < 11) then
+    for i := 1 to sPhoneVal.Length do begin
+      Val(sPhoneVal[i], iTemp, iCode);
+      if iCode <> 0 then begin
+        util.warn('Phone number may only contain 0-9 characters', false);
+        break;
+      end;
+    end
+  else begin
+    util.warn('Phone number to long', false);
+    exit;
+  end;
+  sCode := cmbCountryCodes.Items[cmbCountryCodes.ItemIndex];
+  sPhone := Copy(sCode, 1, Pos(' ', sCode)-1) + sPhone;
+
+
+  if bUserSetup then begin
+
+
+  end else begin
+
+  end;
 
   lblWarning.Caption := 'Changes saved';
   lblWarning.font.Color := clBtnText;
+  bChanges := false;
 end;
 
 procedure TfrmStudents.btnLogoutClick(Sender: TObject);
@@ -151,6 +192,9 @@ end;
 
 procedure TfrmStudents.btnNextClick(Sender: TObject);
 begin
+  if bChanges then
+    if MessageDlg('You have not saved your changes yet, continue?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      tbcStudents.ActivePageIndex := 0;
   tbcStudents.ActivePageIndex := 1;
 end;
 
@@ -202,6 +246,11 @@ begin
   end;
 end;
 
+procedure TfrmStudents.cmbCountryCodesChange(Sender: TObject);
+begin
+  saveWarn;
+end;
+
 procedure TfrmStudents.CreateParams(var Params: TCreateParams);
 begin
   inherited;
@@ -235,6 +284,7 @@ procedure TfrmStudents.saveWarn;
 begin
   lblWarning.Caption := 'Changes not saved';
   lblWarning.font.Color := clOlive;
+  bChanges := true;
 end;
 
 procedure TfrmStudents.setUser(fUsername, fNewHash: string; fNew : boolean);
@@ -251,22 +301,22 @@ begin
   saveWarn;
 end;
 
-procedure TfrmStudents.Edit1Change(Sender: TObject);
+procedure TfrmStudents.edtPhoneNumberChange(Sender: TObject);
 begin
   saveWarn;
 end;
 
-procedure TfrmStudents.Edit2Change(Sender: TObject);
+procedure TfrmStudents.edtAddr1Change(Sender: TObject);
 begin
   saveWarn;
 end;
 
-procedure TfrmStudents.Edit3Change(Sender: TObject);
+procedure TfrmStudents.edtAddr2Change(Sender: TObject);
 begin
   saveWarn;
 end;
 
-procedure TfrmStudents.Edit4Change(Sender: TObject);
+procedure TfrmStudents.edtAddr3Change(Sender: TObject);
 begin
   saveWarn;
 end;
