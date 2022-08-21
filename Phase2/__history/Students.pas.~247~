@@ -1,0 +1,413 @@
+// -----------------------------------------------------------------------------
+//
+//  Copyright (C) 2022  Benrico Krog
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Affero General Public License as published
+//  by the Free Software Foundation version 3 of the License.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warrany of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Affero General Public License for more details.
+//
+//  You should have received a copy of the GNU Affero General Public License
+//  along with this program.  If not, see <https://www.gnu.org/licenses/>
+//
+// -----------------------------------------------------------------------------
+
+unit Students;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Samples.Spin, DB;
+
+type
+  TfrmStudents = class(TForm)
+    pnlQuickAcess: TPanel;
+    btnLogout: TButton;
+    tbcStudents: TPageControl;
+    tabMyInfo: TTabSheet;
+    tabNewApplication: TTabSheet;
+    Label2: TLabel;
+    Label3: TLabel;
+    cmbCourses: TComboBox;
+    Label4: TLabel;
+    Memo1: TMemo;
+    btnSubmitnew: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    Label5: TLabel;
+    edtStudentNotiEmail: TEdit;
+    rgpCurriculum: TRadioGroup;
+    Label6: TLabel;
+    edtEduInstitution: TEdit;
+    Label7: TLabel;
+    edtFirstName: TEdit;
+    Label1: TLabel;
+    edtSurname: TEdit;
+    cmbProvince: TComboBox;
+    Label8: TLabel;
+    edtPhoneNumber: TEdit;
+    Label9: TLabel;
+    edtAddr1: TEdit;
+    edtAddr2: TEdit;
+    edtAddr3: TEdit;
+    btnNext: TBitBtn;
+    lblSub1: TLabel;
+    lblSub2: TLabel;
+    lblSub3: TLabel;
+    lblSub4: TLabel;
+    lblSub5: TLabel;
+    lblSub6: TLabel;
+    lblSub7: TLabel;
+    spnM1: TSpinEdit;
+    spnM2: TSpinEdit;
+    spnM3: TSpinEdit;
+    spnM4: TSpinEdit;
+    spnM5: TSpinEdit;
+    spnM6: TSpinEdit;
+    spnM7: TSpinEdit;
+    lblCourseID: TLabel;
+    btnCalculate: TBitBtn;
+    lblScoretext: TLabel;
+    lblScore: TLabel;
+    btnInitSave: TBitBtn;
+    rgpGender: TRadioGroup;
+    lblActiveAcc: TLabel;
+    lblWarning: TLabel;
+    cmbCountryCodes: TComboBox;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure edtFirstNameChange(Sender: TObject);
+    procedure btnNextClick(Sender: TObject);
+    procedure cmbCoursesChange(Sender: TObject);
+    procedure ClearMarks;
+    procedure btnSubmitnewClick(Sender: TObject);
+    procedure btnCalculateClick(Sender: TObject);
+    procedure btnLogoutClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnInitSaveClick(Sender: TObject);
+    procedure edtSurnameChange(Sender: TObject);
+    procedure edtStudentNotiEmailChange(Sender: TObject);
+    procedure edtPhoneNumberChange(Sender: TObject);
+    procedure edtAddr1Change(Sender: TObject);
+    procedure edtAddr2Change(Sender: TObject);
+    procedure edtAddr3Change(Sender: TObject);
+    procedure edtEduInstitutionChange(Sender: TObject);
+    procedure cmbProvinceChange(Sender: TObject);
+    procedure rgpCurriculumClick(Sender: TObject);
+    procedure rgpGenderClick(Sender: TObject);
+    procedure cmbCountryCodesChange(Sender: TObject);
+  protected
+    procedure CreateParams(var Params: TCreateParams); override;
+  private
+    Var
+      sCurUsername, sNewHash : String;
+      bUserSetup, bChanges : boolean;
+  published
+    procedure setUser(fUsername, fNewHash : string; fNew : boolean);
+    procedure saveWarn;
+  end;
+
+var
+  frmStudents: TfrmStudents;
+
+implementation
+
+uses util_u, DBConnection_u, Login;
+
+{$R *.dfm}
+
+procedure TfrmStudents.BitBtn1Click(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmStudents.btnCalculateClick(Sender: TObject);
+begin
+  // Precalculate score SQL
+end;
+
+procedure TfrmStudents.btnInitSaveClick(Sender: TObject);
+Var
+  sPhoneVal, sPhone, sCode : string;
+  i, iTemp, iCode: Integer;
+begin
+  // Input validation
+  if (edtFirstName.Text = '') OR
+      (edtSurname.Text = '') OR
+      (edtEduInstitution.Text = '') OR
+      (edtPhoneNumber.Text = '') OR
+      (edtStudentNotiEmail.Text = '') OR
+      (edtAddr2.Text = '') OR
+      (rgpCurriculum.ItemIndex = -1) OR
+      (rgpGender.ItemIndex = -1) then begin
+        util.warn('Please complete all required fields', false);
+        exit;
+      end;
+  // Phone number format validation
+  sPhoneVal := edtPhoneNumber.Text;
+  if (sPhoneVal.Length < 11) then
+    for i := 1 to sPhoneVal.Length do begin
+      Val(sPhoneVal[i], iTemp, iCode);
+      if iCode <> 0 then begin
+        util.warn('Phone number may only contain 0-9 characters', false);
+        break;
+      end;
+    end
+  else begin
+    util.warn('Phone number to long', false);
+    exit;
+  end;
+  sCode := cmbCountryCodes.Items[cmbCountryCodes.ItemIndex];
+  sPhone := Copy(sCode, 1, Pos(' ', sCode)-1) + ' ' + sPhone;
+
+  // Database manipulation EDIT AND INSERT
+  tblApplicants.Open;
+  if bUserSetup then begin
+    tblApplicants.Last;
+    tblApplicants.Insert;
+    tblApplicants['Username'] := sCurUsername;
+    tblApplicants['HashedPassword'] := sNewHash;
+  end else if tblApplicants.Locate('Username', sCurUsername, [loCaseInsensitive]) then
+    tblApplicants.Edit
+  else
+    util.error('Username not found in database (Student Form)', true);
+
+    tblApplicants['Firstname'] := edtFirstName.Text;
+    tblApplicants['Surname'] := edtSurname.Text;
+    tblApplicants['Email'] := edtStudentNotiEmail.Text;
+    tblApplicants['Gender'] := rgpGender.Items[rgpGender.ItemIndex];
+    tblApplicants['PhoneNumber'] := sPhone;
+    tblApplicants['Curriculum'] := rgpCurriculum.Items[rgpCurriculum.ItemIndex];
+    tblApplicants['SchoolName'] := edtEduInstitution.Text;
+    tblApplicants['Province'] := cmbProvince.Items[cmbProvince.ItemIndex];
+    tblApplicants['AddressLine1'] := edtAddr1.Text;
+    tblApplicants['AddressLine2'] := edtAddr2.Text;
+    tblApplicants['AddressLine3'] := edtAddr3.Text;
+  tblApplicants.Post;
+
+  lblWarning.Caption := 'Changes saved';
+  lblWarning.font.Color := clBtnText;
+  bChanges := false;
+end;
+
+procedure TfrmStudents.btnLogoutClick(Sender: TObject);
+begin
+  if bUserSetup then
+    if MessageDlg('Your new account will not be saved, are you sure?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      exit;
+  sNewHash := '';
+  sCurUsername := '';
+  bUserSetup := false;
+  frmLogin.logout;
+end;
+
+procedure TfrmStudents.btnNextClick(Sender: TObject);
+begin
+  if bChanges then
+    if MessageDlg('You have not saved your changes yet, continue?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      tbcStudents.ActivePageIndex := 0;
+  tbcStudents.ActivePageIndex := 1;
+end;
+
+procedure TfrmStudents.btnSubmitnewClick(Sender: TObject);
+begin
+  cDB.runSQL('');
+
+  util.notify('Sucsessfully submitted your application');
+  cmbCourses.Text := '';
+  cmbCourses.ItemIndex := -1;
+  ClearMarks;
+end;
+
+procedure TfrmStudents.ClearMarks;
+begin
+  spnM1.Clear;
+  spnM2.Clear;
+  spnM3.Clear;
+  spnM4.Clear;
+  spnM5.Clear;
+  spnM6.Clear;
+  spnM7.Clear;
+end;
+
+procedure TfrmStudents.cmbCoursesChange(Sender: TObject);
+Var
+  iW1, iW2, iW3, iW4, iW5, iW6, iW7 : integer;
+begin
+  ClearMarks;
+  // Locate in database, load values
+  if tblCourses.Locate('Username', cmbCourses.Items[cmbCourses.ItemIndex], [loCaseInsensitive]) then begin
+    lblSub1.Caption := tblCourses['Subject1'];
+    lblSub2.Caption := tblCourses['Subject2'];
+    lblSub3.Caption := tblCourses['Subject3'];
+    lblSub4.Caption := tblCourses['Subject4'];
+    lblSub5.Caption := tblCourses['Subject5'];
+    lblSub6.Caption := tblCourses['Subject6'];
+    lblSub7.Caption := tblCourses['Subject7'];
+
+    iW1 := tblCourses['Weight1'];
+    iW2 := tblCourses['Weight2'];
+    iW3 := tblCourses['Weight3'];
+    iW4 := tblCourses['Weight4'];
+    iW5 := tblCourses['Weight5'];
+    iW6 := tblCourses['Weight6'];
+    iW7 := tblCourses['Weight7'];
+
+    lblCourseID.Caption := tblCourses['CourseID'];
+  end;
+end;
+
+procedure TfrmStudents.cmbCountryCodesChange(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.CreateParams(var Params: TCreateParams);
+begin
+  inherited;
+  Params.ExStyle := Params.ExStyle or WS_EX_APPWINDOW;
+end;
+
+procedure TfrmStudents.FormActivate(Sender: TObject);
+Var
+  sGender, sPhone, sCode : String;
+  i, j, k : integer;
+begin
+
+  // Load avalible courses
+  cmbCourses.Items.Clear;
+  cmbCourses.Text := '';
+  cmbCourses.ItemIndex := -1;
+  cmbCourses.AutoComplete := true;
+
+  //tblCourses.Open;
+  //tblCourses.First;
+  //while NOT(tblCourses.Eof) do begin
+  //  cmbCourses.Items.Append(tblCourses['Name']);
+  //  tblCourses.Next;
+  //end;
+
+  if bUserSetup = false then begin
+    tblApplicants.Open;
+    if NOT(tblApplicants.Locate('Username', sCurUsername, [loCaseInsensitive])) then begin
+      util.error('User ' + sCurUsername + ' not found in database (Students Form)', true);
+      exit;
+    end;
+    edtFirstName.Text := tblApplicants['Firstname'];
+    edtSurname.Text := tblApplicants['Surname'];
+    edtStudentNotiEmail.Text := tblApplicants['Email'];
+    sGender := tblApplicants['Gender'];
+    case sGender[1] of
+      'M': rgpGender.ItemIndex := 0;
+      'F': rgpGender.ItemIndex := 1;
+      ' ': rgpGender.ItemIndex := -1;
+    end;
+    sPhone := tblApplicants['PhoneNumber'];
+    sCode := Copy(sPhone,1, Pos(' ', sPhone)-1);
+    for i := 0 to cmbCountryCodes.Items.Count -1 do
+      if Copy(cmbCountryCodes.Items[i],1, Pos(' ', cmbCountryCodes.Items[i])-1) = sCode then begin
+        cmbCountryCodes.ItemIndex := i;
+        break;
+      end;
+    for j := 0 to rgpCurriculum.Items.Count -1 do
+      if Copy(rgpCurriculum.Items[j],1, Pos(' ', rgpCurriculum.Items[j])-1) = tblApplicants['Curriculum'] then begin
+        rgpCurriculum.ItemIndex := j;
+        break;
+      end;
+    for k := 0 to cmbProvince.Items.Count -1 do
+      if Copy(cmbProvince.Items[k],1, Pos(' ', cmbProvince.Items[k])-1) = tblApplicants['Province'] then begin
+        cmbProvince.ItemIndex := k;
+        break;
+      end;
+    edtEduInstitution.Text := tblApplicants['SchoolName'];
+    edtAddr1.Text := tblApplicants['AddressLine1'];
+    if tblApplicants['AddressLine2'] <> '' then
+      edtAddr2.Text := tblApplicants['AddressLine2'];
+    edtAddr3.Text := tblApplicants['AddressLine3'];
+  end;
+
+end;
+
+procedure TfrmStudents.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmStudents.saveWarn;
+begin
+  lblWarning.Caption := 'Changes not saved';
+  lblWarning.font.Color := clOlive;
+  bChanges := true;
+end;
+
+procedure TfrmStudents.setUser(fUsername, fNewHash: string; fNew : boolean);
+begin
+  sCurUsername := fUsername;
+  lblActiveAcc.Caption := fUsername;
+  sNewHash := fNewHash;
+
+  bUserSetup := fNew;
+end;
+
+procedure TfrmStudents.cmbProvinceChange(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.edtPhoneNumberChange(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.edtAddr1Change(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.edtAddr2Change(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.edtAddr3Change(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.rgpCurriculumClick(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.rgpGenderClick(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.edtEduInstitutionChange(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.edtFirstNameChange(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.edtStudentNotiEmailChange(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+procedure TfrmStudents.edtSurnameChange(Sender: TObject);
+begin
+  saveWarn;
+end;
+
+end.

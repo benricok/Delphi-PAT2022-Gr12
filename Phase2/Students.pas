@@ -275,6 +275,9 @@ begin
 end;
 
 procedure TfrmStudents.FormActivate(Sender: TObject);
+Var
+  sGender, sPhone, sCode : String;
+  i, j, k : integer;
 begin
 
   // Load avalible courses
@@ -296,8 +299,39 @@ begin
       util.error('User ' + sCurUsername + ' not found in database (Students Form)', true);
       exit;
     end;
-
-
+    edtFirstName.Text := tblApplicants['Firstname'];
+    edtSurname.Text := tblApplicants['Surname'];
+    edtStudentNotiEmail.Text := tblApplicants['Email'];
+    sGender := tblApplicants['Gender'];
+    case sGender[1] of
+      'M': rgpGender.ItemIndex := 0;
+      'F': rgpGender.ItemIndex := 1;
+      ' ': rgpGender.ItemIndex := -1;
+    end;
+    sPhone := tblApplicants['PhoneNumber'];
+    sCode := Copy(sPhone,1, Pos(' ', sPhone)-1);
+    edtPhoneNumber.Text := Copy(sPhone, Pos(' ', sPhone)+1);
+    for i := 0 to cmbCountryCodes.Items.Count -1 do
+      if Copy(cmbCountryCodes.Items[i],1, Pos(' ', cmbCountryCodes.Items[i])-1) = sCode then begin
+        cmbCountryCodes.ItemIndex := i;
+        break;
+      end;
+    for j := 0 to rgpCurriculum.Items.Count -1 do
+      if rgpCurriculum.Items[j] = tblApplicants['Curriculum'] then begin
+        rgpCurriculum.ItemIndex := j;
+        break;
+      end;
+    for k := 0 to cmbProvince.Items.Count -1 do
+      if cmbProvince.Items[k] = tblApplicants['Province'] then begin
+        cmbProvince.ItemIndex := k;
+        break;
+      end;
+    edtEduInstitution.Text := tblApplicants['SchoolName'];
+    edtAddr1.Text := tblApplicants['AddressLine1'];
+    if tblApplicants['AddressLine2'] <> null then
+      edtAddr2.Text := tblApplicants['AddressLine2'];
+    if tblApplicants['AddressLine3'] <> null then
+      edtAddr3.Text := tblApplicants['AddressLine3'];
   end;
 
 end;
