@@ -81,7 +81,7 @@ procedure TUtil.logevent(sEvent: string; EventType: TEventType);
 Var
   tFile : TextFile;
 begin
-  initFile('event.log', tFile);
+  initFile('.\Data\Events.log', tFile);
   Append(tFile);
   case EventType of
     {error} TEventType.error: Writeln(tfile, DateToStr(Now) + ' ' + TimeToStr(Now) + ';[ Error ];' + sEvent);

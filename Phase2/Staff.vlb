@@ -31,9 +31,6 @@ Coordinates=92,212,87,51
 [tabCourses]
 Coordinates=183,280,70,33
 
-[tabHome]
-Coordinates=107,280,58,33
-
 [Label2]
 Coordinates=316,144,46,51
 
@@ -62,7 +59,7 @@ Coordinates=250,10,72,51
 Coordinates=379,144,69,51
 
 []
-Coordinates=677,261,82,33
+Coordinates=107,280,58,33
 
 [cpDateClose]
 Coordinates=396,212,76,33

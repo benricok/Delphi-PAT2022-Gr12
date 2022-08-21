@@ -188,7 +188,7 @@ object frmStudents: TfrmStudents
         TextHint = 'Email address (notifications)'
         OnChange = edtStudentNotiEmailChange
       end
-      object ComboBox2: TComboBox
+      object cmbProvince: TComboBox
         Left = 456
         Top = 295
         Width = 402
@@ -196,7 +196,7 @@ object frmStudents: TfrmStudents
         AutoDropDown = True
         TabOrder = 1
         TextHint = 'Select province'
-        OnChange = ComboBox2Change
+        OnChange = cmbProvinceChange
         Items.Strings = (
           'Western Cape'
           'Eastern Cape'

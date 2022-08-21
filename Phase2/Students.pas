@@ -49,7 +49,7 @@ type
     edtFirstName: TEdit;
     Label1: TLabel;
     edtSurname: TEdit;
-    ComboBox2: TComboBox;
+    cmbProvince: TComboBox;
     Label8: TLabel;
     edtPhoneNumber: TEdit;
     Label9: TLabel;
@@ -98,7 +98,7 @@ type
     procedure edtAddr2Change(Sender: TObject);
     procedure edtAddr3Change(Sender: TObject);
     procedure edtEduInstitutionChange(Sender: TObject);
-    procedure ComboBox2Change(Sender: TObject);
+    procedure cmbProvinceChange(Sender: TObject);
     procedure rgpCurriculumClick(Sender: TObject);
     procedure rgpGenderClick(Sender: TObject);
     procedure cmbCountryCodesChange(Sender: TObject);
@@ -164,15 +164,32 @@ begin
     exit;
   end;
   sCode := cmbCountryCodes.Items[cmbCountryCodes.ItemIndex];
-  sPhone := Copy(sCode, 1, Pos(' ', sCode)-1) + sPhone;
+  sPhone := Copy(sCode, 1, Pos(' ', sCode)-1) + ' ' + sPhone;
 
-
+  // Database manipulation EDIT AND INSERT
+  tblApplicants.Open;
   if bUserSetup then begin
+    tblApplicants.Last;
+    tblApplicants.Insert;
+    tblApplicants['Username'] := sCurUsername;
+    tblApplicants['HashedPassword'] := sNewHash;
+  end else if tblApplicants.Locate('Username', sCurUsername, [loCaseInsensitive]) then
+    tblApplicants.Edit
+  else
+    util.error('Username not found in database (Student Form)', true);
 
-
-  end else begin
-
-  end;
+    tblApplicants['Firstname'] := edtFirstName.Text;
+    tblApplicants['Surname'] := edtSurname.Text;
+    tblApplicants['Email'] := edtStudentNotiEmail.Text;
+    tblApplicants['Gender'] := rgpGender.Items[rgpGender.ItemIndex];
+    tblApplicants['PhoneNumber'] := sPhone;
+    tblApplicants['Curriculum'] := rgpCurriculum.Items[rgpCurriculum.ItemIndex];
+    tblApplicants['SchoolName'] := edtEduInstitution.Text;
+    tblApplicants['Province'] := cmbProvince.Items[cmbProvince.ItemIndex];
+    tblApplicants['AddressLine1'] := edtAddr1.Text;
+    tblApplicants['AddressLine2'] := edtAddr2.Text;
+    tblApplicants['AddressLine3'] := edtAddr3.Text;
+  tblApplicants.Post;
 
   lblWarning.Caption := 'Changes saved';
   lblWarning.font.Color := clBtnText;
@@ -182,12 +199,12 @@ end;
 procedure TfrmStudents.btnLogoutClick(Sender: TObject);
 begin
   if bUserSetup then
-    if MessageDlg('Your new account will not be saved, are you sure?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then begin
-      sNewHash := '';
-      sCurUsername := '';
-      bUserSetup := false;
-      frmLogin.logout;
-    end;
+    if MessageDlg('Your new account will not be saved, are you sure?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      exit;
+  sNewHash := '';
+  sCurUsername := '';
+  bUserSetup := false;
+  frmLogin.logout;
 end;
 
 procedure TfrmStudents.btnNextClick(Sender: TObject);
@@ -266,11 +283,21 @@ begin
   cmbCourses.ItemIndex := -1;
   cmbCourses.AutoComplete := true;
 
-  tblCourses.Open;
-  tblCourses.First;
-  while NOT(tblCourses.Eof) do begin
-    cmbCourses.Items.Append(tblCourses['Name']);
-    tblCourses.Next;
+  //tblCourses.Open;
+  //tblCourses.First;
+  //while NOT(tblCourses.Eof) do begin
+  //  cmbCourses.Items.Append(tblCourses['Name']);
+  //  tblCourses.Next;
+  //end;
+
+  if bUserSetup = false then begin
+    tblApplicants.Open;
+    if NOT(tblApplicants.Locate('Username', sCurUsername, [loCaseInsensitive])) then begin
+      util.error('User ' + sCurUsername + ' not found in database (Students Form)', true);
+      exit;
+    end;
+
+
   end;
 
 end;
@@ -296,7 +323,7 @@ begin
   bUserSetup := fNew;
 end;
 
-procedure TfrmStudents.ComboBox2Change(Sender: TObject);
+procedure TfrmStudents.cmbProvinceChange(Sender: TObject);
 begin
   saveWarn;
 end;

@@ -51,25 +51,15 @@ object frmStaff: TfrmStaff
       NumGlyphs = 2
       TabOrder = 2
     end
-    object btnEdtSubjects: TBitBtn
-      Left = 97
-      Top = 6
-      Width = 75
-      Height = 25
-      Caption = 'Edit Subjects'
-      TabOrder = 3
-    end
   end
   object tbcStaff: TPageControl
     Left = 0
     Top = 0
     Width = 886
     Height = 522
-    ActivePage = tabCourses
+    ActivePage = tabEventLog
     TabOrder = 1
-    object tabHome: TTabSheet
-      Caption = 'Home'
-    end
+    OnChange = tbcStaffChange
     object tabCourses: TTabSheet
       Caption = 'Courses'
       ImageIndex = 1
@@ -509,10 +499,45 @@ object frmStaff: TfrmStaff
     object tabUserAdmin: TTabSheet
       Caption = 'User Administration'
       ImageIndex = 3
+      object DBGrid1: TDBGrid
+        Left = 12
+        Top = 16
+        Width = 854
+        Height = 201
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+      end
     end
     object tabEventLog: TTabSheet
       Caption = 'Event Log'
       ImageIndex = 4
+      object redEvent: TRichEdit
+        Left = 3
+        Top = 3
+        Width = 863
+        Height = 457
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        Zoom = 100
+      end
+      object btnClearLog: TButton
+        Left = 791
+        Top = 466
+        Width = 75
+        Height = 25
+        Caption = 'Clear'
+        TabOrder = 1
+        OnClick = btnClearLogClick
+      end
     end
   end
 end

@@ -31,7 +31,6 @@ type
       edtConfirmPassword : TEdit;
       lblNewAcc : TLabel;
       bStateNew : boolean;
-      activeUser : util_u.TUser;
       bAuth : boolean;
       conDB: TADOConnection;
       tblMusic: TADOtable;
@@ -43,7 +42,6 @@ type
       sNewUser : string;
   published
     Procedure logout;
-    Function getUser : TUser;
     Function hash(sIn : string) : String;
   end;
 
@@ -94,17 +92,27 @@ begin
   end else if NOT((edtPass.Text = '') OR (edtUser.Text = '')) then begin
       tblStaff.open;
       tblStaff.First;
-      if tblStaff.Locate('Username', edtUser.Text, [loCaseInsensitive]) then begin
-        if tblStaff['Enabled'] = true then begin
-          if tblStaff['HashedPASS'] = hash(edtPass.Text) then begin
-            util.logevent('User ' + activeUser.username + ' logged in.', TEventType.info);
+      if Copy(edtUser.Text, 1, 4) = 'STAFF/' then
+        if tblStaff.Locate('Username', edtUser.Text, [loCaseInsensitive]) then begin
+          if tblStaff['HashedPassword'] = hash(edtPass.Text) then begin
+            util.logevent('User ' + edtuser.Text + ' logged in.', TEventType.info);
             frmLogin.Hide;
+            frmStaff.Show;
           end else
-            util.warn('Invalid password by user ' + edtUser.Text, true)
+              util.warn('Invalid password by user ' + edtUser.Text, true)
         end else
-          util.warn('User ' + edtUser.Text + ' is disabled', true);
-      end else
-        util.warn(edtUser.Text + ' does not exist', true);
+          util.warn(edtUser.Text + ' does not exist', true)
+        else if Copy(edtUser.Text, 1, 4) = 'APP\' then
+        if tblApplicants.Locate('Username', edtUser.Text, [loCaseInsensitive]) then begin
+          if tblApplicants['HashedPassword'] = hash(edtPass.Text) then begin
+            util.logevent('User ' + edtUser.Text + ' logged in.', TEventType.info);
+            frmLogin.Hide;
+            frmStudents.setUser(edtUser.Text, '', false);
+            frmStudents.Show;
+          end else
+              util.warn('Invalid password by user ' + edtUser.Text, true)
+        end else
+          util.warn(edtUser.Text + ' does not exist', true);
     end else
       util.error('Please enter your credentials before submitting', false);
 end;
@@ -177,12 +185,6 @@ procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
   cDB.connectDB;
   bStateNew := false;
-end;
-
-// Getter for active user record
-function TfrmLogin.getUser: util_u.TUser;
-begin
-  result := activeUser;
 end;
 
 function TfrmLogin.hash(sIn: string): String;

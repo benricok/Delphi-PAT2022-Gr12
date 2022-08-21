@@ -24,7 +24,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
   Vcl.ComCtrls, Vcl.Menus, Vcl.WinXCalendars, Vcl.Grids, Vcl.Samples.Calendar,
-  Vcl.WinXPickers, Vcl.Samples.Spin;
+  Vcl.WinXPickers, Vcl.Samples.Spin, Data.DB, Vcl.DBGrids;
 
 type
   TfrmStaff = class(TForm)
@@ -32,7 +32,6 @@ type
     BitBtn1: TBitBtn;
     btnLogout: TButton;
     tbcStaff: TPageControl;
-    tabHome: TTabSheet;
     tabCourses: TTabSheet;
     tabSubmissions: TTabSheet;
     tabUserAdmin: TTabSheet;
@@ -74,7 +73,9 @@ type
     cbxSub7: TComboBox;
     spnSub7: TSpinEdit;
     Label15: TLabel;
-    btnEdtSubjects: TBitBtn;
+    redEvent: TRichEdit;
+    btnClearLog: TButton;
+    DBGrid1: TDBGrid;
     procedure BitBtn1Click(Sender: TObject);
     procedure btnNewCourseClick(Sender: TObject);
     procedure clearFrmFields;
@@ -82,6 +83,9 @@ type
     procedure btnUpdateCourseClick(Sender: TObject);
     procedure saveCourse(new : boolean);
     procedure clearInputsCourse;
+    procedure tbcStaffChange(Sender: TObject);
+    procedure loadEvents;
+    procedure btnClearLogClick(Sender: TObject);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -103,6 +107,19 @@ uses DBConnection_u, util_u;
 procedure TfrmStaff.BitBtn1Click(Sender: TObject);
 begin
   Application.Terminate;
+end;
+
+procedure TfrmStaff.btnClearLogClick(Sender: TObject);
+Var
+  tFile : TextFile;
+begin
+  if MessageDlg('Are you sure you want to clear the event log?', mtConfirmation, [mbYes,mbCancel], 2) = 6 then begin
+    DeleteFile('event.log');
+    Util.initFile('event.log', tFile);
+    Util.logevent('Event log was cleared', TEventType.warning);
+    CloseFile(tFile);
+    redEvent.Clear;
+  end;
 end;
 
 procedure TfrmStaff.btnNewCourseClick(Sender: TObject);
@@ -143,9 +160,82 @@ begin
   Application.Terminate;
 end;
 
+procedure TfrmStaff.loadEvents;
+Var
+  tFile : Textfile;
+  sLine, sDateTime, sType : string;
+  iPos, iLen, iTotChar : integer;
+  cType : char;
+begin
+  util.initFile('.\Data\Events.log', tFile);
+  Reset(tFile);
+  iTotChar := 1;
+  while NOT(EOF(tFile)) do begin
+    Readln(tFile, sLine);
+    iLen := length(sLine)+2;
+    iPos := Pos(';', sLine);
+    sDateTime := Copy(sLine, 1, iPos-1);
+    Delete(sLine, 1, iPos);
+    ctype := sLine[3];
+    iPos := Pos(';', sLine);
+    sType := Copy(sLine, 1, iPos-1);
+    Delete(sLine, 1, iPos);
+
+    with redEvent do begin
+      case cType of
+        'E': begin
+          selStart := iTotChar+1;
+          selLength := iLen;
+          selAttributes.Color := clGray;
+          selText := sDateTime + ' ';
+          selAttributes.Color := clRed;
+          selText := sType + ' ';
+          SelAttributes.Color := clWindowText;
+          selText := sLine + #13#10;
+          iTotChar := iTotChar + iLen;
+        end;
+        'I': begin
+          selStart := iTotChar+1;
+          selLength := iLen;
+          selAttributes.Color := clGray;
+          selText := sDateTime + ' ';
+          selAttributes.Color := clBlue;
+          selText := sType + ' ';
+          SelAttributes.Color := clWindowText;
+          selText := sLine + #13#10;
+          iTotChar := iTotChar + iLen;
+        end;
+        'W': begin
+          selStart := iTotChar+1;
+          selLength := iLen;
+          selAttributes.Color := clGray;
+          selText := sDateTime + ' ';
+          selAttributes.Color := clWebDarkOrange;
+          selText := sType + ' ';
+          SelAttributes.Color := clWindowText;
+          selText := sLine + #13#10;
+          iTotChar := iTotChar + iLen;
+        end;
+      end;
+    end;
+  end;
+  CloseFile(tFile);
+  //redEvent.lines.LoadFromFile(sTFname);
+end;
+
 procedure TfrmStaff.saveCourse(new: boolean);
 begin
   // Procedure to save all
+end;
+
+procedure TfrmStaff.tbcStaffChange(Sender: TObject);
+begin
+  case tbcStaff.ActivePageIndex of
+    0: ;
+    1: ;
+    2: ;
+    3: loadEvents;
+  end;
 end;
 
 end.
