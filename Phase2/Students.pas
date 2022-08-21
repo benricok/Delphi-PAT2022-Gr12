@@ -332,6 +332,9 @@ begin
       edtAddr2.Text := tblApplicants['AddressLine2'];
     if tblApplicants['AddressLine3'] <> null then
       edtAddr3.Text := tblApplicants['AddressLine3'];
+    lblWarning.Caption := 'Changes saved';
+    lblWarning.font.Color := clBtnText;
+    bChanges := false;
   end;
 
 end;

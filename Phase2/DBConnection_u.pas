@@ -30,14 +30,17 @@ type
   published
     Procedure connectDB;
     procedure runSQL(sSQL: string);
+  public
+    function getDSapplicants : TDataSource;
+    function getDSstaff : TDataSource;
+    function getDSapplications : TDataSource;
   end;
 
 var
   cDB : TcDB;
   dbConnection: TADOConnection;
   tblApplications, tblCourses, tblStaff, tblApplicants: TADOtable;
-  tblUserInfo : TADOtable;
-  dsrTbl: TDataSource;
+  dsrTblApplicants, dsrTblStaff, dsrTblApplications: TDataSource;
   qryMain : TADOQuery;
 
 implementation
@@ -86,9 +89,31 @@ begin
   tblApplicants.Active := true;
 
   // Create datasource object
-  //dsrTbl := TDataSource.Create(Self);
-  //dsrTbl.DataSet := tblUserInfo;
+  dsrTblApplicants := TDataSource.Create(Self);
+  dsrTblApplicants.DataSet := tblApplicants;
+
+  dsrTblStaff := TDataSource.Create(Self);
+  dsrTblStaff.DataSet := tblStaff;
+
+  dsrTblApplications := TDataSource.Create(Self);
+  dsrTblApplications.DataSet := tblApplications;
 end;
+
+function TcDB.getDSapplicants: TDataSource;
+begin
+  result := dsrTblApplicants;
+end;
+
+function TcDB.getDSapplications: TDataSource;
+begin
+  result := dsrTblApplications;
+end;
+
+function TcDB.getDSstaff: TDataSource;
+begin
+  result := dsrTblStaff;
+end;
+
 procedure TcDB.runSQL(sSQL: string);
 begin
   if length(sSQL) <> 0 then

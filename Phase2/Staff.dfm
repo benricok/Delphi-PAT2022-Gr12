@@ -57,7 +57,7 @@ object frmStaff: TfrmStaff
     Top = 0
     Width = 886
     Height = 522
-    ActivePage = tabEventLog
+    ActivePage = tabCourses
     TabOrder = 1
     OnChange = tbcStaffChange
     object tabCourses: TTabSheet
@@ -76,7 +76,7 @@ object frmStaff: TfrmStaff
         Font.Style = []
         ParentFont = False
       end
-      object cbxSelectCourse: TComboBox
+      object cmbSelectCourse: TComboBox
         Left = 24
         Top = 58
         Width = 665
@@ -142,38 +142,12 @@ object frmStaff: TfrmStaff
         Width = 842
         Height = 377
         TabOrder = 3
-        object Label1: TLabel
-          Left = 16
-          Top = 25
-          Width = 57
-          Height = 16
-          Caption = 'CourseID:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object lblCourseID: TLabel
-          Left = 125
-          Top = 23
-          Width = 31
-          Height = 18
-          Caption = 'N/A'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
         object Label3: TLabel
-          Left = 16
-          Top = 61
-          Width = 82
+          Left = 48
+          Top = 77
+          Width = 104
           Height = 16
-          Caption = 'Course Name:'
+          Caption = 'Course Name(ID):'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -182,8 +156,8 @@ object frmStaff: TfrmStaff
           ParentFont = False
         end
         object Label4: TLabel
-          Left = 16
-          Top = 101
+          Left = 48
+          Top = 117
           Width = 76
           Height = 16
           Caption = 'Closing Date:'
@@ -195,128 +169,24 @@ object frmStaff: TfrmStaff
           ParentFont = False
         end
         object Label5: TLabel
-          Left = 16
-          Top = 151
-          Width = 75
-          Height = 18
+          Left = 448
+          Top = 75
+          Width = 45
+          Height = 16
+          Caption = 'Faculty:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label1: TLabel
+          Left = 448
+          Top = 112
+          Width = 68
+          Height = 16
           Caption = 'Description:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label6: TLabel
-          Left = 392
-          Top = 26
-          Width = 57
-          Height = 18
-          Caption = 'Formula:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label7: TLabel
-          Left = 407
-          Top = 64
-          Width = 59
-          Height = 16
-          Caption = 'Subject 1:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label10: TLabel
-          Left = 407
-          Top = 184
-          Width = 59
-          Height = 16
-          Caption = 'Subject 4:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label11: TLabel
-          Left = 407
-          Top = 264
-          Width = 59
-          Height = 16
-          Caption = 'Subject 6:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label12: TLabel
-          Left = 407
-          Top = 305
-          Width = 59
-          Height = 16
-          Caption = 'Subject 7:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label13: TLabel
-          Left = 407
-          Top = 224
-          Width = 59
-          Height = 16
-          Caption = 'Subject 5:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label8: TLabel
-          Left = 407
-          Top = 101
-          Width = 59
-          Height = 16
-          Caption = 'Subject 2:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label9: TLabel
-          Left = 407
-          Top = 144
-          Width = 59
-          Height = 16
-          Caption = 'Subject 3:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label15: TLabel
-          Left = 767
-          Top = 41
-          Width = 56
-          Height = 16
-          Caption = '% Weight'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -325,17 +195,17 @@ object frmStaff: TfrmStaff
           ParentFont = False
         end
         object edtCourseName: TEdit
-          Left = 125
-          Top = 60
-          Width = 233
+          Left = 168
+          Top = 76
+          Width = 222
           Height = 21
           TabOrder = 0
-          TextHint = 'Course friendly name'
+          TextHint = 'Course name'
         end
         object cpDateClose: TCalendarPicker
-          Left = 125
-          Top = 101
-          Width = 233
+          Left = 168
+          Top = 117
+          Width = 222
           Height = 25
           CalendarHeaderInfo.DaysOfWeekFont.Charset = DEFAULT_CHARSET
           CalendarHeaderInfo.DaysOfWeekFont.Color = clWindowText
@@ -358,10 +228,10 @@ object frmStaff: TfrmStaff
           TextHint = 'select a date'
         end
         object redCourseDescript: TRichEdit
-          Left = 16
-          Top = 184
+          Left = 448
+          Top = 136
           Width = 342
-          Height = 168
+          Height = 166
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -371,145 +241,145 @@ object frmStaff: TfrmStaff
           TabOrder = 2
           Zoom = 100
         end
-        object cbxSub1: TComboBox
-          Left = 488
-          Top = 63
-          Width = 265
-          Height = 21
+        object pnlScoreCal: TPanel
+          Left = 48
+          Top = 176
+          Width = 342
+          Height = 121
           TabOrder = 3
+          object Label7: TLabel
+            Left = 7
+            Top = 8
+            Width = 97
+            Height = 16
+            Caption = 'Score calculation'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label15: TLabel
+            Left = 238
+            Top = 17
+            Width = 56
+            Height = 16
+            Caption = '% Weight'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+          end
+          object cbxMath: TCheckBox
+            Left = 25
+            Top = 40
+            Width = 97
+            Height = 17
+            Caption = 'Math required'
+            Checked = True
+            State = cbChecked
+            TabOrder = 0
+          end
+          object spnMath: TSpinEdit
+            Left = 238
+            Top = 39
+            Width = 58
+            Height = 22
+            MaxValue = 0
+            MinValue = 0
+            TabOrder = 1
+            Value = 0
+          end
+          object spnScience: TSpinEdit
+            Left = 238
+            Top = 67
+            Width = 58
+            Height = 22
+            MaxValue = 0
+            MinValue = 0
+            TabOrder = 2
+            Value = 0
+          end
+          object cbxScience: TCheckBox
+            Left = 25
+            Top = 71
+            Width = 97
+            Height = 17
+            Caption = 'Science required'
+            Checked = True
+            State = cbChecked
+            TabOrder = 3
+          end
         end
-        object spnSub1: TSpinEdit
-          Left = 767
-          Top = 63
-          Width = 58
-          Height = 22
-          MaxValue = 0
-          MinValue = 0
+        object edtFaculty: TEdit
+          Left = 528
+          Top = 75
+          Width = 262
+          Height = 21
           TabOrder = 4
-          Value = 0
-        end
-        object cbxSub2: TComboBox
-          Left = 488
-          Top = 103
-          Width = 265
-          Height = 21
-          TabOrder = 5
-        end
-        object cbxSub3: TComboBox
-          Left = 488
-          Top = 143
-          Width = 265
-          Height = 21
-          TabOrder = 6
-        end
-        object cbxSub4: TComboBox
-          Left = 488
-          Top = 183
-          Width = 265
-          Height = 21
-          TabOrder = 7
-        end
-        object cbxSub5: TComboBox
-          Left = 488
-          Top = 223
-          Width = 265
-          Height = 21
-          TabOrder = 8
-        end
-        object cbxSub6: TComboBox
-          Left = 488
-          Top = 303
-          Width = 265
-          Height = 21
-          TabOrder = 9
-        end
-        object cbxSub7: TComboBox
-          Left = 488
-          Top = 263
-          Width = 265
-          Height = 21
-          TabOrder = 10
-        end
-        object spnSub2: TSpinEdit
-          Left = 767
-          Top = 103
-          Width = 58
-          Height = 22
-          MaxValue = 0
-          MinValue = 0
-          TabOrder = 11
-          Value = 0
-        end
-        object spnSub3: TSpinEdit
-          Left = 767
-          Top = 143
-          Width = 58
-          Height = 22
-          MaxValue = 0
-          MinValue = 0
-          TabOrder = 12
-          Value = 0
-        end
-        object spnSub4: TSpinEdit
-          Left = 767
-          Top = 183
-          Width = 58
-          Height = 22
-          MaxValue = 0
-          MinValue = 0
-          TabOrder = 13
-          Value = 0
-        end
-        object spnSub5: TSpinEdit
-          Left = 767
-          Top = 223
-          Width = 58
-          Height = 22
-          MaxValue = 0
-          MinValue = 0
-          TabOrder = 14
-          Value = 0
-        end
-        object spnSub6: TSpinEdit
-          Left = 767
-          Top = 263
-          Width = 58
-          Height = 22
-          MaxValue = 0
-          MinValue = 0
-          TabOrder = 15
-          Value = 0
-        end
-        object spnSub7: TSpinEdit
-          Left = 767
-          Top = 303
-          Width = 58
-          Height = 22
-          MaxValue = 0
-          MinValue = 0
-          TabOrder = 16
-          Value = 0
+          TextHint = 'Course name'
         end
       end
     end
     object tabSubmissions: TTabSheet
       Caption = 'Submissions'
       ImageIndex = 2
-    end
-    object tabUserAdmin: TTabSheet
-      Caption = 'User Administration'
-      ImageIndex = 3
-      object DBGrid1: TDBGrid
-        Left = 12
-        Top = 16
-        Width = 854
-        Height = 201
+      object dbgApplications: TDBGrid
+        Left = 20
+        Top = 24
+        Width = 837
+        Height = 209
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
+      end
+      object Panel2: TPanel
+        Left = 20
+        Top = 248
+        Width = 837
+        Height = 243
+        TabOrder = 1
+      end
+    end
+    object tabUserAdmin: TTabSheet
+      Caption = 'User Administration'
+      ImageIndex = 3
+      object dbgUsers: TDBGrid
+        Left = 21
+        Top = 25
+        Width = 836
+        Height = 208
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+      end
+      object Panel1: TPanel
+        Left = 21
+        Top = 248
+        Width = 836
+        Height = 233
+        TabOrder = 1
+        object rgpUserGroup: TRadioGroup
+          Left = 0
+          Top = 8
+          Width = 145
+          Height = 57
+          Caption = 'User group'
+          ItemIndex = 0
+          Items.Strings = (
+            'Staff'
+            'Applicants')
+          TabOrder = 0
+        end
       end
     end
     object tabEventLog: TTabSheet

@@ -36,7 +36,7 @@ type
     enabled : boolean;
     cellPhone : string[11];
   end;
-  TrecApplic = record
+  TCourse = record
     applic_ID : string[20];
     acc_ID : string[20];
     course_ID : string[50];

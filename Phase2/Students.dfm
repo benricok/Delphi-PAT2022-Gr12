@@ -48,7 +48,7 @@ object frmStudents: TfrmStudents
     Top = -2
     Width = 894
     Height = 526
-    ActivePage = tabMyInfo
+    ActivePage = tabNewApplication
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13

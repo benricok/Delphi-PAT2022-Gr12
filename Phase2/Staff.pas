@@ -36,62 +36,51 @@ type
     tabSubmissions: TTabSheet;
     tabUserAdmin: TTabSheet;
     tabEventLog: TTabSheet;
-    cbxSelectCourse: TComboBox;
+    cmbSelectCourse: TComboBox;
     Label2: TLabel;
-    Label1: TLabel;
     BitBtn2: TBitBtn;
     btnNewCourse: TBitBtn;
     btnUpdateCourse: TBitBtn;
     pnlcourses: TPanel;
-    lblCourseID: TLabel;
     Label3: TLabel;
     edtCourseName: TEdit;
     cpDateClose: TCalendarPicker;
     Label4: TLabel;
     redCourseDescript: TRichEdit;
     Label5: TLabel;
-    Label6: TLabel;
     Label7: TLabel;
-    cbxSub1: TComboBox;
-    spnSub1: TSpinEdit;
-    Label8: TLabel;
-    cbxSub2: TComboBox;
-    spnSub2: TSpinEdit;
-    Label9: TLabel;
-    cbxSub3: TComboBox;
-    spnSub3: TSpinEdit;
-    Label10: TLabel;
-    cbxSub4: TComboBox;
-    spnSub4: TSpinEdit;
-    Label11: TLabel;
-    cbxSub5: TComboBox;
-    spnSub5: TSpinEdit;
-    Label12: TLabel;
-    cbxSub6: TComboBox;
-    spnSub6: TSpinEdit;
-    Label13: TLabel;
-    cbxSub7: TComboBox;
-    spnSub7: TSpinEdit;
+    spnMath: TSpinEdit;
     Label15: TLabel;
     redEvent: TRichEdit;
     btnClearLog: TButton;
-    DBGrid1: TDBGrid;
+    dbgUsers: TDBGrid;
+    Panel1: TPanel;
+    dbgApplications: TDBGrid;
+    Panel2: TPanel;
+    rgpUserGroup: TRadioGroup;
+    spnScience: TSpinEdit;
+    cbxMath: TCheckBox;
+    pnlScoreCal: TPanel;
+    cbxScience: TCheckBox;
+    edtFaculty: TEdit;
+    Label1: TLabel;
     procedure BitBtn1Click(Sender: TObject);
     procedure btnNewCourseClick(Sender: TObject);
-    procedure clearFrmFields;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnUpdateCourseClick(Sender: TObject);
-    procedure saveCourse(new : boolean);
     procedure clearInputsCourse;
     procedure tbcStaffChange(Sender: TObject);
     procedure loadEvents;
     procedure btnClearLogClick(Sender: TObject);
+    procedure loadUserManage;
+  private
+    Var
+      sCurUser : string;
+      bNewCourse : boolean;
   protected
     procedure CreateParams(var Params: TCreateParams); override;
-  private
-    { Private declarations }
-  public
-    { Public declarations }
+  published
+    procedure setUser(sUsername : string);
   end;
 
 var
@@ -124,26 +113,48 @@ end;
 
 procedure TfrmStaff.btnNewCourseClick(Sender: TObject);
 begin
-// Clear all application fields
-
+  // Clear all application fields
+  cmbSelectCourse.ClearSelection;
+  clearInputsCourse;
+  bNewCourse := true;
 end;
 
 procedure TfrmStaff.btnUpdateCourseClick(Sender: TObject);
 begin
 //Save all fields
+  if (edtCourseName.Text = '') OR (cpDateClose.Date <> null) OR (edtFaculty.Text = '') then begin
+    util.warn('Please complete all required fields', false);
+    exit;
+  end;
 
-end;
+  // Database manipulation EDIT AND INSERT
+  tblCourses.Open;
+  if bNewCourse then begin
+    tblCourses.Last;
+    tblCourses.Insert;
+    tblCourses['CourseID'] := edtCourseName.Text;
+  end else if tblCourses.Locate('CourseID', edtCourseName.Text, [loCaseInsensitive]) then
+    tblApplicants.Edit
+  else
+    util.error('Course not found in database (Staff Form)', true);
 
-procedure TfrmStaff.clearFrmFields;
-begin
-//
+    tblCourses['MathWeight'] := spnMath.Value;
+    tblCourses['ScienceWeight'] := spnScience.Value;
+    tblCourses['Faculty'] := edtFaculty.Text;
+    tblCourses['ClosingDate'] := cpDateClose.Date;
+    tblCourses['MathRequired'] := cbxMath.Checked;
+    tblCourses['ScienceRequired'] := cbxScience.Checked;
+
+  tblCourses.Post;
+  util.notify('Course saved');
+  util.logevent('Course saved: ' + edtCourseName.Text, info);
 end;
 
 procedure TfrmStaff.clearInputsCourse;
 begin
   // Clear input fields course edit tab
-  lblCourseID.Caption := 'N/A';
   edtCourseName.Clear;
+  edtFaculty.Clear;
   cpDateClose.Date := Date;
   redCourseDescript.Clear;
 end;
@@ -220,12 +231,19 @@ begin
     end;
   end;
   CloseFile(tFile);
-  //redEvent.lines.LoadFromFile(sTFname);
 end;
 
-procedure TfrmStaff.saveCourse(new: boolean);
+procedure TfrmStaff.loadUserManage;
 begin
-  // Procedure to save all
+  case rgpUserGroup.ItemIndex of
+    0: dbgUsers.DataSource := cDB.getDSstaff;
+    1: dbgUsers.DataSource := cDB.getDSapplicants;
+  end;
+end;
+
+procedure TfrmStaff.setUser(sUsername: string);
+begin
+  sCurUser := sUsername;
 end;
 
 procedure TfrmStaff.tbcStaffChange(Sender: TObject);
@@ -233,7 +251,7 @@ begin
   case tbcStaff.ActivePageIndex of
     0: ;
     1: ;
-    2: ;
+    2: loadUserManage;
     3: loadEvents;
   end;
 end;
