@@ -20,32 +20,20 @@ unit util_u;
 
 interface
 
-uses SysUtils, Classes, Vcl.Forms, Vcl.Dialogs, System.Variants;
+uses SysUtils, Classes, Vcl.Forms, Vcl.Dialogs, System.Variants, Winapi.ShellApi, Winapi.Windows, Cardanal;
 
 type
   Tsc = set of char;
   TEventType = (error, info, warning);
-  TMarks = array[1..7] of integer;
-  TUser = record
-    username : string[20];
-    fullname : string[25];
-    surname : string[25];
-    gender : char;
-    email : string[30];
-    privilege : string[5];
-    enabled : boolean;
-    cellPhone : string[11];
-  end;
-  TrecApplic = record
+  //TMarks = array[1..7] of integer;
+  TCourse = record
     applic_ID : string[20];
     acc_ID : string[20];
     course_ID : string[50];
-    marks : TMarks;
     submitted : boolean;
     dateUpdated : TDatetime;
     preCalculatedScore : real;
   end;
-
 
   TUtil = class(TComponent)
     Function noSpace(sString : string) : string;
@@ -54,7 +42,8 @@ type
     Procedure logevent(sEvent : string; EventType: TEventType);
     Procedure deleteFile(const sFileName : string);
     Procedure warn(sWarn : string; log : boolean);
-    Function calculateScore(course_ID : string; marks : TMarks) : real;
+    Procedure notify(sMessage : string);
+    Procedure openHelp;
     Var
       const
         scInvalidNames : Tsc = [#33..#44, #46..#64, #91..#96, #123..#126];
@@ -65,6 +54,8 @@ Var
   util : TUtil;
 
 implementation
+
+uses DBConnection_u;
 
 procedure TUtil.initFile(const sFileName: string; var tFile : Textfile);
 begin
@@ -78,7 +69,7 @@ procedure TUtil.logevent(sEvent: string; EventType: TEventType);
 Var
   tFile : TextFile;
 begin
-  initFile('event.log', tFile);
+  initFile('.\Data\Events.log', tFile);
   Append(tFile);
   case EventType of
     {error} TEventType.error: Writeln(tfile, DateToStr(Now) + ' ' + TimeToStr(Now) + ';[ Error ];' + sEvent);
@@ -86,11 +77,6 @@ begin
     {warning} TEventType.warning: Writeln(tfile, DateToStr(Now) + ' ' + TimeToStr(Now) + ';[ Warning ];' + sEvent);
   end;
   CloseFile(tFile);
-end;
-
-function TUtil.calculateScore(course_ID : string; marks : TMarks) : real;
-begin
-//
 end;
 
 procedure TUtil.deleteFile(const sFileName: string);
@@ -127,5 +113,14 @@ begin
     logevent(sWarn, TEventType.warning); // Log event in event logger
 end;
 
+Procedure TUtil.notify(sMessage : string);
+begin
+  MessageDlg(sMessage, mtInformation, [mbOK], 0);
+end;
+
+Procedure TUtil.openHelp;
+begin
+  ShellExecute(Handle,'open', 'c:\windows\notepad.exe', 'c:\SomeText.txt', nil, SW_SHOWNORMAL) ;
+end;
 
 end.

@@ -103,6 +103,7 @@ type
     procedure rgpGenderClick(Sender: TObject);
     procedure cmbCountryCodesChange(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -127,6 +128,11 @@ uses util_u, DBConnection_u, Login;
 procedure TfrmStudents.BitBtn1Click(Sender: TObject);
 begin
   Application.Terminate;
+end;
+
+procedure TfrmStudents.BitBtn2Click(Sender: TObject);
+begin
+  util.openHelp;
 end;
 
 procedure TfrmStudents.BitBtn3Click(Sender: TObject);

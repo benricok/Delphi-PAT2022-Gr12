@@ -41,6 +41,7 @@ object frmStudents: TfrmStudents
       Kind = bkHelp
       NumGlyphs = 2
       TabOrder = 1
+      OnClick = BitBtn2Click
     end
   end
   object tbcStudents: TPageControl

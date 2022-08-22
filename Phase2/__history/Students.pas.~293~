@@ -102,6 +102,7 @@ type
     procedure rgpCurriculumClick(Sender: TObject);
     procedure rgpGenderClick(Sender: TObject);
     procedure cmbCountryCodesChange(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -126,6 +127,11 @@ uses util_u, DBConnection_u, Login;
 procedure TfrmStudents.BitBtn1Click(Sender: TObject);
 begin
   Application.Terminate;
+end;
+
+procedure TfrmStudents.BitBtn3Click(Sender: TObject);
+begin
+  ClearMarks;
 end;
 
 procedure TfrmStudents.btnCalculateClick(Sender: TObject);
@@ -221,8 +227,27 @@ begin
 end;
 
 procedure TfrmStudents.btnSubmitnewClick(Sender: TObject);
+Var
+  sPrev : string;
 begin
-  //cDB.runSQL('');
+  btnCalculate.Click;
+  tblApplications.Open;
+  tblApplications.Last;
+  sPrev := tblApplications['ApplicID'];
+  tblApplications.Insert;
+     tblApplications['ApplicID'] := IntToStr(StrToInt(sPrev)+1);
+     tblApplications['CourseID'] := cmbCourses.Items[cmbCourses.ItemIndex];
+     tblApplications['ApplicAccID'] := sCurUsername;
+
+     tblApplications['Score'] := rScore;
+     tblApplications['MathScore'] := spnM1.value;
+     tblApplications['ScienceSubject2Score'] := spnM2.value;
+     tblApplications['Subject3Score'] := spnM3.value;
+     tblApplications['Subject4Score'] := spnM4.value;
+     tblApplications['Subject5Score'] := spnM5.value;
+     tblApplications['Subject6Score'] := spnM6.value;
+     tblApplications['Subject7Score'] := spnM7.value;
+  tblApplications.Post;
 
   util.notify('Sucsessfully submitted your application');
   cmbCourses.Text := '';
@@ -243,7 +268,7 @@ end;
 
 procedure TfrmStudents.cmbCoursesChange(Sender: TObject);
 begin
-  ClearMarks;
+  //ClearMarks;
   rWeightMath := 0;
   rWeightScience := 0;
   // Locate in database, load values
@@ -274,7 +299,7 @@ begin
       end;
       lblClosingDate.Caption := 'Closing Date: ' + FormatDateTime('DD/MM/YYYY', tblCourses['ClosingDate']);
       lblFaculty.Caption := 'Faculty: ' + tblCourses['Faculty'];
-      lblScore.Caption := 'Not Calculated';
+      btnCalculate.Click;
   end;
 end;
 

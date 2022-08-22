@@ -99,6 +99,7 @@ type
     procedure btnShowAllClick(Sender: TObject);
     procedure btnAverageClick(Sender: TObject);
     procedure btnHighestScoreClick(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
   private
     Var
       sCurUser : string;
@@ -122,6 +123,11 @@ uses DBConnection_u, util_u, Login;
 procedure TfrmStaff.BitBtn1Click(Sender: TObject);
 begin
   Application.Terminate;
+end;
+
+procedure TfrmStaff.BitBtn2Click(Sender: TObject);
+begin
+  //
 end;
 
 procedure TfrmStaff.btnAverageClick(Sender: TObject);

@@ -52,6 +52,7 @@ object frmStaff: TfrmStaff
       Kind = bkHelp
       NumGlyphs = 2
       TabOrder = 2
+      OnClick = BitBtn2Click
     end
   end
   object tbcStaff: TPageControl
