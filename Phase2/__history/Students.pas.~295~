@@ -102,6 +102,8 @@ type
     procedure rgpCurriculumClick(Sender: TObject);
     procedure rgpGenderClick(Sender: TObject);
     procedure cmbCountryCodesChange(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -126,6 +128,16 @@ uses util_u, DBConnection_u, Login;
 procedure TfrmStudents.BitBtn1Click(Sender: TObject);
 begin
   Application.Terminate;
+end;
+
+procedure TfrmStudents.BitBtn2Click(Sender: TObject);
+begin
+  util.openHelp;
+end;
+
+procedure TfrmStudents.BitBtn3Click(Sender: TObject);
+begin
+  ClearMarks;
 end;
 
 procedure TfrmStudents.btnCalculateClick(Sender: TObject);
@@ -224,24 +236,23 @@ procedure TfrmStudents.btnSubmitnewClick(Sender: TObject);
 Var
   sPrev : string;
 begin
-   tblApplications.Open;
-   tblApplications.Last;
-   sPrev := tblApplications['ApplicID'];
-   tblApplications.Insert;
-   tblApplications['ApplicID'] := IntToStr(Inc(StrToInt(sPrev)));
-   tblApplications['HashedPassword'] := sNewHash;
+  btnCalculate.Click;
+  tblApplications.Open;
+  tblApplications.Last;
+  sPrev := tblApplications['ApplicID'];
+  tblApplications.Insert;
+     tblApplications['ApplicID'] := IntToStr(StrToInt(sPrev)+1);
+     tblApplications['CourseID'] := cmbCourses.Items[cmbCourses.ItemIndex];
+     tblApplications['ApplicAccID'] := sCurUsername;
 
-   tblApplications['Firstname'] := edtFirstName.Text;
-   tblApplications['Surname'] := edtSurname.Text;
-   tblApplications['Email'] := edtStudentNotiEmail.Text;
-   tblApplications['Gender'] := rgpGender.Items[rgpGender.ItemIndex];
-   tblApplications['PhoneNumber'] := sPhone;
-   tblApplications['Curriculum'] := rgpCurriculum.Items[rgpCurriculum.ItemIndex];
-   tblApplications['SchoolName'] := edtEduInstitution.Text;
-   tblApplications['Province'] := cmbProvince.Items[cmbProvince.ItemIndex];
-   tblApplications['AddressLine1'] := edtAddr1.Text;
-   tblApplications['AddressLine2'] := edtAddr2.Text;
-   tblApplications['AddressLine3'] := edtAddr3.Text;
+     tblApplications['Score'] := rScore;
+     tblApplications['MathScore'] := spnM1.value;
+     tblApplications['ScienceSubject2Score'] := spnM2.value;
+     tblApplications['Subject3Score'] := spnM3.value;
+     tblApplications['Subject4Score'] := spnM4.value;
+     tblApplications['Subject5Score'] := spnM5.value;
+     tblApplications['Subject6Score'] := spnM6.value;
+     tblApplications['Subject7Score'] := spnM7.value;
   tblApplications.Post;
 
   util.notify('Sucsessfully submitted your application');

@@ -53,9 +53,7 @@ type
     Label15: TLabel;
     redEvent: TRichEdit;
     btnClearLog: TButton;
-    dbgUsers: TDBGrid;
     Panel1: TPanel;
-    dbgApplications: TDBGrid;
     Panel2: TPanel;
     rgpUserGroup: TRadioGroup;
     spnScience: TSpinEdit;
@@ -75,6 +73,8 @@ type
     btnShowAll: TBitBtn;
     btnAverage: TBitBtn;
     btnHighestScore: TButton;
+    dbgApplications: TDBGrid;
+    dbgUsers: TDBGrid;
     procedure BitBtn1Click(Sender: TObject);
     procedure btnNewCourseClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -132,7 +132,7 @@ end;
 
 procedure TfrmStaff.btnAverageClick(Sender: TObject);
 begin
-  cDB.runSQL('SELECT AVG(Score) AS (Average Score) FROM Applications');
+  cDB.runSQL('SELECT AVG(Score) AS AverageScore FROM Applications');
   dbgApplications.Update;
 end;
 

@@ -382,6 +382,19 @@ begin
     lblWarning.Caption := 'Changes saved';
     lblWarning.font.Color := clBtnText;
     bChanges := false;
+  end else begin
+    edtFirstName.Clear;
+    edtSurname.Clear;
+    edtEduInstitution.Clear;
+    edtStudentNotiEmail.Clear;
+    edtPhoneNumber.Clear;
+    cmbProvince.ItemIndex := -1;
+    cmbCountryCodes.ItemIndex := -1;
+    rgpCurriculum.ItemIndex := -1;
+    rgpGender.ItemIndex := -1;
+    edtAddr1.Clear;
+    edtAddr2.Clear;
+    edtAddr3.Clear;
   end;
 
 end;

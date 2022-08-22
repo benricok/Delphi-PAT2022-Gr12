@@ -60,7 +60,7 @@ object frmStaff: TfrmStaff
     Top = 0
     Width = 886
     Height = 522
-    ActivePage = tabSubmissions
+    ActivePage = tabUserAdmin
     TabOrder = 1
     OnChange = tbcStaffChange
     object tabCourses: TTabSheet
@@ -342,24 +342,12 @@ object frmStaff: TfrmStaff
     object tabSubmissions: TTabSheet
       Caption = 'Submissions'
       ImageIndex = 2
-      object dbgApplications: TDBGrid
-        Left = 20
-        Top = 24
-        Width = 837
-        Height = 313
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-      end
       object Panel2: TPanel
         Left = 20
         Top = 352
         Width = 837
         Height = 139
-        TabOrder = 1
+        TabOrder = 0
         object btnFilter: TButton
           Left = 239
           Top = 11
@@ -418,29 +406,28 @@ object frmStaff: TfrmStaff
           OnClick = btnHighestScoreClick
         end
       end
-    end
-    object tabUserAdmin: TTabSheet
-      Caption = 'User Administration'
-      ImageIndex = 3
-      object dbgUsers: TDBGrid
-        Left = 21
-        Top = 25
-        Width = 836
-        Height = 344
-        Options = [dgTitles, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-        TabOrder = 0
+      object dbgApplications: TDBGrid
+        Left = 20
+        Top = 24
+        Width = 837
+        Height = 313
+        TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
       end
+    end
+    object tabUserAdmin: TTabSheet
+      Caption = 'User Administration'
+      ImageIndex = 3
       object Panel1: TPanel
         Left = 21
         Top = 392
         Width = 836
         Height = 89
-        TabOrder = 1
+        TabOrder = 0
         object Label6: TLabel
           Left = 256
           Top = 23
@@ -510,8 +497,20 @@ object frmStaff: TfrmStaff
         Width = 75
         Height = 25
         Caption = 'Delete'
-        TabOrder = 2
+        TabOrder = 1
         OnClick = btnDeleteUserClick
+      end
+      object dbgUsers: TDBGrid
+        Left = 21
+        Top = 18
+        Width = 836
+        Height = 351
+        TabOrder = 2
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
       end
     end
     object tabEventLog: TTabSheet

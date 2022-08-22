@@ -6,3 +6,6 @@
 2022/08/22 03:37:20 UNIT:[Unit1.pas] ERROR:'2022/04/56' is not a valid date and time
 2022/08/22 03:37:31 UNIT:[Unit1.pas] ERROR:Row cannot be located for updating. Some values may have been changed since it was last read
 2022/08/22 03:37:33 UNIT:[Unit1.pas] ERROR:Row cannot be located for updating. Some values may have been changed since it was last read
+2022/08/22 10:34:20 AM UNIT:[Unit1.pas] ERROR:Access violation at address 005E4CA5 in module 'MDBPlus.exe'. Read of address 00000040
+2022/08/22 10:34:24 AM UNIT:[Unit1.pas] ERROR:Access violation at address 005A6FF2 in module 'MDBPlus.exe'. Read of address 000002E4
+2022/08/22 10:34:26 AM UNIT:[Unit1.pas] ERROR:Access violation at address 005A6FF2 in module 'MDBPlus.exe'. Read of address 000002E4

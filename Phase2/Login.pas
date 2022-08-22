@@ -205,6 +205,7 @@ begin
   edtUser.SetFocus;
   edtPass.Clear;
   edtUser.Clear;
+  edtUser.ReadOnly := false;
 
   if bStateNew then begin
     edtConfirmPassword.Free;
