@@ -46,6 +46,7 @@ type
     edtCourseName: TEdit;
     cpDateClose: TCalendarPicker;
     Label4: TLabel;
+    redComments: TRichEdit;
     Label5: TLabel;
     Label7: TLabel;
     spnMath: TSpinEdit;
@@ -59,6 +60,7 @@ type
     cbxMath: TCheckBox;
     pnlScoreCal: TPanel;
     cbxScience: TCheckBox;
+    Label1: TLabel;
     cmbFaculty: TComboBox;
     Label6: TLabel;
     btnSortASC: TButton;

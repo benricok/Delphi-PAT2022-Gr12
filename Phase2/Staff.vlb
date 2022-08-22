@@ -37,9 +37,6 @@ Coordinates=10,280,76,33
 [Label3]
 Coordinates=10,144,46,51
 
-[redCourseDescript]
-Coordinates=264,212,107,33
-
 [Label4]
 Coordinates=342,10,46,51
 
@@ -53,7 +50,7 @@ Coordinates=121,10,46,51
 Coordinates=379,144,69,51
 
 []
-Coordinates=677,209,61,33
+Coordinates=264,212,107,33
 Visible=True
 
 [cpDateClose]

@@ -25,6 +25,7 @@ uses SysUtils, Classes, Vcl.Forms, Vcl.Dialogs, System.Variants, Winapi.ShellApi
 type
   Tsc = set of char;
   TEventType = (error, info, warning);
+
   TUtil = class(TObject)
     Function noSpace(sString : string) : string;
     procedure error(sError: string; log : boolean);
@@ -104,7 +105,6 @@ begin
   MessageDlg(sMessage, mtInformation, [mbOK], 0);
 end;
 
-//Show Help Readme text file in notepad
 Procedure TUtil.openHelp;
 begin
   ShellExecute(0,'open', 'c:\windows\notepad.exe', '.\Help.md', nil, SW_SHOWNORMAL) ;

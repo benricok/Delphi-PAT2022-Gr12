@@ -432,7 +432,6 @@ end;
 
 procedure TfrmStudents.setUser(fUsername, fNewHash: string; fNew : boolean);
 begin
-  //Setup user and prepre from
   sCurUsername := fUsername;
   lblActiveAcc.Caption := fUsername;
   sNewHash := fNewHash;

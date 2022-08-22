@@ -60,7 +60,7 @@ object frmStaff: TfrmStaff
     Top = 0
     Width = 886
     Height = 522
-    ActivePage = tabSubmissions
+    ActivePage = tabCourses
     TabOrder = 1
     OnChange = tbcStaffChange
     object tabCourses: TTabSheet
@@ -333,14 +333,14 @@ object frmStaff: TfrmStaff
         object cmbCourseFilter: TComboBox
           Left = 16
           Top = 15
-          Width = 385
+          Width = 249
           Height = 21
           TabOrder = 1
           TextHint = 'Filter Course'
         end
         object btnShowAll: TBitBtn
-          Left = 104
-          Top = 42
+          Left = 360
+          Top = 18
           Width = 89
           Height = 25
           Caption = 'Show All'
@@ -350,8 +350,8 @@ object frmStaff: TfrmStaff
           OnClick = btnShowAllClick
         end
         object btnAverage: TBitBtn
-          Left = 294
-          Top = 42
+          Left = 360
+          Top = 96
           Width = 89
           Height = 25
           Caption = 'Average Score'
@@ -359,8 +359,8 @@ object frmStaff: TfrmStaff
           OnClick = btnAverageClick
         end
         object btnHighestScore: TButton
-          Left = 199
-          Top = 42
+          Left = 360
+          Top = 57
           Width = 89
           Height = 25
           Caption = 'Highest Score'
@@ -368,9 +368,9 @@ object frmStaff: TfrmStaff
           OnClick = btnHighestScoreClick
         end
         object redOutSub: TRichEdit
-          Left = 416
+          Left = 464
           Top = 8
-          Width = 409
+          Width = 361
           Height = 169
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText

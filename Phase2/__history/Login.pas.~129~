@@ -147,7 +147,6 @@ begin
     edtConfirmPassword.Visible := True;
     lblNewAcc.Visible := True;
 
-    // Setup components
     edtConfirmPassword.Top := 165;
     edtConfirmPassword.Left := 75;
     edtConfirmPassword.Width := 180;
@@ -169,7 +168,6 @@ begin
   end;
 end;
 
-// Show password
 procedure TfrmLogin.btnShowPassMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin

@@ -169,7 +169,6 @@ begin
   end;
 end;
 
-// Show password
 procedure TfrmLogin.btnShowPassMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin

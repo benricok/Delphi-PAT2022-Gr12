@@ -107,7 +107,6 @@ begin
         end else
           util.warn(edtUser.Text + ' does not exist', true)
       else if Copy(edtUser.Text, 1, 4) = 'APP\' then
-      // Process Applicant user account
         if tblApplicants.Locate('Username', edtUser.Text, [loCaseInsensitive]) then begin
           if tblApplicants['HashedPassword'] = hash(edtPass.Text) then begin
             util.logevent('User ' + edtUser.Text + ' logged in.', TEventType.info);
@@ -123,7 +122,7 @@ begin
 end;
 
 
-//Dynamic component
+//Dynamic
 procedure TfrmLogin.btnNewStudentClick(Sender: TObject);
 Var
   sLastAcc : string;
@@ -132,7 +131,6 @@ begin
   edtPass.Clear;
 
   if bStateNew then begin
-    // Free dynamic objectss
     edtConfirmPassword.Free;
     lblNewAcc.Free;
     bStateNew := false;
@@ -147,7 +145,6 @@ begin
     edtConfirmPassword.Visible := True;
     lblNewAcc.Visible := True;
 
-    // Setup components
     edtConfirmPassword.Top := 165;
     edtConfirmPassword.Left := 75;
     edtConfirmPassword.Width := 180;
@@ -169,7 +166,6 @@ begin
   end;
 end;
 
-// Show password
 procedure TfrmLogin.btnShowPassMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin

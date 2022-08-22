@@ -46,6 +46,7 @@ type
     edtCourseName: TEdit;
     cpDateClose: TCalendarPicker;
     Label4: TLabel;
+    redCourseDescript: TRichEdit;
     Label5: TLabel;
     Label7: TLabel;
     spnMath: TSpinEdit;
@@ -59,6 +60,7 @@ type
     cbxMath: TCheckBox;
     pnlScoreCal: TPanel;
     cbxScience: TCheckBox;
+    Label1: TLabel;
     cmbFaculty: TComboBox;
     Label6: TLabel;
     btnSortASC: TButton;
@@ -246,7 +248,7 @@ begin
   util.notify('Course saved');
   util.logevent('Course saved: ' + edtCourseName.Text, info);
   clearInputsCourse;
-  loadCourses(cmbSelectCourse);
+  loadCourses;
 end;
 
 procedure TfrmStaff.btnUserDownClick(Sender: TObject);
@@ -270,8 +272,8 @@ begin
   //cDB.runSQL('SELECT * FROM Applications A, Courses C WHERE A.CourseID = C.CourseID AND C.Faculty = ' + QuotedStr(cmbFacultyFilter.Items[cmbFacultyFilter.ItemIndex]));
   //dbgApplications.Update;
 
-  tblApplications.Filter := 'CourseID = ' + QuotedStr(cmbCourseFilter.Items[cmbCourseFilter.ItemIndex]);
-  tblApplications.Filtered := true;
+  //tblApplications.Filter := ''
+
 end;
 
 procedure TfrmStaff.btnHighestScoreClick(Sender: TObject);
@@ -343,7 +345,7 @@ end;
 procedure TfrmStaff.FormActivate(Sender: TObject);
 begin
   tbcStaff.ActivePageIndex := 0;
-  loadCourses(cmbCourseFilter);
+  loadCourses;
 end;
 
 procedure TfrmStaff.FormClose(Sender: TObject; var Action: TCloseAction);

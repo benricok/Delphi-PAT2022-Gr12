@@ -424,7 +424,6 @@ end;
 
 procedure TfrmStudents.saveWarn;
 begin
-  // Visual feedback of save state to user
   lblWarning.Caption := 'Changes not saved';
   lblWarning.font.Color := clOlive;
   bChanges := true;
@@ -432,7 +431,6 @@ end;
 
 procedure TfrmStudents.setUser(fUsername, fNewHash: string; fNew : boolean);
 begin
-  //Setup user and prepre from
   sCurUsername := fUsername;
   lblActiveAcc.Caption := fUsername;
   sNewHash := fNewHash;

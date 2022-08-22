@@ -25,7 +25,8 @@ uses SysUtils, Classes, Vcl.Forms, Vcl.Dialogs, System.Variants, Winapi.ShellApi
 type
   Tsc = set of char;
   TEventType = (error, info, warning);
-  TUtil = class(TObject)
+
+  TUtil = class(TComponent)
     Function noSpace(sString : string) : string;
     procedure error(sError: string; log : boolean);
     Procedure initFile(const sFileName : string; var tFile : Textfile);
@@ -34,6 +35,10 @@ type
     Procedure warn(sWarn : string; log : boolean);
     Procedure notify(sMessage : string);
     Procedure openHelp;
+    Var
+      const
+        scInvalidNames : Tsc = [#33..#44, #46..#64, #91..#96, #123..#126];
+                               {!  to , ;  . to @ ;  [ to ' ;  {  to  " }
   end;
 
 Var
@@ -104,7 +109,6 @@ begin
   MessageDlg(sMessage, mtInformation, [mbOK], 0);
 end;
 
-//Show Help Readme text file in notepad
 Procedure TUtil.openHelp;
 begin
   ShellExecute(0,'open', 'c:\windows\notepad.exe', '.\Help.md', nil, SW_SHOWNORMAL) ;

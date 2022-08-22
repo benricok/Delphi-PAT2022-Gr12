@@ -104,7 +104,6 @@ begin
   MessageDlg(sMessage, mtInformation, [mbOK], 0);
 end;
 
-//Show Help Readme text file in notepad
 Procedure TUtil.openHelp;
 begin
   ShellExecute(0,'open', 'c:\windows\notepad.exe', '.\Help.md', nil, SW_SHOWNORMAL) ;

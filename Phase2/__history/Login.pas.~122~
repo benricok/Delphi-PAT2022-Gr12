@@ -1,21 +1,3 @@
-// -----------------------------------------------------------------------------
-//
-//  Copyright (C) 2022  Benrico Krog
-//
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Affero General Public License as published
-//  by the Free Software Foundation version 3 of the License.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Affero General Public License for more details.
-//
-//  You should have received a copy of the GNU Affero General Public License
-//  along with this program.  If not, see <https://www.gnu.org/licenses/>
-//
-// -----------------------------------------------------------------------------
-
 unit Login;
 
 interface
@@ -74,6 +56,24 @@ implementation
 
 uses DBConnection_u, Staff, Students;
 
+// -----------------------------------------------------------------------------
+//
+//  Copyright (C) 2021  Benrico Krog
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Affero General Public License as published
+//  by the Free Software Foundation version 3 of the License.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Affero General Public License for more details.
+//
+//  You should have received a copy of the GNU Affero General Public License
+//  along with this program.  If not, see <https://www.gnu.org/licenses/>
+//
+// -----------------------------------------------------------------------------
+
 procedure TfrmLogin.btnLoginClick(Sender: TObject);
 Var
   sGender : string;
@@ -89,13 +89,11 @@ begin
     else
       util.error('Please fill in both password fields', false);
 
-  //Check if fields filled in
   end else if NOT((edtPass.Text = '') OR (edtUser.Text = '')) then begin
       tblStaff.open;
       tblStaff.First;
       tblApplicants.open;
       tblApplicants.First;
-      // Process Staff user account
       if Copy(edtUser.Text, 1, 6) = 'STAFF/' then
         if tblStaff.Locate('Username', edtUser.Text, [loCaseInsensitive]) then begin
           if tblStaff['HashedPassword'] = hash(edtPass.Text) then begin
@@ -107,7 +105,6 @@ begin
         end else
           util.warn(edtUser.Text + ' does not exist', true)
       else if Copy(edtUser.Text, 1, 4) = 'APP\' then
-      // Process Applicant user account
         if tblApplicants.Locate('Username', edtUser.Text, [loCaseInsensitive]) then begin
           if tblApplicants['HashedPassword'] = hash(edtPass.Text) then begin
             util.logevent('User ' + edtUser.Text + ' logged in.', TEventType.info);
@@ -123,7 +120,7 @@ begin
 end;
 
 
-//Dynamic component
+//Dynamic
 procedure TfrmLogin.btnNewStudentClick(Sender: TObject);
 Var
   sLastAcc : string;
@@ -132,7 +129,6 @@ begin
   edtPass.Clear;
 
   if bStateNew then begin
-    // Free dynamic objectss
     edtConfirmPassword.Free;
     lblNewAcc.Free;
     bStateNew := false;
@@ -147,7 +143,6 @@ begin
     edtConfirmPassword.Visible := True;
     lblNewAcc.Visible := True;
 
-    // Setup components
     edtConfirmPassword.Top := 165;
     edtConfirmPassword.Left := 75;
     edtConfirmPassword.Width := 180;
@@ -169,7 +164,6 @@ begin
   end;
 end;
 
-// Show password
 procedure TfrmLogin.btnShowPassMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin

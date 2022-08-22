@@ -348,7 +348,6 @@ begin
     tblCourses.Next;
   end;
 
-  //Load userdata from tblApplicants if account already exists
   if bUserSetup = false then begin
     tblApplicants.Open;
     if NOT(tblApplicants.Locate('Username', sCurUsername, [loCaseInsensitive])) then begin
@@ -358,16 +357,12 @@ begin
     edtFirstName.Text := tblApplicants['Firstname'];
     edtSurname.Text := tblApplicants['Surname'];
     edtStudentNotiEmail.Text := tblApplicants['Email'];
-
-    // Load Gender
     sGender := tblApplicants['Gender'];
     case sGender[1] of
       'M': rgpGender.ItemIndex := 0;
       'F': rgpGender.ItemIndex := 1;
       ' ': rgpGender.ItemIndex := -1;
     end;
-
-    // Split phone number and populate fields correctly to keep universal format
     sPhone := tblApplicants['PhoneNumber'];
     sCode := Copy(sPhone,1, Pos(' ', sPhone)-1);
     edtPhoneNumber.Text := Copy(sPhone, Pos(' ', sPhone)+1);
@@ -376,8 +371,6 @@ begin
         cmbCountryCodes.ItemIndex := i;
         break;
       end;
-
-    // Load Curriculum and Province into combo boxes
     for j := 0 to rgpCurriculum.Items.Count -1 do
       if rgpCurriculum.Items[j] = tblApplicants['Curriculum'] then begin
         rgpCurriculum.ItemIndex := j;
@@ -388,8 +381,6 @@ begin
         cmbProvince.ItemIndex := k;
         break;
       end;
-
-    // Assign rest of values
     edtEduInstitution.Text := tblApplicants['SchoolName'];
     edtAddr1.Text := tblApplicants['AddressLine1'];
     if tblApplicants['AddressLine2'] <> null then
@@ -400,7 +391,6 @@ begin
     lblWarning.font.Color := clBtnText;
     bChanges := false;
   end else begin
-    // Clear all fields
     edtFirstName.Clear;
     edtSurname.Clear;
     edtEduInstitution.Clear;
@@ -424,7 +414,6 @@ end;
 
 procedure TfrmStudents.saveWarn;
 begin
-  // Visual feedback of save state to user
   lblWarning.Caption := 'Changes not saved';
   lblWarning.font.Color := clOlive;
   bChanges := true;
@@ -432,7 +421,6 @@ end;
 
 procedure TfrmStudents.setUser(fUsername, fNewHash: string; fNew : boolean);
 begin
-  //Setup user and prepre from
   sCurUsername := fUsername;
   lblActiveAcc.Caption := fUsername;
   sNewHash := fNewHash;
