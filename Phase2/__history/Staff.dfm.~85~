@@ -59,7 +59,7 @@ object frmStaff: TfrmStaff
     Top = 0
     Width = 886
     Height = 522
-    ActivePage = tabUserAdmin
+    ActivePage = tabSubmissions
     TabOrder = 1
     OnChange = tbcStaffChange
     object tabCourses: TTabSheet
@@ -345,7 +345,7 @@ object frmStaff: TfrmStaff
         Left = 20
         Top = 24
         Width = 837
-        Height = 209
+        Height = 313
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -355,10 +355,19 @@ object frmStaff: TfrmStaff
       end
       object Panel2: TPanel
         Left = 20
-        Top = 248
+        Top = 352
         Width = 837
-        Height = 243
+        Height = 139
         TabOrder = 1
+        object Button1: TButton
+          Left = 0
+          Top = 0
+          Width = 75
+          Height = 25
+          Caption = 'Button1'
+          TabOrder = 0
+          OnClick = Button1Click
+        end
       end
     end
     object tabUserAdmin: TTabSheet
@@ -369,8 +378,7 @@ object frmStaff: TfrmStaff
         Top = 25
         Width = 836
         Height = 344
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-        ReadOnly = True
+        Options = [dgEditing, dgTitles, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -428,6 +436,24 @@ object frmStaff: TfrmStaff
           TabOrder = 2
           OnClick = btnSortDESCClick
         end
+        object btnUserUp: TBitBtn
+          Left = 464
+          Top = 45
+          Width = 75
+          Height = 25
+          Caption = 'Up'
+          TabOrder = 3
+          OnClick = btnUserUpClick
+        end
+        object btnUserDown: TBitBtn
+          Left = 545
+          Top = 45
+          Width = 75
+          Height = 25
+          Caption = 'Down'
+          TabOrder = 4
+          OnClick = btnUserDownClick
+        end
       end
       object btnDeleteUser: TBitBtn
         Left = 389
@@ -436,6 +462,7 @@ object frmStaff: TfrmStaff
         Height = 25
         Caption = 'Delete'
         TabOrder = 2
+        OnClick = btnDeleteUserClick
       end
     end
     object tabEventLog: TTabSheet

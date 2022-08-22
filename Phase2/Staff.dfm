@@ -359,14 +359,62 @@ object frmStaff: TfrmStaff
         Width = 837
         Height = 139
         TabOrder = 1
-        object Button1: TButton
-          Left = 0
-          Top = 0
+        object btnFilter: TButton
+          Left = 239
+          Top = 11
           Width = 75
           Height = 25
-          Caption = 'Button1'
+          Caption = 'Filter'
           TabOrder = 0
-          OnClick = Button1Click
+          OnClick = btnFilterClick
+        end
+        object cmbFacultyFilter: TComboBox
+          Left = 16
+          Top = 15
+          Width = 217
+          Height = 21
+          TabOrder = 1
+          TextHint = 'Filter Faculty'
+          Items.Strings = (
+            'AgriSciences'
+            'Economic and Management Science'
+            'Arts and Social Science'
+            'Education'
+            'Engineering'
+            'Law'
+            'Medicine and Health Sciences'
+            'Military Science'
+            'Science'
+            'Theology')
+        end
+        object btnShowAll: TBitBtn
+          Left = 16
+          Top = 42
+          Width = 89
+          Height = 25
+          Caption = 'Show All'
+          Kind = bkOK
+          NumGlyphs = 2
+          TabOrder = 2
+          OnClick = btnShowAllClick
+        end
+        object btnAverage: TBitBtn
+          Left = 120
+          Top = 42
+          Width = 89
+          Height = 25
+          Caption = 'Average Score'
+          TabOrder = 3
+          OnClick = btnAverageClick
+        end
+        object btnHighestScore: TButton
+          Left = 225
+          Top = 42
+          Width = 89
+          Height = 25
+          Caption = 'Highest Score'
+          TabOrder = 4
+          OnClick = btnHighestScoreClick
         end
       end
     end

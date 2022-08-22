@@ -70,7 +70,11 @@ type
     btnDeleteUser: TBitBtn;
     btnUserUp: TBitBtn;
     btnUserDown: TBitBtn;
-    Button1: TButton;
+    btnFilter: TButton;
+    cmbFacultyFilter: TComboBox;
+    btnShowAll: TBitBtn;
+    btnAverage: TBitBtn;
+    btnHighestScore: TButton;
     procedure BitBtn1Click(Sender: TObject);
     procedure btnNewCourseClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -91,7 +95,10 @@ type
     procedure btnUserUpClick(Sender: TObject);
     procedure btnUserDownClick(Sender: TObject);
     procedure loadApplications;
-    procedure Button1Click(Sender: TObject);
+    procedure btnFilterClick(Sender: TObject);
+    procedure btnShowAllClick(Sender: TObject);
+    procedure btnAverageClick(Sender: TObject);
+    procedure btnHighestScoreClick(Sender: TObject);
   private
     Var
       sCurUser : string;
@@ -115,6 +122,11 @@ uses DBConnection_u, util_u, Login;
 procedure TfrmStaff.BitBtn1Click(Sender: TObject);
 begin
   Application.Terminate;
+end;
+
+procedure TfrmStaff.btnAverageClick(Sender: TObject);
+begin
+  cDB.runSQL('SELECT AVG(Score) AS (Average Score) FORM tblApplications');
 end;
 
 procedure TfrmStaff.btnClearLogClick(Sender: TObject);
@@ -158,6 +170,11 @@ begin
   cmbSelectCourse.ClearSelection;
   clearInputsCourse;
   bNewCourse := true;
+end;
+
+procedure TfrmStaff.btnShowAllClick(Sender: TObject);
+begin
+  cDB.runSQL('SELECT * FROM tblApplications');
 end;
 
 procedure TfrmStaff.btnSortASCClick(Sender: TObject);
@@ -223,9 +240,14 @@ begin
   end;
 end;
 
-procedure TfrmStaff.Button1Click(Sender: TObject);
+procedure TfrmStaff.btnFilterClick(Sender: TObject);
 begin
-  cDB.runSQL('SELECT ApplicID FROM Applications');
+  cDB.runSQL('SELECT * FROM tblApplications WHERE Faculty = ' + QuotedStr(cmbFacultyFilter.Items[cmbFacultyFilter.ItemIndex]));
+end;
+
+procedure TfrmStaff.btnHighestScoreClick(Sender: TObject);
+begin
+  cDB.runSQL('SELECT S.FirstName,S.Surname,S.Email,A.CourseID,A.MAX(Score) AS (Highest Score) FROM tblApplications A, tblApplicants S WHERE A.AppicAccID = S.Username');
 end;
 
 procedure TfrmStaff.clearInputsCourse;

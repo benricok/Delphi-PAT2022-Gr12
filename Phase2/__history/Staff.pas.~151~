@@ -68,6 +68,10 @@ type
     btnSortASC: TButton;
     btnSortDESC: TButton;
     btnDeleteUser: TBitBtn;
+    btnUserUp: TBitBtn;
+    btnUserDown: TBitBtn;
+    btnFilter: TButton;
+    cmbFacultyFilter: TComboBox;
     procedure BitBtn1Click(Sender: TObject);
     procedure btnNewCourseClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -85,6 +89,10 @@ type
     procedure btnSortDESCClick(Sender: TObject);
     procedure btnLogoutClick(Sender: TObject);
     procedure btnDeleteUserClick(Sender: TObject);
+    procedure btnUserUpClick(Sender: TObject);
+    procedure btnUserDownClick(Sender: TObject);
+    procedure loadApplications;
+    procedure btnFilterClick(Sender: TObject);
   private
     Var
       sCurUser : string;
@@ -128,13 +136,14 @@ begin
   if MessageDlg('Are you sure you want to delete this user?', mtConfirmation, [mbYes,mbCancel], 2) = 6 then begin
     if rgpUserGroup.ItemIndex = 0 then begin
       tblStaff.Open;
+      util.logevent('User ' + tblStaff['Username'] + ' was deleted', TEventType.warning);
       tblStaff.Delete;
     end else if rgpUserGroup.ItemIndex = 1 then begin
       tblApplicants.Open;
+      util.logevent('User ' + tblApplicants['Username'] + ' was deleted', TEventType.warning);
       tblApplicants.Delete;
     end;
   end;
-
 end;
 
 procedure TfrmStaff.btnLogoutClick(Sender: TObject);
@@ -199,6 +208,27 @@ begin
   loadCourses;
 end;
 
+procedure TfrmStaff.btnUserDownClick(Sender: TObject);
+begin
+  case rgpUserGroup.ItemIndex of
+    0: tblStaff.Next;
+    1: tblApplicants.Next;
+  end;
+end;
+
+procedure TfrmStaff.btnUserUpClick(Sender: TObject);
+begin
+  case rgpUserGroup.ItemIndex of
+    0: tblStaff.Prior;
+    1: tblApplicants.Prior;
+  end;
+end;
+
+procedure TfrmStaff.btnFilterClick(Sender: TObject);
+begin
+  cDB.runSQL('SELECT * FROM tblApplications WHERE Faculty = ' + QuotedStr(cmbFacultyFilter.Items[cmbFacultyFilter.ItemIndex]));
+end;
+
 procedure TfrmStaff.clearInputsCourse;
 begin
   // Clear input fields course edit tab
@@ -250,6 +280,11 @@ end;
 procedure TfrmStaff.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Application.Terminate;
+end;
+
+procedure TfrmStaff.loadApplications;
+begin
+  dbgApplications.DataSource := cDB.getDSapplications;
 end;
 
 procedure TfrmStaff.loadCourses;
@@ -349,7 +384,7 @@ procedure TfrmStaff.tbcStaffChange(Sender: TObject);
 begin
   case tbcStaff.ActivePageIndex of
     0: loadCourses;
-    1: ;
+    1: loadApplications;
     2: loadUserManage;
     3: loadEvents;
   end;
