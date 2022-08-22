@@ -286,12 +286,12 @@ begin
   cmbCourses.ItemIndex := -1;
   cmbCourses.AutoComplete := true;
 
-  //tblCourses.Open;
-  //tblCourses.First;
-  //while NOT(tblCourses.Eof) do begin
-  //  cmbCourses.Items.Append(tblCourses['Name']);
-  //  tblCourses.Next;
-  //end;
+  tblCourses.Open;
+  tblCourses.First;
+  while NOT(tblCourses.Eof) do begin
+    cmbCourses.Items.Append(tblCourses['CourseID']);
+    tblCourses.Next;
+  end;
 
   if bUserSetup = false then begin
     tblApplicants.Open;
@@ -310,27 +310,31 @@ begin
     end;
     sPhone := tblApplicants['PhoneNumber'];
     sCode := Copy(sPhone,1, Pos(' ', sPhone)-1);
+    edtPhoneNumber.Text := Copy(sPhone, Pos(' ', sPhone)+1);
     for i := 0 to cmbCountryCodes.Items.Count -1 do
       if Copy(cmbCountryCodes.Items[i],1, Pos(' ', cmbCountryCodes.Items[i])-1) = sCode then begin
         cmbCountryCodes.ItemIndex := i;
         break;
       end;
-
     for j := 0 to rgpCurriculum.Items.Count -1 do
-      if Copy(rgpCurriculum.Items[i],1, Pos(' ', rgpCurriculum.Items[i])-1) = tblApplicants['Curriculum'] then begin
-        rgpCurriculum.ItemIndex := i;
+      if rgpCurriculum.Items[j] = tblApplicants['Curriculum'] then begin
+        rgpCurriculum.ItemIndex := j;
         break;
       end;
     for k := 0 to cmbProvince.Items.Count -1 do
-      if Copy(cmbProvince.Items[i],1, Pos(' ', cmbProvince.Items[i])-1) = tblApplicants['Province'] then begin
-        cmbProvince.ItemIndex := i;
+      if cmbProvince.Items[k] = tblApplicants['Province'] then begin
+        cmbProvince.ItemIndex := k;
         break;
       end;
     edtEduInstitution.Text := tblApplicants['SchoolName'];
-    ShowMessage('Allive');
     edtAddr1.Text := tblApplicants['AddressLine1'];
-    edtAddr2.Text := tblApplicants['AddressLine2'];
-    edtAddr3.Text := tblApplicants['AddressLine3'];
+    if tblApplicants['AddressLine2'] <> null then
+      edtAddr2.Text := tblApplicants['AddressLine2'];
+    if tblApplicants['AddressLine3'] <> null then
+      edtAddr3.Text := tblApplicants['AddressLine3'];
+    lblWarning.Caption := 'Changes saved';
+    lblWarning.font.Color := clBtnText;
+    bChanges := false;
   end;
 
 end;

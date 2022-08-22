@@ -62,18 +62,29 @@ type
     cbxMath: TCheckBox;
     pnlScoreCal: TPanel;
     cbxScience: TCheckBox;
-    edtFaculty: TEdit;
     Label1: TLabel;
+    cmbFaculty: TComboBox;
+    Label6: TLabel;
+    btnSortASC: TButton;
+    btnSortDESC: TButton;
+    btnDeleteUser: TBitBtn;
     procedure BitBtn1Click(Sender: TObject);
     procedure btnNewCourseClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnUpdateCourseClick(Sender: TObject);
-    procedure saveCourse(new : boolean);
     procedure clearInputsCourse;
     procedure tbcStaffChange(Sender: TObject);
     procedure loadEvents;
     procedure btnClearLogClick(Sender: TObject);
     procedure loadUserManage;
+    procedure loadCourses;
+    procedure cmbSelectCourseSelect(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure rgpUserGroupClick(Sender: TObject);
+    procedure btnSortASCClick(Sender: TObject);
+    procedure btnSortDESCClick(Sender: TObject);
+    procedure btnLogoutClick(Sender: TObject);
+    procedure btnDeleteUserClick(Sender: TObject);
   private
     Var
       sCurUser : string;
@@ -91,7 +102,7 @@ implementation
 
 {$R *.dfm}
 
-uses DBConnection_u, util_u;
+uses DBConnection_u, util_u, Login;
 
 
 procedure TfrmStaff.BitBtn1Click(Sender: TObject);
@@ -112,6 +123,27 @@ begin
   end;
 end;
 
+procedure TfrmStaff.btnDeleteUserClick(Sender: TObject);
+begin
+  if MessageDlg('Are you sure you want to delete this user?', mtConfirmation, [mbYes,mbCancel], 2) = 6 then begin
+    if rgpUserGroup.ItemIndex = 0 then begin
+      tblStaff.Open;
+      tblStaff.Delete;
+    end else if rgpUserGroup.ItemIndex = 1 then begin
+      tblApplicants.Open;
+      tblApplicants.Delete;
+    end;
+  end;
+
+end;
+
+procedure TfrmStaff.btnLogoutClick(Sender: TObject);
+begin
+  sCurUser := '';
+  bNewCourse := false;
+  frmLogin.logout;
+end;
+
 procedure TfrmStaff.btnNewCourseClick(Sender: TObject);
 begin
   // Clear all application fields
@@ -120,23 +152,42 @@ begin
   bNewCourse := true;
 end;
 
+procedure TfrmStaff.btnSortASCClick(Sender: TObject);
+begin
+  tblStaff.Sort := 'Surname ASC';
+  tblApplicants.Sort := 'Surname ASC';
+end;
+
+procedure TfrmStaff.btnSortDESCClick(Sender: TObject);
+begin
+  tblStaff.Sort := 'Surname DESC';
+  tblApplicants.Sort := 'Surname DESC';
+end;
+
 procedure TfrmStaff.btnUpdateCourseClick(Sender: TObject);
 begin
 //Save all fields
+  if (edtCourseName.Text = '') OR (cmbFaculty.ItemIndex = -1) then begin
+    util.warn('Please complete all required fields', false);
+    exit;
+  end;
+
   // Database manipulation EDIT AND INSERT
   tblCourses.Open;
   if bNewCourse then begin
     tblCourses.Last;
     tblCourses.Insert;
     tblCourses['CourseID'] := edtCourseName.Text;
-  end else if tblCourses.Locate('CourseID', edtCourseName.Text, [loCaseInsensitive]) then
-    tblApplicants.Edit
-  else
-    util.error('Course not found in database (Staff Form)', true);
+    cmbSelectCourse.Items.Append(edtCourseName.Text);
+  end else
+    if tblCourses.Locate('CourseID', edtCourseName.Text, [loCaseInsensitive]) then
+      tblApplicants.Edit
+    else
+      util.error('Course not found in database (Staff Form)', true);
 
     tblCourses['MathWeight'] := spnMath.Value;
     tblCourses['ScienceWeight'] := spnScience.Value;
-    tblCourses['Faculty'] := edtFaculty.Text;
+    tblCourses['Faculty'] := cmbFaculty.Items[cmbFaculty.ItemIndex];
     tblCourses['ClosingDate'] := cpDateClose.Date;
     tblCourses['MathRequired'] := cbxMath.Checked;
     tblCourses['ScienceRequired'] := cbxScience.Checked;
@@ -144,15 +195,43 @@ begin
   tblCourses.Post;
   util.notify('Course saved');
   util.logevent('Course saved: ' + edtCourseName.Text, info);
+  clearInputsCourse;
+  loadCourses;
 end;
 
 procedure TfrmStaff.clearInputsCourse;
 begin
   // Clear input fields course edit tab
-  //lblCourseID.Caption := 'N/A';
   edtCourseName.Clear;
+  cmbFaculty.ClearSelection;
   cpDateClose.Date := Date;
   redCourseDescript.Clear;
+  edtCourseName.ReadOnly := false;
+end;
+
+procedure TfrmStaff.cmbSelectCourseSelect(Sender: TObject);
+Var
+  i : integer;
+begin
+  edtCourseName.Text := cmbSelectCourse.Items[cmbSelectCourse.ItemIndex];
+  edtCourseName.ReadOnly := true;
+
+  if NOT(tblCourses.Locate('CourseID', edtCourseName.Text, [loCaseInsensitive])) then begin
+    util.error('Course not found in database (Staff Form)', true);
+    exit;
+  end;
+
+  spnMath.Value := tblCourses['MathWeight'];
+  spnScience.Value := tblCourses['ScienceWeight'];
+  for i := 0 to cmbFaculty.Items.Count -1 do
+    if cmbFaculty.Items[i] = tblCourses['Faculty'] then begin
+      cmbFaculty.ItemIndex := i;
+      break;
+    end;
+  cpDateClose.Date := tblCourses['ClosingDate'];
+  cbxMath.Checked := tblCourses['MathRequired'];
+  cbxScience.Checked := tblCourses['ScienceRequired'];
+
 end;
 
 //Show from in taskbar
@@ -162,9 +241,28 @@ begin
   Params.ExStyle := Params.ExStyle or WS_EX_APPWINDOW;
 end;
 
+procedure TfrmStaff.FormActivate(Sender: TObject);
+begin
+  tbcStaff.ActivePageIndex := 0;
+  loadCourses;
+end;
+
 procedure TfrmStaff.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Application.Terminate;
+end;
+
+procedure TfrmStaff.loadCourses;
+begin
+  cmbSelectCourse.Items.Clear;
+  bNewCourse := false;
+  tblCourses.Open;
+  tblCourses.First;
+
+  while NOT(tblCourses.Eof) do begin
+    cmbSelectCourse.Items.Append(tblCourses['CourseID']);
+    tblCourses.Next;
+  end;
 end;
 
 procedure TfrmStaff.loadEvents;
@@ -237,9 +335,9 @@ begin
   end;
 end;
 
-procedure TfrmStaff.saveCourse(new: boolean);
+procedure TfrmStaff.rgpUserGroupClick(Sender: TObject);
 begin
-  // Procedure to save all
+  loadUserManage;
 end;
 
 procedure TfrmStaff.setUser(sUsername: string);
@@ -250,7 +348,7 @@ end;
 procedure TfrmStaff.tbcStaffChange(Sender: TObject);
 begin
   case tbcStaff.ActivePageIndex of
-    0: ;
+    0: loadCourses;
     1: ;
     2: loadUserManage;
     3: loadEvents;

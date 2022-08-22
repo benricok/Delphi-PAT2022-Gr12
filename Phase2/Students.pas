@@ -286,12 +286,13 @@ begin
   cmbCourses.ItemIndex := -1;
   cmbCourses.AutoComplete := true;
 
-  //tblCourses.Open;
-  //tblCourses.First;
-  //while NOT(tblCourses.Eof) do begin
-  //  cmbCourses.Items.Append(tblCourses['Name']);
-  //  tblCourses.Next;
-  //end;
+  tblCourses.Open;
+  tblCourses.First;
+  cmbCourses.Items.Clear;
+  while NOT(tblCourses.Eof) do begin
+    cmbCourses.Items.Append(tblCourses['CourseID']);
+    tblCourses.Next;
+  end;
 
   if bUserSetup = false then begin
     tblApplicants.Open;

@@ -13,6 +13,7 @@ object frmStaff: TfrmStaff
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
+  OnActivate = FormActivate
   OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
@@ -43,7 +44,7 @@ object frmStaff: TfrmStaff
       TabOrder = 1
     end
     object BitBtn2: TBitBtn
-      Left = 16
+      Left = 25
       Top = 6
       Width = 75
       Height = 25
@@ -57,7 +58,7 @@ object frmStaff: TfrmStaff
     Top = 0
     Width = 886
     Height = 522
-    ActivePage = tabCourses
+    ActivePage = tabUserAdmin
     TabOrder = 1
     OnChange = tbcStaffChange
     object tabCourses: TTabSheet
@@ -83,6 +84,7 @@ object frmStaff: TfrmStaff
         Height = 21
         TabOrder = 0
         TextHint = 'Select Course'
+        OnSelect = cmbSelectCourseSelect
       end
       object btnNewCourse: TBitBtn
         Left = 791
@@ -171,12 +173,25 @@ object frmStaff: TfrmStaff
         object Label5: TLabel
           Left = 448
           Top = 75
-          Width = 75
-          Height = 18
+          Width = 45
+          Height = 16
+          Caption = 'Faculty:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label1: TLabel
+          Left = 448
+          Top = 112
+          Width = 68
+          Height = 16
           Caption = 'Description:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -15
+          Font.Height = -13
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
@@ -216,9 +231,9 @@ object frmStaff: TfrmStaff
         end
         object redCourseDescript: TRichEdit
           Left = 448
-          Top = 102
+          Top = 136
           Width = 342
-          Height = 200
+          Height = 166
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -266,24 +281,26 @@ object frmStaff: TfrmStaff
             Width = 97
             Height = 17
             Caption = 'Math required'
+            Checked = True
+            State = cbChecked
             TabOrder = 0
           end
-          object spnSub1: TSpinEdit
+          object spnMath: TSpinEdit
             Left = 238
             Top = 39
             Width = 58
             Height = 22
-            MaxValue = 0
+            MaxValue = 100
             MinValue = 0
             TabOrder = 1
             Value = 0
           end
-          object spnSub2: TSpinEdit
+          object spnScience: TSpinEdit
             Left = 238
             Top = 67
             Width = 58
             Height = 22
-            MaxValue = 0
+            MaxValue = 100
             MinValue = 0
             TabOrder = 2
             Value = 0
@@ -294,8 +311,29 @@ object frmStaff: TfrmStaff
             Width = 97
             Height = 17
             Caption = 'Science required'
+            Checked = True
+            State = cbChecked
             TabOrder = 3
           end
+        end
+        object cmbFaculty: TComboBox
+          Left = 512
+          Top = 74
+          Width = 278
+          Height = 21
+          TabOrder = 4
+          TextHint = 'Select Faculty'
+          Items.Strings = (
+            'AgriSciences'
+            'Economic and Management Science'
+            'Arts and Social Science'
+            'Education'
+            'Engineering'
+            'Law'
+            'Medicine and Health Sciences'
+            'Military Science'
+            'Science'
+            'Theology')
         end
       end
     end
@@ -330,6 +368,8 @@ object frmStaff: TfrmStaff
         Top = 25
         Width = 836
         Height = 208
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        ReadOnly = True
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -343,10 +383,23 @@ object frmStaff: TfrmStaff
         Width = 836
         Height = 233
         TabOrder = 1
+        object Label6: TLabel
+          Left = 0
+          Top = 71
+          Width = 29
+          Height = 16
+          Caption = 'Sort:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
         object rgpUserGroup: TRadioGroup
           Left = 0
           Top = 8
-          Width = 145
+          Width = 161
           Height = 57
           Caption = 'User group'
           ItemIndex = 0
@@ -354,6 +407,24 @@ object frmStaff: TfrmStaff
             'Staff'
             'Applicants')
           TabOrder = 0
+          OnClick = rgpUserGroupClick
+        end
+        object btnSortASC: TButton
+          Left = 18
+          Top = 93
+          Width = 57
+          Height = 25
+          Caption = 'ASC'
+          TabOrder = 1
+          OnClick = btnSortASCClick
+        end
+        object btnSortDESC: TButton
+          Left = 88
+          Top = 93
+          Width = 57
+          Height = 25
+          Caption = 'DESC'
+          TabOrder = 2
         end
       end
     end
