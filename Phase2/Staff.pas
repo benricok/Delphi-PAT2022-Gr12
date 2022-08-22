@@ -127,7 +127,7 @@ end;
 
 procedure TfrmStaff.BitBtn2Click(Sender: TObject);
 begin
-  //
+  Util.openHelp;
 end;
 
 procedure TfrmStaff.btnAverageClick(Sender: TObject);

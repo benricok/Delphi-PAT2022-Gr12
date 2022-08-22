@@ -20,7 +20,7 @@ unit util_u;
 
 interface
 
-uses SysUtils, System, Classes, Vcl.Forms, Vcl.Dialogs, System.Variants, Winapi.ShellApi, Winapi.Windows;
+uses SysUtils, Classes, Vcl.Forms, Vcl.Dialogs, System.Variants, Winapi.ShellApi, Winapi.Windows;
 
 type
   Tsc = set of char;

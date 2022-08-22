@@ -1,0 +1,23 @@
+program eduPortal;
+
+uses
+  Vcl.Forms,
+  Students in 'Students.pas' {frmStudents},
+  Staff in 'Staff.pas' {frmStaff},
+  Login in 'Login.pas' {frmLogin},
+  DBConnection_u in 'DBConnection_u.pas',
+  util_u in 'util_u.pas',
+  Vcl.Themes,
+  Vcl.Styles;
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Light');
+  Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmStudents, frmStudents);
+  Application.CreateForm(TfrmStaff, frmStaff);
+  Application.Run;
+end.
