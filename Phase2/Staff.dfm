@@ -59,7 +59,7 @@ object frmStaff: TfrmStaff
     Top = 0
     Width = 886
     Height = 522
-    ActivePage = tabUserAdmin
+    ActivePage = tabSubmissions
     TabOrder = 1
     OnChange = tbcStaffChange
     object tabCourses: TTabSheet
@@ -369,8 +369,7 @@ object frmStaff: TfrmStaff
         Top = 25
         Width = 836
         Height = 344
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-        ReadOnly = True
+        Options = [dgEditing, dgTitles, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
