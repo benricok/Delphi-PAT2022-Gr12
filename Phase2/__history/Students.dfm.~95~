@@ -48,7 +48,7 @@ object frmStudents: TfrmStudents
     Top = -2
     Width = 894
     Height = 526
-    ActivePage = tabMyInfo
+    ActivePage = tabNewApplication
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -188,7 +188,7 @@ object frmStudents: TfrmStudents
         TextHint = 'Email address (notifications)'
         OnChange = edtStudentNotiEmailChange
       end
-      object ComboBox2: TComboBox
+      object cmbProvince: TComboBox
         Left = 456
         Top = 295
         Width = 402
@@ -196,7 +196,7 @@ object frmStudents: TfrmStudents
         AutoDropDown = True
         TabOrder = 1
         TextHint = 'Select province'
-        OnChange = ComboBox2Change
+        OnChange = cmbProvinceChange
         Items.Strings = (
           'Western Cape'
           'Eastern Cape'
@@ -257,14 +257,14 @@ object frmStudents: TfrmStudents
         OnChange = edtSurnameChange
       end
       object edtPhoneNumber: TEdit
-        Left = 126
+        Left = 224
         Top = 247
-        Width = 308
+        Width = 210
         Height = 24
         Hint = 'notification email'
         MaxLength = 15
         TabOrder = 6
-        TextHint = 'Enter your phone number (e.g. +27 83 765 0192)'
+        TextHint = 'Phone number'
         OnChange = edtPhoneNumberChange
       end
       object edtAddr1: TEdit
@@ -330,13 +330,14 @@ object frmStudents: TfrmStudents
         TabOrder = 12
         OnClick = rgpGenderClick
       end
-      object cmxCountryCodes: TComboBox
+      object cmbCountryCodes: TComboBox
         Left = 32
         Top = 247
-        Width = 88
+        Width = 180
         Height = 24
         TabOrder = 13
         Text = 'Code'
+        OnChange = cmbCountryCodesChange
         Items.Strings = (
           '+93  Afghanistan'
           '+355  Albania'

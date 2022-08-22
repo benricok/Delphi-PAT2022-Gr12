@@ -695,19 +695,6 @@ object frmStudents: TfrmStudents
         Font.Style = []
         ParentFont = False
       end
-      object lblCourseID: TLabel
-        Left = 16
-        Top = 132
-        Width = 65
-        Height = 16
-        Caption = 'Course ID: '
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
       object lblScoretext: TLabel
         Left = 16
         Top = 376
@@ -734,6 +721,20 @@ object frmStudents: TfrmStudents
         Font.Style = []
         ParentFont = False
       end
+      object lblClosingDate: TLabel
+        Left = 304
+        Top = 376
+        Width = 76
+        Height = 16
+        Caption = 'Closing Date:'
+      end
+      object lblFaculty: TLabel
+        Left = 16
+        Top = 128
+        Width = 45
+        Height = 16
+        Caption = 'Faculty:'
+      end
       object cmbCourses: TComboBox
         Left = 16
         Top = 89
@@ -743,49 +744,13 @@ object frmStudents: TfrmStudents
         Text = 'Select an avalible course'
         OnChange = cmbCoursesChange
       end
-      object Memo1: TMemo
-        Left = 448
-        Top = 43
-        Width = 410
-        Height = 430
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Lines.Strings = (
-          'EXAMPLE FOR PHASE 1'
-          ''
-          'Selected course: <currently select cource>'
-          'Please edit percentages after the '#39':'#39' according to the '
-          'marks you obtained at the end of your gr11 year:'
-          ''
-          'Note that this course does not require specific subjects '
-          'apart from Pure mathematics and Physical sciences.'
-          'You can enter your best other subject'#39's marks into '
-          'subject (4-6)'
-          ''
-          'Pure Mathematics: 0%'
-          'Physical Sciences: 0%'
-          'Home Language: 0%'
-          'Subject 4: 0%'
-          'Subject 5: 0%'
-          'Subject 6 0%:'
-          'Life Orientation: 0% '
-          ''
-          'Score formula: '
-          '6x (average) + Mathematics + Physical Sciences '
-          '= score/800')
-        ParentFont = False
-        TabOrder = 1
-      end
       object btnSubmitnew: TBitBtn
         Left = 16
         Top = 448
         Width = 145
         Height = 25
         Caption = 'Submit New Application'
-        TabOrder = 2
+        TabOrder = 1
         OnClick = btnSubmitnewClick
       end
       object BitBtn3: TBitBtn
@@ -796,7 +761,8 @@ object frmStudents: TfrmStudents
         Caption = '&Reset'
         Kind = bkRetry
         NumGlyphs = 2
-        TabOrder = 3
+        TabOrder = 2
+        OnClick = BitBtn3Click
       end
       object spnM1: TSpinEdit
         Left = 343
@@ -805,7 +771,7 @@ object frmStudents: TfrmStudents
         Height = 26
         MaxValue = 100
         MinValue = 0
-        TabOrder = 4
+        TabOrder = 3
         Value = 0
       end
       object spnM2: TSpinEdit
@@ -815,7 +781,7 @@ object frmStudents: TfrmStudents
         Height = 26
         MaxValue = 100
         MinValue = 0
-        TabOrder = 5
+        TabOrder = 4
         Value = 0
       end
       object spnM3: TSpinEdit
@@ -825,7 +791,7 @@ object frmStudents: TfrmStudents
         Height = 26
         MaxValue = 100
         MinValue = 0
-        TabOrder = 6
+        TabOrder = 5
         Value = 0
       end
       object spnM4: TSpinEdit
@@ -835,7 +801,7 @@ object frmStudents: TfrmStudents
         Height = 26
         MaxValue = 100
         MinValue = 0
-        TabOrder = 7
+        TabOrder = 6
         Value = 0
       end
       object spnM5: TSpinEdit
@@ -845,7 +811,7 @@ object frmStudents: TfrmStudents
         Height = 26
         MaxValue = 100
         MinValue = 0
-        TabOrder = 8
+        TabOrder = 7
         Value = 0
       end
       object spnM6: TSpinEdit
@@ -855,7 +821,7 @@ object frmStudents: TfrmStudents
         Height = 26
         MaxValue = 100
         MinValue = 0
-        TabOrder = 9
+        TabOrder = 8
         Value = 0
       end
       object spnM7: TSpinEdit
@@ -865,7 +831,7 @@ object frmStudents: TfrmStudents
         Height = 26
         MaxValue = 100
         MinValue = 0
-        TabOrder = 10
+        TabOrder = 9
         Value = 0
       end
       object btnCalculate: TBitBtn
@@ -874,7 +840,7 @@ object frmStudents: TfrmStudents
         Width = 89
         Height = 25
         Caption = 'Calculate score'
-        TabOrder = 11
+        TabOrder = 10
         OnClick = btnCalculateClick
       end
     end

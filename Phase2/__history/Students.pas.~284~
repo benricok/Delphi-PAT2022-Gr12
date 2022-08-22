@@ -36,7 +36,6 @@ type
     Label3: TLabel;
     cmbCourses: TComboBox;
     Label4: TLabel;
-    Memo1: TMemo;
     btnSubmitnew: TBitBtn;
     BitBtn2: TBitBtn;
     BitBtn3: TBitBtn;
@@ -71,7 +70,6 @@ type
     spnM5: TSpinEdit;
     spnM6: TSpinEdit;
     spnM7: TSpinEdit;
-    lblCourseID: TLabel;
     btnCalculate: TBitBtn;
     lblScoretext: TLabel;
     lblScore: TLabel;
@@ -80,6 +78,8 @@ type
     lblActiveAcc: TLabel;
     lblWarning: TLabel;
     cmbCountryCodes: TComboBox;
+    lblClosingDate: TLabel;
+    lblFaculty: TLabel;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure edtFirstNameChange(Sender: TObject);
@@ -108,6 +108,7 @@ type
     Var
       sCurUsername, sNewHash : String;
       bUserSetup, bChanges : boolean;
+      rWeightMath, rWeightScience, rWeightOther, rScore : real;
   published
     procedure setUser(fUsername, fNewHash : string; fNew : boolean);
     procedure saveWarn;
@@ -129,7 +130,11 @@ end;
 
 procedure TfrmStudents.btnCalculateClick(Sender: TObject);
 begin
-  // Precalculate score SQL
+  rScore := (spnM1.Value * rWeightMath) + (spnM2.Value * rWeightScience) +
+            (spnM3.Value * rWeightOther) + (spnM3.Value * rWeightOther) +
+            (spnM4.Value * rWeightOther) + (spnM5.Value * rWeightOther) +
+            (spnM6.Value * rWeightOther) + (spnM7.Value * rWeightOther);
+  lblScore.Caption := FormatFloat('0.00', rScore);
 end;
 
 procedure TfrmStudents.btnInitSaveClick(Sender: TObject);
@@ -217,7 +222,7 @@ end;
 
 procedure TfrmStudents.btnSubmitnewClick(Sender: TObject);
 begin
-  cDB.runSQL('');
+  //cDB.runSQL('');
 
   util.notify('Sucsessfully submitted your application');
   cmbCourses.Text := '';
@@ -227,39 +232,49 @@ end;
 
 procedure TfrmStudents.ClearMarks;
 begin
-  spnM1.Clear;
-  spnM2.Clear;
-  spnM3.Clear;
-  spnM4.Clear;
-  spnM5.Clear;
-  spnM6.Clear;
-  spnM7.Clear;
+  spnM1.value := 0;
+  spnM2.value := 0;
+  spnM3.value := 0;
+  spnM4.value := 0;
+  spnM5.value := 0;
+  spnM6.value := 0;
+  spnM7.value := 0;
 end;
 
 procedure TfrmStudents.cmbCoursesChange(Sender: TObject);
-Var
-  iW1, iW2, iW3, iW4, iW5, iW6, iW7 : integer;
 begin
-  ClearMarks;
+  //ClearMarks;
+  rWeightMath := 0;
+  rWeightScience := 0;
   // Locate in database, load values
-  if tblCourses.Locate('Username', cmbCourses.Items[cmbCourses.ItemIndex], [loCaseInsensitive]) then begin
-    lblSub1.Caption := tblCourses['Subject1'];
-    lblSub2.Caption := tblCourses['Subject2'];
-    lblSub3.Caption := tblCourses['Subject3'];
-    lblSub4.Caption := tblCourses['Subject4'];
-    lblSub5.Caption := tblCourses['Subject5'];
-    lblSub6.Caption := tblCourses['Subject6'];
-    lblSub7.Caption := tblCourses['Subject7'];
-
-    iW1 := tblCourses['Weight1'];
-    iW2 := tblCourses['Weight2'];
-    iW3 := tblCourses['Weight3'];
-    iW4 := tblCourses['Weight4'];
-    iW5 := tblCourses['Weight5'];
-    iW6 := tblCourses['Weight6'];
-    iW7 := tblCourses['Weight7'];
-
-    lblCourseID.Caption := tblCourses['CourseID'];
+  if tblCourses.Locate('CourseID', cmbCourses.Items[cmbCourses.ItemIndex], [loCaseInsensitive]) then begin
+      if tblCourses['MathRequired'] = true then begin
+        lblSub1.Caption := 'Subject 1: Mathematics';
+        rWeightMath := tblCourses['MathWeight'];
+      end else
+        lblSub1.Caption := 'Subject 1:';
+      if tblCourses['ScienceRequired'] = true then begin
+        lblSub2.Caption := 'Subject 2: Science';
+        rWeightMath := tblCourses['ScienceWeight'];
+      end else
+        lblSub2.Caption := 'Subject 2';
+      //Calculate rest of the weights
+      if (rWeightMath = 0) AND (rWeightScience = 0) then begin
+        rWeightOther := 100/700;
+        rWeightMath := rWeightOther;
+        rWeightScience := rWeightOther;
+      end else if (rWeightMath <> 0) AND (rWeightScience = 0) then begin
+        rWeightOther := (100-rWeightMath)/700;
+        rWeightMath := rWeightMath/100;
+        rWeightScience := rWeightOther;
+      end else if (rWeightMath <> 0) AND (rWeightScience <> 0) then begin
+        rWeightOther := (100-(rWeightMath+rWeightScience))/7;
+        rWeightMath := rWeightMath/100;
+        rWeightScience := rWeightScience/100;
+      end;
+      lblClosingDate.Caption := 'Closing Date: ' + FormatDateTime('DD/MM/YYYY', tblCourses['ClosingDate']);
+      lblFaculty.Caption := 'Faculty: ' + tblCourses['Faculty'];
+      lblScore.Caption := 'Not Calculated';
   end;
 end;
 
@@ -286,12 +301,13 @@ begin
   cmbCourses.ItemIndex := -1;
   cmbCourses.AutoComplete := true;
 
-  //tblCourses.Open;
-  //tblCourses.First;
-  //while NOT(tblCourses.Eof) do begin
-  //  cmbCourses.Items.Append(tblCourses['Name']);
-  //  tblCourses.Next;
-  //end;
+  tblCourses.Open;
+  tblCourses.First;
+  cmbCourses.Items.Clear;
+  while NOT(tblCourses.Eof) do begin
+    cmbCourses.Items.Append(tblCourses['CourseID']);
+    tblCourses.Next;
+  end;
 
   if bUserSetup = false then begin
     tblApplicants.Open;
@@ -310,6 +326,7 @@ begin
     end;
     sPhone := tblApplicants['PhoneNumber'];
     sCode := Copy(sPhone,1, Pos(' ', sPhone)-1);
+    edtPhoneNumber.Text := Copy(sPhone, Pos(' ', sPhone)+1);
     for i := 0 to cmbCountryCodes.Items.Count -1 do
       if Copy(cmbCountryCodes.Items[i],1, Pos(' ', cmbCountryCodes.Items[i])-1) = sCode then begin
         cmbCountryCodes.ItemIndex := i;
@@ -331,6 +348,9 @@ begin
       edtAddr2.Text := tblApplicants['AddressLine2'];
     if tblApplicants['AddressLine3'] <> null then
       edtAddr3.Text := tblApplicants['AddressLine3'];
+    lblWarning.Caption := 'Changes saved';
+    lblWarning.font.Color := clBtnText;
+    bChanges := false;
   end;
 
 end;

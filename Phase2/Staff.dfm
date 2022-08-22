@@ -345,7 +345,7 @@ object frmStaff: TfrmStaff
         Left = 20
         Top = 24
         Width = 837
-        Height = 209
+        Height = 313
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -355,10 +355,19 @@ object frmStaff: TfrmStaff
       end
       object Panel2: TPanel
         Left = 20
-        Top = 248
+        Top = 352
         Width = 837
-        Height = 243
+        Height = 139
         TabOrder = 1
+        object Button1: TButton
+          Left = 0
+          Top = 0
+          Width = 75
+          Height = 25
+          Caption = 'Button1'
+          TabOrder = 0
+          OnClick = Button1Click
+        end
       end
     end
     object tabUserAdmin: TTabSheet

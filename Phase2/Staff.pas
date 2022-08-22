@@ -70,6 +70,7 @@ type
     btnDeleteUser: TBitBtn;
     btnUserUp: TBitBtn;
     btnUserDown: TBitBtn;
+    Button1: TButton;
     procedure BitBtn1Click(Sender: TObject);
     procedure btnNewCourseClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -89,6 +90,8 @@ type
     procedure btnDeleteUserClick(Sender: TObject);
     procedure btnUserUpClick(Sender: TObject);
     procedure btnUserDownClick(Sender: TObject);
+    procedure loadApplications;
+    procedure Button1Click(Sender: TObject);
   private
     Var
       sCurUser : string;
@@ -220,6 +223,11 @@ begin
   end;
 end;
 
+procedure TfrmStaff.Button1Click(Sender: TObject);
+begin
+  cDB.runSQL('SELECT ApplicID FROM Applications');
+end;
+
 procedure TfrmStaff.clearInputsCourse;
 begin
   // Clear input fields course edit tab
@@ -271,6 +279,11 @@ end;
 procedure TfrmStaff.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Application.Terminate;
+end;
+
+procedure TfrmStaff.loadApplications;
+begin
+  dbgApplications.DataSource := cDB.getDSapplications;
 end;
 
 procedure TfrmStaff.loadCourses;
@@ -370,7 +383,7 @@ procedure TfrmStaff.tbcStaffChange(Sender: TObject);
 begin
   case tbcStaff.ActivePageIndex of
     0: loadCourses;
-    1: ;
+    1: loadApplications;
     2: loadUserManage;
     3: loadEvents;
   end;

@@ -1,2 +1,8 @@
 2022/08/21 21:45:46 UNIT:[Unit1.pas] ERROR:Row cannot be located for updating. Some values may have been changed since it was last read
 2022/08/21 21:45:49 UNIT:[Unit1.pas] ERROR:Row cannot be located for updating. Some values may have been changed since it was last read
+2022/08/22 03:29:38 UNIT:[Unit1.pas] ERROR:'2022/09/31' is not a valid date and time
+2022/08/22 03:30:11 UNIT:[Unit1.pas] ERROR:Row cannot be located for updating. Some values may have been changed since it was last read
+2022/08/22 03:30:16 UNIT:[Unit1.pas] ERROR:Row cannot be located for updating. Some values may have been changed since it was last read
+2022/08/22 03:37:20 UNIT:[Unit1.pas] ERROR:'2022/04/56' is not a valid date and time
+2022/08/22 03:37:31 UNIT:[Unit1.pas] ERROR:Row cannot be located for updating. Some values may have been changed since it was last read
+2022/08/22 03:37:33 UNIT:[Unit1.pas] ERROR:Row cannot be located for updating. Some values may have been changed since it was last read
