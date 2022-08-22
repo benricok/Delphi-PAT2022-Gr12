@@ -132,7 +132,8 @@ end;
 
 procedure TfrmStaff.btnAverageClick(Sender: TObject);
 begin
-  cDB.runSQL('SELECT AVG(Score) AS (Average Score) FORM tblApplications');
+  cDB.runSQL('SELECT AVG(Score) AS (Average Score) FROM Applications');
+  dbgApplications.Update;
 end;
 
 procedure TfrmStaff.btnClearLogClick(Sender: TObject);
@@ -180,7 +181,8 @@ end;
 
 procedure TfrmStaff.btnShowAllClick(Sender: TObject);
 begin
-  cDB.runSQL('SELECT * FROM tblApplications');
+  cDB.runSQL('SELECT * FROM Applications');
+  dbgApplications.Update;
 end;
 
 procedure TfrmStaff.btnSortASCClick(Sender: TObject);
@@ -248,12 +250,14 @@ end;
 
 procedure TfrmStaff.btnFilterClick(Sender: TObject);
 begin
-  cDB.runSQL('SELECT * FROM tblApplications WHERE Faculty = ' + QuotedStr(cmbFacultyFilter.Items[cmbFacultyFilter.ItemIndex]));
+  cDB.runSQL('SELECT * FROM Applications A, Courses C WHERE A.CourseID = C.CourseID AND C.Faculty = ' + QuotedStr(cmbFacultyFilter.Items[cmbFacultyFilter.ItemIndex]));
+  dbgApplications.Update;
 end;
 
 procedure TfrmStaff.btnHighestScoreClick(Sender: TObject);
 begin
-  cDB.runSQL('SELECT S.FirstName,S.Surname,S.Email,A.CourseID,A.MAX(Score) AS (Highest Score) FROM tblApplications A, tblApplicants S WHERE A.AppicAccID = S.Username');
+  cDB.runSQL('SELECT S.FirstName,S.Surname,S.Email,A.CourseID,A.MAX(Score) AS (Highest Score) FROM Applications A, Applicants S WHERE A.AppicAccID = S.Username');
+  dbgApplications.Update;
 end;
 
 procedure TfrmStaff.clearInputsCourse;

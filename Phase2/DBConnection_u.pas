@@ -118,6 +118,7 @@ procedure TcDB.runSQL(sSQL: string);
 begin
   if length(sSQL) <> 0 then
   begin
+    ShowMessage(sSQL);
     qryMain.Close;
     qryMain.SQL.Text := sSQL;
     qryMain.Open;
